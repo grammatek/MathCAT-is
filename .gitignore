@@ -11,6 +11,7 @@ src/*.bak
 *.swp
 */*.swp
 */*/*.swp
+**/.DS_store
 __pycache__
 PythonScripts/__pycache__
 PythonScripts/cachedir
