@@ -21,22 +21,22 @@
       if: "IsNode(*[1], 'simple') and IsNode(*[2], 'simple')"
       then:
       - x: "*[1]"
-      - t: "over"
+      - T: "deilt með"   #TODO: ath: en: over sv: genom
       - x: "*[2]"
       else:
-      - t: "fraction"
+      - T: "brot"
 
 - name: overview-default
   tag: msqrt
   match: "."
   replace:
-  - t: "square root"
+  - T: "ferningsrótin"                #TODO: líka: önnur rót ATH: kvaðratrótin?
   - test:
       if: "IsNode(*[1], 'simple')"
       then:
       - test:
           if: "$Verbosity!='Terse'"
-          then: [t: "of"]
+          then: [T: "af"]
       - x: "*[1]"
 
 - name: overview-default
@@ -47,25 +47,25 @@
       if: "*[2][self::m:mn]"
       then_test:
       - if: "*[2][text()='2']"
-        then: [t: "square root"]
+        then: [T: "ferningsrótin"]
       - else_if: "*[2][text()='3']"
-        then: [t: "cube root"]
+        then: [T: "teningsrótin"]       # also: þriðja rót, verpilrót
       - else_if: "*[2][not(contains(., '.'))]"
-        then: [x: "ToOrdinal(*[2])", t: "root"]
+        then: [x: "ToOrdinal(*[2])", T: "rótin"]
       else:
       - test:
           if: "*[2][self::m:mi][string-length(.)=1]"
           then:
           - x: "*[2]"
-          - pronounce: [{text: "-th"}, {ipa: "θ"}, {sapi5: "th"}, {eloquence: "T"}]
+          - pronounce: [{text: "-th"}, {ipa: "θ"}, {sapi5: "th"}, {eloquence: "T"}] #TODO: we need to be able to insert the correct ordinals before "rótin": fjórða rótin, fimmta rótin, etc.
           else: {x: "*[2]"}
-      - t: "root"
+      - T: "rótin"
   - test:
       if: "IsNode(*[1], 'simple')"
       then:
       - test:
           if: "$Verbosity!='Terse'"
-          then: [t: "of"]
+          then: [T: "af"]
       - x: "*[1]"
 
 - name: matrix-override
@@ -74,24 +74,22 @@
   - "*[2][self::m:mtable] and"
   - "(IsBracketed(., '(', ')') or IsBracketed(., '[', ']') or IsBracketed(., '|', '|'))"
   replace:
-  - t: "the"
   - x: count(*[2]/*)
-  - t: "by"
+  - T: "sinnum"         #TODO: check, correct?
   - x: count(*[2]/*[self::m:mtr][1]/*)
   - test:
       if: "*[1][text()='|']" # just need to check the first bracket since we know it must be (, [, or |
-      then: [t: "determinant"]
-      else: [t: "matrix"]
+      then: [T: "ákveða"]
+      else: [T: "fylki"]
 
 - name: overview-default
   tag: mtable
   match: "."
   replace:
-  - t: "the"
   - x: count(*[2]/*)
-  - t: "by"
+  - T: "sinnum"
   - x: count(*[2]/*[self::m:mtr][1]/*)
-  - t: "table"
+  - T: "tafla"
 
 - name: short-mrow
   tag: mrow
@@ -115,6 +113,6 @@
   - pause: auto
   - x: "*[5]"
   - pause: auto
-  - t: "and so on"
+  - t: "og svo framvegis"
 
 - include: "SimpleSpeak_Rules.yaml"
