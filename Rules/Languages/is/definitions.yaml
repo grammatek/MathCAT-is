@@ -1,9 +1,11 @@
 ---
 - include: "../../definitions.yaml"
 
-- OperatorIntentRenaming: {
-    "dimension-product": "by"
-    }
+#TODO: Icelandic - do we need this?
+
+#- OperatorIntentRenaming: {
+#    "dimension-product": "by"
+#    }
 
 # Lines starting with "#" are a comment
 # Each definition in this file is of the form
@@ -30,78 +32,84 @@
 # The definitions for the "ones" should extend until a regular pattern begins
 #   The minimum length is 10.
 
-# For English, a regular pattern starts at twenty
+# For Icelandic, as for English, a regular pattern starts at twenty
+#TODO: Icelandic: how do we handle different forms of one to four?
 - NumbersOnes: [
-        "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-        "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
-        "seventeen", "eighteen", "nineteen"
+        "núll", "einn", "tveir", "þrír", "fjórir", "fimm", "sex", "sjö", "átta", "níu",
+        "tíu", "ellefu", "tólf", "þrettán", "fjórtán", "fimmtán", "sextán",
+        "sautján", "átján", "nítján"
     ]
 
+#TODO: Icelandic: how do we handle different forms of ordinals (ALL ordinals, not only one to four)
 - NumbersOrdinalOnes: [
-        "zeroth", "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth",
-        "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth",
-        "seventeenth", "eighteenth", "nineteenth"
+        "núllti", "fyrsti", "annar", "þriðji", "fjórði", "fimmti", "sjötti", "sjöundi", "áttundi", "níundi",
+        "tíundi", "ellefti", "tólfti", "þrettándi", "fjórtándi", "fimmtándi", "sextándi",
+        "sautjándi", "átjándi", "nítjándi"
     ]
 
 - NumbersOrdinalPluralOnes: [
-        "zeroth", "first", "seconds", "thirds", "fourths", "fifths", "sixths", "sevenths", "eights", "ninths",
-        "tenths", "elevenths", "twelfths", "thirteenths", "fourteenths", "fifteenths", "sixteenths",
-        "seventeenths", "eighteenths", "nineteenths"
+        "núlltu", "fyrstu", "aðrir", "þriðju", "fjórðu", "fimmtu", "sjöttu", "sjöundu", "áttundu", "níundu",
+        "tíundu", "elleftu", "tólftu", "þrettándu", "fjórtándu", "fimmtándu", "sextándu",
+        "sautjándu", "átjándu", "nítjándu"
     ]
 
     # stop when regularity begins
+  #TODO: Icelandic: what is this exactly?
 - NumbersOrdinalFractionalOnes: [
-        "zero", "first", "half"
+        "núll", "heill", "hálfur"
     ]
 
     # stop when regularity begins
 - NumbersOrdinalFractionalPluralOnes: [
-        "zeros", "firsts", "halves"
+        "núll", "heilir", "hálfir"
     ]
 
 
     # What to use for multiples of 10
 - NumbersTens: [
-        "", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"
+        "", "tíu", "tuttugu", "þrjátíu", "fjörutíu", "fimmtíu", "sextíu", "sjötíu", "áttatíu", "níutíu"
     ]
 
+#TODO: Icelandic: see above, different forms
 - NumbersOrdinalTens: [
-        "", "tenth", "twentieth", "thirtieth", "fortieth", "fiftieth", "sixtieth", "seventieth", "eightieth", "ninetieth"
+        "", "tíundi", "tuttugasti", "þrítugasti", "fertugasti", "fimmtugasti", "sextugasti", "sjötugasti", "áttugasti", "nítugasti"
     ]
 
+#TODO: is this relevant for Icelandic?
 - NumbersOrdinalPluralTens: [
         "", "tenths", "twentieths", "thirtieths", "fortieths", "fiftieths", "sixtieths", "seventieths", "eightieths", "ninetieths"
     ]
 
 
 - NumbersHundreds: [
-      "", "one hundred", "two hundred", "three hundred", "four hundred", "five hundred",
-        "six hundred", "seven hundred", "eight hundred", "nine hundred"
+      "", "eitt hundrað", "tvö hundruð", "þrjú hundruð", "fjögur hundruð", "fimm hundruð",
+        "sex hundruð", "sjö hundruð", "átta hundruð", "níu hundruð"
     ]
 
 - NumbersOrdinalHundreds: [
-      "", "one hundredth", "two hundredth", "three hundredth", "four hundredth", "five hundredth",
-        "six hundredth", "seven hundredth", "eight hundredth", "nine hundredth"
+      "", "einn hundraðasti", "tvö hundraðasti", "þrjú hundraðasti", "fjögur hundraðasti", "fimm hundraðasti",
+        "sex hundraðasti", "sjö hundraðasti", "átta hundraðasti", "níu hundraðasti"
     ]
 
 - NumbersOrdinalPluralHundreds: [
-      "", "one hundredths", "two hundredths", "three hundredths", "four hundredths", "five hundredths",
-        "six hundredths", "seven hundredths", "eight hundredths", "nine hundredths"
+      "", "eitt hundruðustu", "tvö hundruðustu", "þrjú hundruðustu", "fjögur hundruðustu", "fimm hundruðustu",
+        "sex hundruðustu", "sjö hundruðustu", "átta hundruðustu", "níu hundruðustu"
     ]
       
 
     # At this point, hopefully the language is regular. If not, code needs to be written
+  # Icelandic list copied from: https://is.wikipedia.org/wiki/St%C3%B3rar_t%C3%B6lur
 - NumbersLarge: [
-        "", "thousand", "million", "billion", "trillion", "quadrillion",
-        "quintillion", "sextillion", "septillion", "octillion", "nonillion",
+        "", "þúsund", "milljón", "milljarður", "billjón", "billjarður",
+        "trilljón", "trilljarður", "kvaðrilljón", "kvaðrilljarður", "kvintilljón"
     ]
       
 - NumbersOrdinalLarge: [
-        "", "thousandth", "millionth", "billionth", "trillionth", "quadrillionth",
-        "quintillionth", "sextillionth", "septillionth", "octillionth", "nonillionth"
+        "", "þúsundasti", "milljónasti", "milljarðasti", "billjónasti", "billjarðasti",
+        "trilljónasti", "trilljarðasti", "kvaðrilljónasti", "kvaðrilljarðasti", "kvintilljónasti"
     ]
       
 - NumbersOrdinalPluralLarge: [
-        "", "thousandths", "millionths", "billionths", "trillionths", "quadrillionths",
-        "quintillionths", "sextillionths", "septillionths", "octillionths", "nonillionths"
+  "", "þúsundustu", "milljónustu", "milljörðustu", "billjónustu", "billjörðustu",
+  "trilljónustu", "trilljörðustu", "kvaðrilljónustu", "kvaðrilljörðustu", "kvintilljónustu"
     ]
