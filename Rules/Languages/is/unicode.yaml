@@ -1,23 +1,15 @@
 ---
- # Note to translators:
- #   most languages don't have two ways to pronounce 'a' -- if not need, remove the rules and change "B-Z" to "A-Z"
- #   some languages say the word for "uppercase" after the letter. Make sure to change that where appropriate by moving some code around
- - "a": 
+ - "a-z":                   # TODO: Is the Icelandic alphabet relevant in this context? If yes, a-z is not sufficient.
     - test: 
         if: "$TTS='none'"
-        then: [t: "eigh"]                         # long "a" sound in all speech engines I tested (espeak, MS SAPI, eloquence,
-        else: [spell: "'a'"]                         #    AWS Polly, ReadSpeaker, NaturalReader, google cloud, nuance, ibm watson)
- - "b-z": 
-    - test: 
-        if: "$TTS='none'"
-        then: [t: "."]                          
+        then: [T: "."]
         else: [spell: "'.'"]                       
 
  # Capital letters are a little tricky: users can pick their favorite word (something that was requested) and 
  # screen readers have options to use pitch changes or beeps instead of or in addition to say "cap"
  # Also, if a user can see the screen, they probably don't need to hear "cap", but if they specified an override, they must want to hear the override.
 
- - "A":
+ - "A-Z":
     - test: 
         if: "$CapitalLetters_Beep"
         then:
@@ -30,78 +22,55 @@
           if: "$SpeechOverrides_CapitalLetters = ''"
           then_test:
             if: "$Impairment = 'Blindness'"
-            then: [t: "cap"]
+            then: [T: "stórt"]
           else: [x: "$SpeechOverrides_CapitalLetters"]
     - pitch:
         value: "$CapitalLetters_Pitch"
-        replace:
-        - test:
-            if: "$TTS='none'"
-            then: [t: "eigh"]
-            else: [spell: "'a'"]
-            
- - "B-Z":
-    - test: 
-        if: "$CapitalLetters_Beep"
-        then:
-        - audio:
-            value: "beep.mp4"
-            replace: []
-    - test: 
-        if: "$CapitalLetters_UseWord"
-        then_test:
-          if: "$SpeechOverrides_CapitalLetters = ''"
-          then_test:
-            if: "$Impairment = 'Blindness'"
-            then: [t: "cap"]
-          else: [x: "$SpeechOverrides_CapitalLetters"] 
-    - pitch:
-        value: "$CapitalLetters_Pitch"
         # note: processing of ranges converts '.' into the character, so it needs to be in quotes below
-        replace: [spell: "translate('.', 'BCDEFGHIJKLMNOPQRSTUVWXYZ', 'bcdefghijklmnopqrstuvwxyz')"]
+        replace: [ spell: "translate('.', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')" ]
 
- - "0-9": [t: "."]
+ - "0-9": [T: "."]
 
- - " ": [t: " "]                     # 0x20
+ - " ": [t: " "]                     # 0x20 - TODO: missing in the Swedish translation, why?
 
  - "!":                                            # 0x21
     - test:
         if: "ancestor-or-self::*[contains(@data-intent-property, ':literal:')]"
         then_test:
             if: "$Verbosity = 'Terse'"
-            then: [t: "bang"]                      # 0x21
-            else: [t: "exclamation point"]          # 0x21
-        else: [t: "factorial"]                     # 0x21
+            then: [T: "upphrópunarmerki"]                      # 0x21
+            else: [T: "upphrópunarmerki"]          # 0x21
+        else: [T: "hrópmerkt"]                     # 0x21   # Also: "aðfaldað"
           
- - "\"": [t: "quotation mark"]                     # 0x22
- - "#": [t: "number"]                              # 0x23
- - "$": [t: "dollars"]                             # 0x24
- - "%": [t: "percent"]                             # 0x25
- - "&": [t: "ampersand"]                           # 0x26
- - "'": [t: "apostrophe"]                          # 0x27
+ - "\"": [T: "gæsalappir"]                     # 0x22
+ - "#": [T: "tala"]                              # 0x23     # TODO: check
+ - "$": [T: "dollari"]                             # 0x24   # TODO: what form?
+ - "%": [T: "prósent"]                             # 0x25
+ - "&": [T: "og-merki"]                           # 0x26    # Íðorðabankinn
+ - "'": [T: "úrfellingarmerki"]                          # 0x27
  - "(":                                            # 0x28
     - test:
         if: $SpeechStyle = 'ClearSpeak' or $SpeechStyle = 'SimpleSpeak'
         then_test:
             if: "$Verbosity='Terse'"
-            then: [t: "open"]                     # 0x28
-            else: [t: "open paren"]               # 0x28
-        else: [t: "left paren"]                   # 0x28                         
+            then: [T: "svigi"]                     # 0x28   # TODO: is this enough? Or always "svigi opnast/lokast"?
+            else: [T: "svigi opnast"]               # 0x28
+        else: [T: "vinstri svigi"]                   # 0x28
  - ")":                                          # 0x29
     - test:
         if: $SpeechStyle = 'ClearSpeak' or $SpeechStyle = 'SimpleSpeak'
         then_test:
             if: "$Verbosity='Terse'"
-            then: [t: "close"]                   # 0x29
-            else: [t: "close paren"]             # 0x29
-        else: [t: "right paren"]                 # 0x29                 
+            then: [T: "svigi"]                   # 0x29
+            else: [T: "svigi lokast"]             # 0x29
+        else: [T: "hægri svigi"]                 # 0x29
 
  - "*":                                          # 0x2a
     test:
         if: "parent::*[name(.)='msup' or name(.)='msubsup' or name(.)='skip-super']"
-        then: [t: "star"]                        # 0x2a
-        else: [t: "times"]                       # 0x2a
- - "+": [t: "plus"]                              # 0x2b
+        then: [T: "stjarna"]                        # 0x2a
+        else: [T: "sinnum"]                       # 0x2a
+ - "+": [T: "plús"]                              # 0x2b
  - ",":                                          # 0x2c
     # the following deals with the interaction of "," with "…" which sometimes wants the ',' to be silent
     # that this test is here and not with "…" is not ideal, but seems simplest
@@ -113,109 +82,109 @@
             - "( following-sibling::*[1][text()!= '…'] and preceding-sibling::*[1][text()!='…']  ) or "
                # except if expression starts with '…'
             - "../*[1][text()='…'] "
-        then: [t: "comma"]
+        then: [T: "komma"]
         # else silent
 
- - "-": [t: "minus"]                               # 0x2d
+ - "-": [T: "mínus"]                               # 0x2d
  - ".":                                          # 0x2e
     - test:
         if: "parent::*[1][self::m:mn]"
-        then: [t: "point"]
-        else: [t: "dot"]
- - "/": [t: "divided by"]                          # 0x2f
- - ":": [t: "colon"]                               # 0x3a
- - ";": [t: "semicolon"]                           # 0x3b
+        then: [T: "komma"]
+        else: [T: "punktur"]
+ - "/": [T: "deilt með"]                          # 0x2f
+ - ":": [T: "tvípunktur"]                               # 0x3a
+ - ";": [T: "semikomma"]                           # 0x3b
  - "<":                                          # 0x3c
      - test: 
          if: "$Verbosity!='Terse'"
-         then: [t: "is"]
-     - t: "less than"
+         then: [T: "er"]
+     - T: "minna en"                              # TODO: do we sometimes need 'minni en'?
  - "=":                                           # 0x3d
     - test: 
         if: "$Verbosity!='Terse'"
-        then: [t: "is equal to"]
-        else: [t: "equals"]
+        then: [T: "er jafnt og"]
+        else: [T: "jafnt og"]
 
  - ">":                                          # 0x3e
      - test: 
          if: "$Verbosity!='Terse'"
-         then: [t: "is"]
-     - t: "greater than"
- - "?": [t: "question mark"]                       # 0x3f
- - "@": [t: "at sign"]                             # 0x40
+         then: [T: "er"]
+     - T: "stærra en"                             # TODO: do we sometimes need 'stærri en'?
+ - "?": [T: "spurningarmerki"]                       # 0x3f
+ - "@": [T: "vistmerki"]                             # 0x40 Íðorðabankinn, also: að-merki, á-merki, hjá-merki
  - "[":                                          # 0x5b
     - test:
         if: $SpeechStyle = 'ClearSpeak' or $SpeechStyle = 'SimpleSpeak'
-        then: [t: "open bracket"]
-        else: [t: "left bracket"]                            
- - "\\": [t: "back slash"]                         # 0x5c
+        then: [T: "hornklofi opnast"]
+        else: [T: "vinstri hornklofi"]
+ - "\\": [T: "öfugt skástrik"]                         # 0x5c
  - "]":                                          # 0x5d
     - test:
         if: $SpeechStyle = 'ClearSpeak' or $SpeechStyle = 'SimpleSpeak'
-        then: [t: "close bracket"]
-        else: [t: "right bracket"]
+        then: [T: "hornklokfi lokast"]
+        else: [T: "hægri hornklofi"]
  - "^":                                           # 0x5e
     - test:
         if: "parent::m:modified-variable or parent::m:mover"
-        then: [t: "hat"]
-        else: [t: "caret"]
- - "_": [t: "under bar"]                          # 0x5f
- - "`": [t: "grave"]                              # 0x60
+        then: [T: "hattur"]                       # TODO: is this correct? 'hat' and 'caret'. See Íðorðabankinn
+        else: [T: "innskotsmerki"]
+ - "_": [T: "undirstrik"]                          # 0x5f
+ - "`": [T: "öfugur broddur"]                              # 0x60
  - "{":                                         # 0x7b
     - test:
         if: $SpeechStyle = 'ClearSpeak' or $SpeechStyle = 'SimpleSpeak'
-        then: [t: "open brace"]
-        else: [t: "left brace"]                            
+        then: [T: "oddsvigi opnast"]
+        else: [T: "vinstri oddsvigi"]
  - "|":                                          # 0x7c
     # note: for ClearSpeak and SimpleSpeak, "|" inside of sets is handled at the mrow level, same for 'sets'
      - test:
         - if: "$SpeechStyle != 'ClearSpeak' or not(preceding-sibling::*) or not(following-sibling::*)"
-          then: [t: "vertical line"]
+          then: [T: "lóðstrik"]
         - else_if: "$ClearSpeak_VerticalLine = 'SuchThat'"
-          then: [t: "such that"]
+          then: [T: "þannig að"]                  # (en: 'such that')
         - else_if: "$ClearSpeak_VerticalLine = 'Given'"  
-          then: [t: "given"] 
-        - else: [t: "divides"]                   
+          then: [T: "gefið að"]                   # (en: 'given')
+        - else: [T: "skiptir"]                    # (en: 'divides')
 
  - "}":                                          # 0x7d
     - test:
         if: $SpeechStyle = 'ClearSpeak' or $SpeechStyle = 'SimpleSpeak'
-        then: [t: "close brace"]
-        else: [t: "right brace"]                            
+        then: [T: "oddsvigi lokast"]
+        else: [T: "hægri oddsvigi"]
 
- - "~": [t: "tilde"]                               # 0x7e
+ - "~": [T: "bylgja"]                               # 0x7e
  - " ":                                            # 0xa0
     - test:
         if: "@data-empty-in-2D"
-        then: [t: "empty"]                         # want to say something for fraction (etc) with empty child
-        else: [t: ""]                            
+        then: [T: "tómt"]                         # want to say something for fraction (etc) with empty child
+        else: [T: ""]
 
- - "¬": [t: "not"]                                 # 0xac
- - "°": [t: "degrees"]                           # 0xb0
- - "±": [t: "plus or minus"]                       # 0xb1
- - "´": [t: "acute"]                            # 0xb4
+ - "¬": [T: "ekki"]                                 # 0xac
+ - "°": [T: "gráður"]                           # 0xb0
+ - "±": [T: "plús mínus"]                       # 0xb1
+ - "´": [T: "broddur"]                            # 0xb4
  - "·":                                            # 0xB7
     - test:
         if: "$SpeechStyle != 'ClearSpeak' or $ClearSpeak_MultSymbolDot = 'Auto'"
-        then: [t: "times"]
-        else: [t: "dot"]
+        then: [T: "sinnum"]
+        else: [T: "punktur"]                    # TODO: sv: halvhög punkt, en: dot
  - "×":                                          # 0xd7
     - test:
         if: "$SpeechStyle != 'ClearSpeak' or $ClearSpeak_MultSymbolX = 'Auto'"
-        then: [t: "times"]
+        then: [T: "sinnum"]
         else_test:
             if: $ClearSpeak_MultSymbolX = 'By'
-            then: [t: "by"]
-            else: [t: "cross"]
- - "÷": [t: "divided by"]                          # 0xf7
- - "̀": [t: "grave accent embellishment"]          # 0x300
- - "́": [t: "acute accent embellishment"]          # 0x301
- - "̂": [t: "circumflex accent embellishment"]     # 0x302
- - "̃": [t: "tilde embellishment"]                 # 0x303
- - "̄": [t: "macron embellishment"]                # 0x304
- - "̅": [t: "overbar embellishment"]               # 0x305
- - "̆": [t: "breve"]                               # 0x306
- - "̇": [t: "dot above embellishment"]             # 0x307
+            then: [T: "sinnum"]
+            else: [T: "kross"]
+ - "÷": [T: "deilt með"]                          # 0xf7
+ - "̀": [T: "öfugur broddur"]          # 0x300    (en: "grave accent embellishment")
+ - "́": [T: "broddur"]          # 0x301 (en: "acute accent embellishment")
+ - "̂": [T: "hattur"]     # 0x302  (en: "circumflex accent embellishment")
+ - "̃": [T: "bylgja"]                 # 0x303  (en: "tilde embellishment")
+ - "̄": [t: "macron embellishment"]                # 0x304  # TODO: missing translation
+ - "̅": [T: "yfirstrik"]               # 0x305  (en: "overbar embellishment")
+ - "̆": [t: "breve"]                               # 0x306  # TODO: missing translation
+ - "̇": [T: "punktur fyrir ofan"]             # 0x307  (en: "dot above embellishment")
 
    # Note: ClearSpeak has pref TriangleSymbol for "Δ", but that is wrong
  - "Α-Ω": 
@@ -231,47 +200,47 @@
           if: "$SpeechOverrides_CapitalLetters = ''"
           then_test:
             if: "$Impairment = 'Blindness'"
-            then: [t: "cap"]
+            then: [T: "stórt"]
           else: [x: "$SpeechOverrides_CapitalLetters"] 
     - pitch:
         value: "$CapitalLetters_Pitch"
         # note: processing of ranges converts '.' into the character, so it needs to be in quotes below
         replace: [spell: "translate('.', 'ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡ΢ΣΤΥΦΧΨΩ', 'αβγδεζηθικλμνξοπρςστυφχψω')"]
 
- - "α": [t: "alpha"]                               # 0x3b1
- - "β": [t: "beta"]                                # 0x3b2
- - "γ": [t: "gamma"]                               # 0x3b3
- - "δ": [t: "delta"]                               # 0x3b4
- - "ε": [t: "epsilon"]                             # 0x3b5
- - "ζ": [t: "zeta"]                                # 0x3b6
- - "η": [t: "eta"]                                 # 0x3b7
- - "θ": [t: "theta"]                               # 0x3b8
- - "ι": [t: "iota"]                                # 0x3b9
- - "κ": [t: "kappa"]                               # 0x3ba
- - "λ": [t: "lambda"]                               # 0x3bb
- - "μ": [t: "mu"]                                  # 0x3bc
- - "ν": [t: "nu"]                                  # 0x3bd
- - "ξ": [t: "zai"]                                 # 0x3be
- - "ο": [t: "omicron"]                             # 0x3bf
- - "π": [t: "pi"]                                  # 0x3c0
- - "ρ": [t: "rho"]                                 # 0x3c1
- - "ς": [t: "final sigma"]                         # 0x3c2
- - "σ": [t: "sigma"]                               # 0x3c3
- - "τ": [t: "tau"]                                 # 0x3c4
- - "υ": [t: "upsilon"]                             # 0x3c5
- - "φ": [t: "phi"]                                 # 0x3c6
- - "χ": [t: "chi"]                                 # 0x3c7
- - "ψ": [t: "psi"]                                 # 0x3c8
- - "ω": [t: "omega"]                               # 0x3c9
- - "ϕ": [t: "phi"]                                 # 0x3d5
- - "ϖ": [t: "pi"]                                  # 0x3d6
- - "ϵ": [t: "epsilon"]                             # 0x3f5
- - "϶": [t: "reversed epsilon"]                    # 0x3f6
+ - "α": [T: "alfa"]                               # 0x3b1
+ - "β": [T: "beta"]                                # 0x3b2
+ - "γ": [T: "gamma"]                               # 0x3b3
+ - "δ": [T: "delta"]                               # 0x3b4
+ - "ε": [T: "epsilon"]                             # 0x3b5
+ - "ζ": [T: "zeta"]                                # 0x3b6
+ - "η": [T: "eta"]                                 # 0x3b7
+ - "θ": [T: "þeta"]                               # 0x3b8
+ - "ι": [T: "jóta"]                                # 0x3b9
+ - "κ": [T: "kappa"]                               # 0x3ba
+ - "λ": [T: "lambda"]                               # 0x3bb
+ - "μ": [T: "mý"]                                  # 0x3bc
+ - "ν": [T: "ný"]                                  # 0x3bd
+ - "ξ": [T: "xí"]                                 # 0x3be
+ - "ο": [T: "ómíkron"]                             # 0x3bf
+ - "π": [T: "pí"]                                  # 0x3c0
+ - "ρ": [T: "hró"]                                 # 0x3c1
+ - "ς": [T: "sigma"]                         # 0x3c2
+ - "σ": [T: "sigma"]                               # 0x3c3
+ - "τ": [T: "tá"]                                 # 0x3c4
+ - "υ": [T: "upsílon"]                             # 0x3c5
+ - "φ": [T: "fí"]                                 # 0x3c6
+ - "χ": [T: "kí"]                                 # 0x3c7
+ - "ψ": [T: "psí"]                                 # 0x3c8
+ - "ω": [T: "ómega"]                               # 0x3c9
+ - "ϕ": [T: "fí"]                                 # 0x3d5
+ - "ϖ": [T: "pí"]                                  # 0x3d6
+ - "ϵ": [T: "epsilon"]                             # 0x3f5
+ - "϶": [T: "öfugt epsilon"]                    # 0x3f6       # TODO: correct? en: "reversed epsilon"
 
- - "–": [t: "en dash"]                             # 0x2013
- - "—": [t: "em dash"]                             # 0x2014
- - "―": [t: "horizontal bar"]                      # 0x2015
- - "‖": [t: "double vertical line"]                # 0x2016
+ - "–": [T: "tilstrik"]                             # 0x2013  # Also: stutt þankastrik, Íðorðabankinn
+ - "—": [T: "þankastrik"]                             # 0x2014
+ - "―": [T: "lárétt strik"]                      # 0x2015     # en: "horizontal bar"
+ - "‖": [T: "tvöfalt lóðrétt strik"]                # 0x2016  en: "double vertical line" Google translate: "tvöföld lóðrétt lína"
  - "…":                                          # 0x2026
     test:
         if:
@@ -279,101 +248,93 @@
                # must be ClearSpeak and $ClearSpeak_Ellipses = 'AndSoOn'
                # speak '…' as 'and so on...' unless expr starts with '…'
             - "../*[1][text()='…']"
-        then: [t: "dot dot dot"]
+        then: [T: "punktur punktur punktur"]
         else_test:  # must have $ClearSpeak_Ellipses = 'AndSoOn'
             if: "count(following-sibling::*) = 0"
-            then: [t: "and so on"]
-            else: [t: "and so on up to"]
+            then: [T: "og svo framvegis"]
+            else: [T: "og svo framvegis upp að"]        # en: "and so on up to"
 
  - "⁡":                                          # 0x2061
     - test:
         if: "$Verbosity!='Terse' and not(preceding-sibling::*[1][IsInDefinition(., 'GeometryShapes')]) and
              not(@data-changed='added' and ancestor-or-self::*[contains(@data-intent-property, ':literal:')])"
-        then: [t: "of"]
- - "⁢": [t: ""]                                   # 0x2062
- - "⁣": [t: ""]                                   # 0x2063
- - "⁤": [t: "and"]                                # 0x2064
- - "′": [t: "prime"]                               # 0x2032
+        then: [T: "af"]
+ - "⁢": [T: ""]                                   # 0x2062
+ - "⁣": [T: ""]                                   # 0x2063
+ - "⁤": [T: "og"]                                # 0x2064
+ - "′": [t: "prime"]                               # 0x2032   # TODO: translation missing. frumtala? tvöföld, þreföld?
  - "″": [t: "double prime"]                        # 0x2033
  - "‴": [t: "triple prime"]                        # 0x2034
 
  - "ℂℕℚℝℤ":     # here we rely on this running through the table again to speak "cap xxx"
-    - t: "double-struck"
+    - T: "tvísláttur"                          # en: "double-struck", sv: "med dubbelstreck" TODO: correct?
     - spell: "translate('.', 'ℂℕℚℝℤ', 'CNQRZ')"
 
- - "℃": [t: "degrees celsius"]                     # 0x2103
- - "℉": [t: "degrees fahrenheit"]                  # 0x2109
+ - "℃": [T: "gráður á selsíus"]                     # 0x2103
+ - "℉": [T: "gráður á fahrenheit"]                  # 0x2109
  - "ℋℛℓ":                                          # 0x210b
-    - t: "script"
+    - T: "leturgerð"                                # TODO: correct? en: "script", sv: "skrivstilt"
     - spell: "translate('.', 'ℋℛℓ', 'HRl')"
- - "ℎ": [t: "planck constant"]                     # 0x210e
+ - "ℎ": [T: "planck stuðull"]                     # 0x210e
  - "ℜ":                                          # 0x211c
-    - t: "fraktur"
+    - T: "gotneskt letur"                         # Also: brotaletur, fraktúrletur, Íðorðabankinn. en: "fraktur"
     - spell: "'R'"
 
- - "Ω": [t: "ohms"]                                # 0x2126
- - "K": [t: "kelvin"]                              # 0x212a
- - "Å": [t: "angstroms"]                           # 0x212b
+ - "Ω": [T: "ohm"]                                # 0x2126
+ - "K": [T: "kelvin"]                              # 0x212a   # sv: "grader kelvin"
+ - "Å": [T: "angström"]                           # 0x212b
  - "ⅆⅇⅈⅉ":                                          # 0x2146-9
-    - t: "double-struck italic"
+    - T: "tvísláttur skáletrað"                     # TODO: correct? en: "double-struck italic"
     - spell: "translate('.', 'ⅆⅇⅈⅉ', 'deij')"
 
- - "←": [t: "leftwards arrow"]                     # 0x2190
- - "↑": [t: "upwards arrow"]                       # 0x2191
+ - "←": [T: "ör til vinstri"]                     # 0x2190
+ - "↑": [T: "ör upp"]                       # 0x2191
  - "→":                                          # 0x2192
      - test:
         if: "ancestor::*[2][self::m:limit]"
-        then: [t: "approaches"]
-        else: [t: "right arrow"]
+        then: [T: "nálgast"]
+        else: [T: "ör til hægri"]
 
- - "↓": [t: "downwards arrow"]                     # 0x2193
- - "⇒": [t: "rightwards double arrow"]             # 0x21d2
- - "∀": [t: "for all"]                             # 0x2200
+ - "↓": [T: "ör niður"]                     # 0x2193
+ - "⇒": [T: "tvöföld ör til hægri"]             # 0x21d2
+ - "∀": [T: "fyrir öll"]                             # 0x2200
  - "∂":                                          # 0x2202
      - test: 
          if: "$Verbosity='Terse'"
-         then: [t: "partial"]
-         else: [t: "partial derivative"]
- - "∃": [t: "there exists"]                        # 0x2203
- - "∄": [t: "there does not exist"]                # 0x2204
- - "∅": [t: "empty set"]                           # 0x2205
- - "∆":                                          # 0x2206
-     - test: 
-         if: "$Verbosity!='Terse'"
-         then: [t: "the"]
-     - t: "laplacian of"
- - "∇":                                          # 0x2207
-     - test: 
-         if: "$Verbosity!='Terse'"
-         then: [t: "the"]
-     - t: "gradient of"
+         then: [T: "hlut-"]                       # TODO: correct? en: "partial"
+         else: [T: "hlutafleiða"]
+ - "∃": [T: "eru til"]                        # 0x2203
+ - "∄": [T: "eru ekki til"]                # 0x2204
+ - "∅": [T: "tómamengi"]                           # 0x2205
+ - "∆": [T: "laplace"]                                          # 0x2206    # TODO: ath: laplace-virki
+ - "∇": [T: "stigull"]                                         # 0x2207
  - "∈":                                          # 0x2208
      - test:
         if: "$SpeechStyle != 'ClearSpeak'"
         then:
         - test:
             if: "$Verbosity!='Terse' and not(ancestor::*[self::m:set])"    # "the set x is an element of ..." sounds bad"
-            then: [t: "is"]
-        - t: "an element of"
+            then: [T: "er"]
+        - T: "eining í"       # TODO: correct? "element of" - rather "stak" or "hluti"? See this and next translation batches
         # Several options for speaking elements in ClearSpeak -- they split between being inside a set or not and then the option
         else_test:
             if: "../../self::m:set or ../../../self::m:set" # inside a set
             then_test:
               - if: $ClearSpeak_SetMemberSymbol = 'Auto' or $ClearSpeak_SetMemberSymbol = 'In'
-                then: [t: "in"]
+                then: [T: "í"]
               - else_if: $ClearSpeak_SetMemberSymbol = 'Member'
-                then: [t: "member of"]
+                then: [T: "meðlimur í"]
               - else_if: $ClearSpeak_SetMemberSymbol = 'Element'
-                then: [t: "element of"]
-              - else: [t: "belonging to"]             # $ClearSpeak_SetMemberSymbol = 'Belongs'
+                then: [T: "eining í"]
+              - else: [T: "tilheyrandi"]             # $ClearSpeak_SetMemberSymbol = 'Belongs' , en: "belonging to"
             else_test:
               - if: $ClearSpeak_SetMemberSymbol = 'Auto' or $ClearSpeak_SetMemberSymbol = 'Member'
-                then: [t: "is a member of"]
+                then: [T: "er meðlimur í"]
               - else_if: $ClearSpeak_SetMemberSymbol = 'Element'
-                then: [t: "is an element of"]
+                then: [T: "er eining í"]
               - else_if: $ClearSpeak_SetMemberSymbol = 'In'
-                then: [t: "is in"]
-              - else: [t: "belongs to"]              # $ClearSpeak_SetMemberSymbol = 'Belongs'
+                then: [T: "er í"]
+              - else: [T: "tilheyrir"]              # $ClearSpeak_SetMemberSymbol = 'Belongs'
  - "∉":                                          # 0x2209
     # rule is identical to 0x2208
      - test:
@@ -381,160 +342,152 @@
         then:
         - test: 
             if: "$Verbosity!='Terse'"
-            then: [t: "is"]
-        - t: "not an element of"
+            then: [T: "er"]
+        - T: "ekki eining í"
         # Several options for speaking elements in ClearSpeak -- they split between being inside a set or not and then the option
         else_test:
             if: "../../self::m:set or ../../../self::m:set" # inside a set
             then_test:
               - if: $ClearSpeak_SetMemberSymbol = 'Auto' or $ClearSpeak_SetMemberSymbol = 'In'
-                then: [t: "not in"]
+                then: [T: "ekki í"]
               - else_if: $ClearSpeak_SetMemberSymbol = 'Member'
-                then: [t: "not member of"]
+                then: [T: "ekki meðlimur í"]
               - else_if: $ClearSpeak_SetMemberSymbol = 'Element'
-                then: [t: "not element of"]
-              - else: [t: "not belonging to"]             # $ClearSpeak_SetMemberSymbol = 'Belongs'
+                then: [T: "ekki eining í"]
+              - else: [T: "ekki tilheyrandi"]             # $ClearSpeak_SetMemberSymbol = 'Belongs'
             else_test:
               - if: $ClearSpeak_SetMemberSymbol = 'Auto' or $ClearSpeak_SetMemberSymbol = 'Member'
-                then: [t: "is not a member of"]
+                then: [T: "er ekki meðlimur í"]
               - else_if: $ClearSpeak_SetMemberSymbol = 'Element'
-                then: [t: "is not an element of"]
+                then: [T: "er ekki eining í"]
               - else_if: $ClearSpeak_SetMemberSymbol = 'In'
-                then: [t: "is not in"]
-              - else: [t: "does not belong to"]              # $ClearSpeak_SetMemberSymbol = 'Belongs'
+                then: [T: "er ekki í"]
+              - else: [T: "tilheyrir ekki"]              # $ClearSpeak_SetMemberSymbol = 'Belongs'
  - "∊":                                          # 0x220a
      - test:
         if: "$SpeechStyle != 'ClearSpeak'"
         then:
         - test: 
             if: "$Verbosity!='Terse' and not(ancestor::*[self::m:set])"    # "the set x is an element of ..." sounds bad"
-            then: [t: "is"]
-        - t: "an element of"
+            then: [T: "er"]
+        - T: "eining í"
         # Several options for speaking elements in ClearSpeak -- they split between being inside a set or not and then the option
         else_test:
             if: "../../self::m:set or ../../../self::m:set" # inside a set
             then_test:
               - if: $ClearSpeak_SetMemberSymbol = 'Auto' or $ClearSpeak_SetMemberSymbol = 'In'
-                then: [t: "in"]
+                then: [T: "í"]
               - else_if: $ClearSpeak_SetMemberSymbol = 'Member'
-                then: [t: "member of"]
+                then: [T: "meðlimur í"]
               - else_if: $ClearSpeak_SetMemberSymbol = 'Element'
-                then: [t: "element of"]
-              - else: [t: "belonging to"]             # $ClearSpeak_SetMemberSymbol = 'Belongs'
+                then: [T: "eining í"]
+              - else: [T: "tilheyrandi"]             # $ClearSpeak_SetMemberSymbol = 'Belongs'
             else_test:
               - if: $ClearSpeak_SetMemberSymbol = 'Auto' or $ClearSpeak_SetMemberSymbol = 'Member'
-                then: [t: "is a member of"]
+                then: [T: "er meðlimur í"]
               - else_if: $ClearSpeak_SetMemberSymbol = 'Element'
-                then: [t: "is an element of"]
+                then: [T: "er eining í"]
               - else_if: $ClearSpeak_SetMemberSymbol = 'In'
-                then: [t: "is in"]
-              - else: [t: "belongs to"]              # $ClearSpeak_SetMemberSymbol = 'Belongs'
- - "∏": [t: "product"]                             # 0x220f
- - "∐": [t: "co-product"]                          # 0x2210
- - "∑": [t: "sum"]                                 # 0x2211
- - "−": [t: "minus"]                               # 0x2212
- - "∓": [t: "minus or plus"]                       # 0x2213
- - "∗": [t: "times"]                               # 0x2217
- - "∘": [t: "composed with"]                       # 0x2218
- - "√":                                          # 0x221a
-     - test: 
-         if: "$Verbosity!='Terse'"
-         then: [t: "the"]
-     - t: "square root of"
+                then: [T: "er í"]
+              - else: [T: "tilheyrir"]              # $ClearSpeak_SetMemberSymbol = 'Belongs'
+ - "∏": [T: "margfeldi"]                             # 0x220f
+ - "∐": [T: "hjámargfeldi"]                          # 0x2210   Also: summa, https://www.stæ.is/os
+ - "∑": [T: "summa"]                                 # 0x2211
+ - "−": [T: "mínus"]                               # 0x2212
+ - "∓": [T: "mínus plús"]                       # 0x2213
+ - "∗": [T: "sinnum"]                               # 0x2217
+ - "∘": [T: "og"]                       # 0x2218     # TODO: correct? en: "composed with", sv: "och"
+ - "√": [T: "ferningsrótin af"]                                        # 0x221a   # Also: kvaðratrótin, önnur rótin
  - "∝":                                          # 0x221d
      - test: 
          if: "$Verbosity!='Terse'"
-         then: [t: "is"]
-     - t: "proportional to"
- - "∞": [t: "infinity"]                          # 0x221e
- - "∟": [t: "right angle"]                         # 0x221f
- - "∠": [t: "angle"]                               # 0x2220
- - "∡": [t: "measured angle"]                      # 0x2221
- - "∣": [t: "divides"]                              # 0x2223
- - "∤": [t: "does not divide"]                      # 0x2224
+         then: [T: "er"]
+     - T: "í réttu hlutfalli við"                 # Also: í beinu hlutfalli við, Íðorðabankinn, eðlisfræði
+ - "∞": [T: "óendanlegt"]                          # 0x221e   Also: óendanleg stærð, óendanleiki, Íðorðabankinn, eðlisfræði
+ - "∟": [T: "rétt horn"]                         # 0x221f
+ - "∠": [T: "horn"]                               # 0x2220
+ - "∡": [T: "hornamál"]                      # 0x2221   # TODO: correct? en: "measured angle", "measure of angle" = hornamál (https://www.stæ.is/os)
+ - "∣": [T: "skiptir"]                              # 0x2223  # TODO: correct? en: "divides"
+ - "∤": [T: "skiptir ekki"]                      # 0x2224
  - "∥":                                           # 0x2225
      - test: 
          if: "$Verbosity!='Terse'"
-         then: [t: "is"]
-     - t: "parallel to"
+         then: [T: "er"]
+     - T: "samsíða"                         # Also: samhliða, https://www.stæ.is/os
  - "∦":                                           # 0x2226
      - test: 
          if: "$Verbosity!='Terse'"
-         then: [t: "is"]
-     - t: "not parallel to"
- - "∧": [t: "and"]                                 # 0x2227
- - "∨": [t: "or"]                                  # 0x2228
- - "∩": [t: "intersection"]                        # 0x2229
- - "∪": [t: "union"]                               # 0x222a
- - "∫": [t: "integral"]                            # 0x222b
- - "∬": [t: "double integral"]                     # 0x222c
- - "∭": [t: "triple integral"]                     # 0x222d
- - "∮": [t: "contour integral"]                    # 0x222e
- - "∶":                                          # 0x2236
-     - test: 
-         if: "$Verbosity!='Terse'"
-         then: [t: "is"]
-     - t: "to"
- - "∷": [t: "as"]                                  # 0x2237
- - "∼": [t: "varies with"]                         # 0x223c
- - "∽": [t: "reversed tilde"]                      # 0x223d
- - "∾":                                          # 0x223e
+         then: [T: "er"]
+     - T: "ekki samsíða"                    # Also: ekki samhliða
+ - "∧": [T: "og"]                                 # 0x2227
+ - "∨": [T: "eða"]                                  # 0x2228
+ - "∩": [T: "sniðmengi"]                        # 0x2229    Also: snið, skurðmengi, skarmengi (https://www.stæ.is/os)
+ - "∪": [T: "sammengi"]                               # 0x222a
+ - "∫": [T: "heildi"]                            # 0x222b   Also: tegur (https://www.stæ.is/os)
+ - "∬": [T: "tvöfalt heildi"]                     # 0x222c  Also: tvöfalt tegur
+ - "∭": [T: "þrefalt heildi"]                     # 0x222d  Also: þrefalt tegur
+ - "∮": [T: "lykkjuheildi"]                    # 0x222e   Also: lykkjutegur, heildi yfir lokaðan feril, tegur yfir lokaðan feril
+ - "∶":  [T: "til"]                            # 0x2236   TODO: correct? en: 'is to' (verbose), sv: 'till'
+ - "∷": [T: "sem"]                                  # 0x2237
+ - "∼": [T: "bylgja"]                         # 0x223c TODO: correct? en: 'varies with', sv: 'tilde'
+ - "∽": [T: "öfug bylgja"]                      # 0x223d
+ - "∾":                                          # 0x223e   TODO: what is this? sv: "omvänt långdraget s"
      - test: 
          if: "$Verbosity!='Terse'"
          then: [t: "is"]
      - t: "most positive"
- - "∿": [t: "sine wave"]                           # 0x223f
+ - "∿": [T: "sínusbylgja"]                           # 0x223f
  - "≠":                                          # 0x2260
      - test: 
          if: "$Verbosity!='Terse'"
-         then: [t: "is"]
-     - t: "not equal to"
+         then: [T: "er"]
+     - T: "ekki jafnt og"
  - "≡":                                          # 0x2261
      - test: 
          if: "$Verbosity!='Terse'"
-         then: [t: "is"]
-     - t: "identical to"
+         then: [T: "er"]
+     - T: "aljafnt og"                            # Also: samur, alsamur (https://www.stæ.is/os)
  - "≤":                                          # 0x2264
      - test: 
          if: "$Verbosity!='Terse'"
-         then: [t: "is"]
-     - t:  "less than or equal to"
+         then: [T: "er"]
+     - T:  "minna en eða jafnt og"
  - "≥":                                          # 0x2265
      - test: 
          if: "$Verbosity!='Terse'"
-         then: [t: "is"]
-     - t: "greater than or equal to"
- - "≦": [t: "less than over equal to"]             # 0x2266
- - "≧": [t: "greater than over equal to"]          # 0x2267
- - "≺": [t: "precedes"]                            # 0x227a
- - "≻": [t: "succeeds"]                            # 0x227b
+         then: [T: "er"]
+     - T: "stærra en eða jafnt og"
+ - "≦": [T: "minna en eða jafnt og"]             # 0x2266  TODO: en: "less than over equal to", sv: "mindre än eller lika med". What is correct in Icelandic?
+ - "≧": [T: "stærra en eða jafnt og"]          # 0x2267
+ - "≺": [T: "kemur á undan"]                            # 0x227a
+ - "≻": [T: "kemur á eftir"]                            # 0x227b
  - "⊂":                                          # 0x2282
      - test: 
          if: "$Verbosity!='Terse'"
-         then: [t: "is a"]
-     - t: "subset of"
+         then: [T: "er"]
+     - T: "hlutmengi í"
  - "⊃":                                          # 0x2283
      - test: 
          if: "$Verbosity!='Terse'"
-         then: [t: "is a"]
-     - t: "superset of"
+         then: [T: "er"]
+     - T: "yfirmengi"                         # TODO: correct? en: "superset of", stæ.is: including set = yfirmengi, sv: "övermängd till"
  - "⊄":                                          # 0x2284
      - test: 
          if: "$Verbosity!='Terse'"
-         then: [t: "is"]
-     - t: "not a subset of"
+         then: [T: "er"]
+     - T: "ekki hlutmengi í"
  - "⊅":                                          # 0x2285
      - test: 
          if: "$Verbosity!='Terse'"
-         then: [t: "is"]
-     - t: "not a superset of"
+         then: [T: "er"]
+     - T: "ekki yfirmengi"
  - "⊆":                                          # 0x2286
      - test: 
          if: "$Verbosity!='Terse'"
-         then: [t: "is a"]
-     - t: "subset of or equal to"
+         then: [T: "er"]
+     - T: "hlutmengi í eða jafnt og"
  - "⊇":                                          # 0x2287
      - test: 
          if: "$Verbosity!='Terse'"
-         then: [t: "is a"]
-     - t: "superset of or equal to"
+         then: [T: "er"]
+     - T: "yfirmengi eða jafnt og"
