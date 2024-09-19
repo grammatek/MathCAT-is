@@ -23,7 +23,7 @@
   tag: mrow
   match: "not(*)"
   replace:
-  - t: " " # say nothing -- placeholder
+  - T: " " # say nothing -- placeholder
 
 - name: default
   tag: mrow
@@ -61,7 +61,7 @@
   tag: ms
   match: "."
   replace:
-  - t: "the string"      # phrase('the string' is long)
+  - T: "strengurinn"      # phrase('the string' is long)
   - pause: short
   - x: "text()"
 
@@ -81,7 +81,7 @@
   - "not(ancestor::*[name() != 'mrow'][1]/self::m:fraction)" # FIX: can't test for mrow -- what should be used???
   replace:
   - x: "*[1]"
-  - t: "over"               # phrase("the fraction x 'over' y")
+  - T: "deilt með"               # phrase("the fraction x 'over' y") # TODO: should this be "yfir"? See also below
   - x: "*[2]"
   - pause: short
 
@@ -89,13 +89,13 @@
   tag: mfrac
   match: "."
   replace:
-  - t: "start"              # phrase("'start'  fraction x over y end of fraction")
+  - T: "byrjun"              # phrase("'start'  fraction x over y end of fraction")
   - pause: short
   - x: "*[1]"
   - test:
       if: "not(IsNode(*[1],'leaf'))"
       then: [pause: short]
-  - t: "over"               # phrase("the fraction x 'over' y")
+  - T: "deilt með"               # phrase("the fraction x 'over' y")
   - test:
       if: "not(IsNode(*[2],'leaf'))"
       then: [pause: short]
@@ -103,7 +103,7 @@
   - pause: short
   - test:
       if: "$Impairment = 'Blindness'"
-      then: [t: "end over"]          # phrase("start of fraction x over y 'end over'")
+      then: [T: "endir brot"]          # phrase("start of fraction x over y 'end over'")
   - pause: medium
 
 
@@ -112,39 +112,33 @@
   tag: msqrt
   match: "."
   replace:
+  - T: "rótarmerkið"
   - test:
       if: "$Verbosity!='Terse'"
-      then: [t: "the"]    # phrase("'the' root of x")
-  - t: "root symbol"
-  - test:
-      if: "$Verbosity!='Terse'"
-      then: [t: "of"]    # phrase("the root 'of' x")
+      then: [T: "af"]    # phrase("the root 'of' x")
   - x: "*[1]"
   - pause: short
   - test:
       if: "not(IsNode(*[1],'leaf')) or $Impairment = 'Blindness'"
-      then: [t: "end root symbol"] # phrase("root of x 'end root symbol'")
+      then: [T: "endir rótarmerki"] # phrase("root of x 'end root symbol'")
 
 # not sure what really should be said for these since we should not assume they are square roots
 - name: literal-default
   tag: mroot
   match: "."
   replace:
-  - test:
-      if: "$Verbosity!='Terse'"
-      then: [t: "the"]   # phrase("'the' root of x")
-  - t: "root symbol"
-  - t: "with index"      # phrase("the root of x 'with index' 5")
+  - T: "rótarmerkið"
+  - T: "með stuðulinn"      # phrase("the root of x 'with index' 5") TODO: is this correct in Icelandic?
   - x: "*[1]"
   - pause: short
   - test:
       if: "$Verbosity!='Terse'"
-      then: [t: "of"]   # phrase("the root 'of' x")
+      then: [T: "af"]   # phrase("the root 'of' x")
   - x: "*[2]"
   - pause: short
   - test:
       if: "not(IsNode(*[2],'leaf'))"
-      then: [t: "end root symbol"] # phrase("root of x 'end root symbol'")
+      then: [T: "endir rótarmerki"] # phrase("root of x 'end root symbol'")
 
 
 - name: simple-sub
@@ -155,7 +149,7 @@
   - x: "*[1]"
   - test:
       if: "$Verbosity!='Terse' or not(*[2][self::m:mn])" # just say "x 1" for terse vs "x sub 1"
-      then: [t: "sub"]      # phrase(x 'sub' 2)
+      then: [T: "lágvísir"]      # phrase(x 'sub' 2) TODO: how do we express this in Icelandic? Is it really "x lágvísir 2"?
   - x: "*[2]"
 
 - name: default
@@ -163,11 +157,11 @@
   match: "count(*)=2"
   replace:
   - x: "*[1]"
-  - t: "sub"               # phrase(x 'sub' 2)
+  - T: "lágvísir"               # phrase(x 'sub' 2)
   - x: "*[2]"
   - test:
       if: "$Impairment = 'Blindness'"
-      then: [t: "end sub"]           # phrase(x sub 2 'end of sub')
+      then: [T: "endir lágvísir"]           # phrase(x sub 2 'end of sub')
   - pause: short
 
 
@@ -176,7 +170,7 @@
   match: "."
   replace:
   - x: "*[1]"
-  - t: "sub"              # phrase(x 'sub' 2)
+  - T: "lágvísir"              # phrase(x 'sub' 2)
   - x: "*[2]"
 
 - name: literal
@@ -187,7 +181,7 @@
   - test:
       if: "name(.)='msubsup'"
       then:
-      - t: "sub"          # phrase(x 'sub' 2)
+      - T: "lágvísir"          # phrase(x 'sub' 2)
       - x: "*[2]"
   - test:
       if: "*[last()][translate(., '′″‴⁗†‡°*', '')='']"
@@ -195,15 +189,15 @@
       else_test:
           if: "ancestor-or-self::*[contains(@data-intent-property, ':literal:')]"  # FIX: is this test necessary?
           then:
-          - t: "super"      # phrase(x 'super' 2)
+          - T: "brjóstvísir"      # phrase(x 'super' 2) TODO: Ice also: hávísir
           - x: "*[last()]"
           - test:
               if: "not(IsNode(*[last()], 'simple')) or $Impairment = 'Blindness'"
-              then: [t: "end super"]      # phrase(x super 2 'end of super')
+              then: [T: "endir brjóstvísir"]      # phrase(x super 2 'end of super')
           else:
-          - t: "raised to the"            # phrase(5 'raised to the' second power equals 25)
+          - T: "í"            # phrase(5 'raised to the' second power equals 25)
           - x: "*[last()]"
-          - t: "power"                    # phrase(5 raised to the second 'power' equals 25)
+          - T: "veldi"                    # phrase(5 raised to the second 'power' equals 25)
 
 - name: default
   tag: munder
@@ -211,11 +205,11 @@
   replace:
   - test:
       if: "not(IsNode(*[1], 'leaf'))"
-      then: [t: "modified"]      # phrase(phrase(x 'modified' with y above it)
+      then: [T: "modified"]      # phrase(phrase(x 'modified' with y above it) TODO: what is this?
   - x: "*[1]"
-  - t: "with"      # phrase(x 'with' z below it)
+  - T: "með"      # phrase(x 'with' z below it)
   - x: "*[2]"
-  - t: "below"      # phrase(x with z 'below' it)
+  - T: "fyrir neðan"      # phrase(x with z 'below' it)
 
 - name: diacriticals
   tag: mover
@@ -230,11 +224,11 @@
   replace:
   - test:
       if: "not(IsNode(*[1], 'leaf'))"
-      then: [t: "modified"]      # phrase(phrase(x 'modified' with y above it)
+      then: [T: "modified"]      # phrase(phrase(x 'modified' with y above it) TODO: what is this?
   - x: "*[1]"
-  - t: "with"         # phrase(x modified 'with' y above it)
+  - T: "með"         # phrase(x modified 'with' y above it)
   - x: "*[2]"
-  - t: "above"        # phrase(x modified 'with' y above it)
+  - T: "fyrir ofan"        # phrase(x modified 'with' y above it)
 
 - name: default
   tag: munderover
@@ -242,13 +236,13 @@
   replace:
   - test:
       if: "not(IsNode(*[1], 'leaf'))"
-      then: [t: "modified"]      # phrase(the equation has been 'modified')
+      then: [T: "modified"]      # phrase(the equation has been 'modified') TODO: what is this?
   - x: "*[1]"
-  - t: "with"         # phrase(x modified 'with' y above it)
+  - T: "með"         # phrase(x modified 'with' y above it)
   - x: "*[2]"
-  - t: "below and"    # phrase(x modified with y 'below and' y above it)
+  - T: "fyrir neðan og"    # phrase(x modified with y 'below and' y above it)
   - x: "*[3]"
-  - t: "above"        # phrase(x modified with y 'above' it)
+  - T: "fyrir ofan"        # phrase(x modified with y 'above' it)
 
 - name: default
   #   Here we support up to 2 prescripts and up to 4 postscripts -- that should cover all reasonable cases
@@ -275,9 +269,9 @@
           - test: # only bother announcing if there is more than one prescript
               if: "count($Prescripts) > 2"
               then:
-              - t: "with"      # phrase(substitute x 'with' y)
+              - T: "með"      # phrase(substitute x 'with' y)
               - x: "count($Prescripts) div 2"
-              - t: "prescripts"      # phrase(in this equation certain 'prescripts' apply)
+              - T: "forskrift"      # phrase(in this equation certain 'prescripts' apply) TODO: what is this?
               - pause: short
           - test:
               if: "not($Prescripts[1][self::m:none])"
@@ -286,7 +280,7 @@
               - x: "$Prescripts[1]"
           - test:
               if: "not($Prescripts[1][self::m:none] or $Prescripts[2][self::m:none])"
-              then: [t: "and"]      # phrase(10 is greater than 8 'and' less than 15)
+              then: [T: "og"]      # phrase(10 is greater than 8 'and' less than 15)
           - test:
               if: "not($Prescripts[2][self::m:none])"
               then:
@@ -303,7 +297,7 @@
                   - x: "$Prescripts[3]"
               - test:
                   if: "not($Prescripts[3][self::m:none] or $Prescripts[4][self::m:none])"
-                  then: [t: "and"]      # phrase(10 is grater than 8 'and' less than 15)
+                  then: [T: "og"]      # phrase(10 is grater than 8 'and' less than 15)
               - test:
                   if: "not($Prescripts[4][self::m:none])"
                   then:
@@ -312,9 +306,9 @@
               - test:
                   if: "count($Prescripts) > 4" # give up and just dump them out so at least the content is there
                   then:
-                  - t: "and alternating prescripts"      # phrase(in this case there are values 'and alternating prescripts')
+                  - T: "og víxlandi forskriftir"      # phrase(in this case there are values 'and alternating prescripts') TODO: what is this?
                   - x: "$Prescripts[position() > 4]"
-                  - t: "end prescripts"      # phrase(This is where 'end prescripts' occurs)
+                  - T: "endir forskriftir"      # phrase(This is where 'end prescripts' occurs)
   - test:
       if: "$Postscripts"
       then:
@@ -328,10 +322,10 @@
               then:
               - test:
                   if: "$Prescripts"
-                  then: [t: "and"]      # phrase(10 is greater than 8 'and' less than 15)
-              - t: "with"      # phrase(substitute x 'with' y)
+                  then: [T: "og"]      # phrase(10 is greater than 8 'and' less than 15)
+              - T: "fyrir"      # phrase(substitute x 'with' y) TODO: skiptu út x 'fyrir' y
               - x: "count($Postscripts) div 2"
-              - t: "postscripts"      # phrase(this material includes several 'postscripts')
+              - T: "eftirskrift"      # phrase(this material includes several 'postscripts') TODO: what is this?
               - pause: short
           - test:
               if: "not($Postscripts[1][self::m:none])"
@@ -340,7 +334,7 @@
               - x: "$Postscripts[1]"
           - test:
               if: "not($Postscripts[1][self::m:none] or $Postscripts[2][self::m:none])"
-              then: [t: "and"]      # phrase(10 is greater than 8 'and' less than 15)
+              then: [T: "og"]      # phrase(10 is greater than 8 'and' less than 15)
           - test:
               if: "not($Postscripts[2][self::m:none])"
               then:
@@ -356,7 +350,7 @@
                   - x: "$Postscripts[3]"
               - test:
                   if: "not($Postscripts[3][self::m:none] or $Postscripts[4][self::m:none])"
-                  then: [t: "and"]      # phrase(10 is greater than 8 'and' less than 15)
+                  then: [T: "og"]      # phrase(10 is greater than 8 'and' less than 15)
               - test:
                   if: "not($Postscripts[4][self::m:none])"
                   then:
@@ -372,7 +366,7 @@
                       - x: "$Postscripts[5]"
                   - test:
                       if: "not($Postscripts[5][self::m:none] or $Postscripts[6][self::m:none])"
-                      then: [t: "and"]      # phrase(10 is greater than 8 'and' less than 15)
+                      then: [T: "og"]      # phrase(10 is greater than 8 'and' less than 15)
                   - test:
                       if: "not($Postscripts[6][self::m:none])"
                       then:
@@ -388,7 +382,7 @@
                           - x: "$Postscripts[7]"
                       - test:
                           if: "not($Postscripts[7][self::m:none] or $Postscripts[8][self::m:none])"
-                          then: [t: "and"]      # phrase(10 is less than 15 'and' greater than 5)
+                          then: [T: "og"]      # phrase(10 is less than 15 'and' greater than 5)
                       - test:
                           if: "not($Postscripts[8][self::m:none])"
                           then:
@@ -397,27 +391,27 @@
                       - test:
                           if: "count($Postscripts) > 8" # give up and just dump them out so at least the content is there
                           then:
-                          - t: "and alternating scripts"      # phrase(this situation involves complexities 'and alternating scripts')
+                          - T: "and alternating scripts"      # phrase(this situation involves complexities 'and alternating scripts') TODO: what is this?
                           - x: "$Postscripts[position() > 8]"
-                          - t: "end scripts"      # phrase(At this point 'end scripts' occurs)
+                          - T: "end scripts"      # phrase(At this point 'end scripts' occurs)
 
 - name: default
   tag: mtable
   variables: [IsColumnSilent: false()]
   match: "."
   replace:
-  - t: "table with"      # phrase(the 'table with' 3 rows)
+  - T: "tafla með"      # phrase(the 'table with' 3 rows)
   - x: count(*)
   - test:
       if: count(*)=1
-      then: [t: "row"]      # phrase(the table with 1 'row')
-      else: [t: "rows"]      # phrase(the table with 3 'rows')
-  - t: "and"      # phrase(the table with 3 rows 'and' 4 columns)
+      then: [T: "línu"]      # phrase(the table with 1 'row')
+      else: [T: "línum"]      # phrase(the table with 3 'rows')
+  - T: "og"      # phrase(the table with 3 rows 'and' 4 columns)
   - x: "count(*[1]/*)"
   - test:
       if: "count(*[1]/*)=1"
-      then: [t: "column"]      # phrase(the table with 3 rows and 1 'column')
-      else: [t: "columns"]      # phrase(the table with 3 rows and 4 'columns')
+      then: [T: "dálki"]      # phrase(the table with 3 rows and 1 'column')
+      else: [T: "dálkum"]      # phrase(the table with 3 rows and 4 'columns')
   - pause: long
   - x: "*"
 
@@ -427,12 +421,12 @@
   tag: [mtr, mlabeledtr]
   match: "."
   replace:
-  - t: "row"      # phrase(the first 'row' of a matrix)
+  - T: "lína"      # phrase(the first 'row' of a matrix)
   - x: "count(preceding-sibling::*)+1"
   - test:
       if: .[self::m:mlabeledtr]
       then:
-      - t: "with label"      # phrase(the line 'with label' first equation)
+      - T: "merkt"      # phrase(the line 'with label' first equation)
       - x: "*[1]/*"
       - pause: short
   - pause: medium
@@ -470,7 +464,7 @@
   tag: menclose
   match: "@notation='box' and *[self::m:mtext and text()=' ']"
   replace:
-  - t: "empty box"      # phrase(the 'empty box' contains no values)
+  - T: "tómur kassi"      # phrase(the 'empty box' contains no values) TODO: correct?
 
 - name: default
   # The ordering below is the order in which words come out when there is more than one value
@@ -480,29 +474,29 @@
   replace:
   - test:
       if: ".[contains(concat(' ', normalize-space(@notation), ' '), ' box ')]"
-      then: [t: "box", pause: short]      # phrase(the 'box' around the expression)
+      then: [T: "kassi", pause: short]      # phrase(the 'box' around the expression)
   - test:
       if: ".[contains(@notation,'roundedbox')]"
-      then: [t: "round box", pause: short]      # phrase(the 'round box' around the expression)
+      then: [T: "rúnnaður kassi", pause: short]      # phrase(the 'round box' around the expression)
   - test:
       if: ".[contains(@notation,'circle')]"
-      then: [t: "circle", pause: short]      # phrase(the 'circle' around the expression)
+      then: [T: "hringur", pause: short]      # phrase(the 'circle' around the expression)
   - test:
       if: ".[ contains(concat(' ', normalize-space(@notation), ' '), ' left ') or contains(concat(' ', normalize-space(@notation), ' '), ' right ') or contains(@notation,'top') or contains(@notation,'bottom') ]"
       then:
-      - t: "line on"      # phrase(draw a straight 'line' on the page)
+      - T: "línu á"      # phrase(draw a straight 'line' on the page)
       - test:
           if: ".[contains(concat(' ', normalize-space(@notation), ' '), ' left ')]"
-          then: [t: "left", pause: short]      # phrase(line on 'left' of the expression)
+          then: [T: "vinstra", pause: short]      # phrase(line on 'left' of the expression)
       - test:
           if: ".[contains(concat(' ', normalize-space(@notation), ' '), ' right ')]"
-          then: [t: "right", pause: short]      # phrase(line on 'right' of the expression)
+          then: [T: "hægra", pause: short]      # phrase(line on 'right' of the expression)
       - test:
           if: ".[contains(@notation,'top')]"
-          then: [t: "top", pause: short]      # phrase(line on 'top' of the expression)
+          then: [T: "fyrir ofan", pause: short]      # phrase(line on 'top' of the expression)
       - test:
           if: ".[contains(@notation,'bottom')]"
-          then: [t: "bottom", pause: short]      # phrase(line on the 'bottom' of the expression)
+          then: [T: "fyrir neðan", pause: short]      # phrase(line on the 'bottom' of the expression)
   - test:
       if: ".[ contains(@notation,'updiagonalstrike') or contains(@notation,'downdiagonalstrike') or contains(@notation,'verticalstrike') or contains(@notation,'horizontalstrike') ]"
       then:
@@ -512,77 +506,77 @@
           else:
           - test:
               if: ".[contains(@notation,'updiagonalstrike')]"
-              then: [t: "up diagonal", pause: short]      # phrase(the line runs 'up diagonal')
+              then: [T: "upp á ská", pause: short]      # phrase(the line runs 'up diagonal')
           - test:
               if: ".[contains(@notation,'downdiagonalstrike')]"
-              then: [t: "down diagonal", pause: short]      # phrase(the line runs 'down diagonal')
+              then: [T: "niður á ská", pause: short]      # phrase(the line runs 'down diagonal')
       - test:
           if: ".[contains(@notation,'verticalstrike')]"
-          then: [t: "vertical", pause: short]      # phrase(the line is  'vertical')
+          then: [T: "lóðrétt", pause: short]      # phrase(the line is  'vertical')
       - test:
           if: ".[contains(@notation,'horizontalstrike')]"
-          then: [t: "horizontal", pause: short]      # phrase(the line is 'horizontal')
-      - t: "cross out"      # phrase(please 'cross out' the incorrect answer)
+          then: [T: "lárétt", pause: short]      # phrase(the line is 'horizontal')
+      - T: "strikaðu út"      # phrase(please 'cross out' the incorrect answer)
       - pause: short
   - test:
       if: ".[contains(@notation,'uparrow')]"
-      then: [t: "up arrow", pause: short]      # phrase(direction is shown by the 'up arrow')
+      then: [T: "ör upp", pause: short]      # phrase(direction is shown by the 'up arrow')
   - test:
       if: ".[contains(concat(' ', normalize-space(@notation), ' '), ' downarrow ')]"
-      then: [t: "down arrow", pause: short]      # phrase(the trend is shown by the 'down arrow')
+      then: [T: "ör niður", pause: short]      # phrase(the trend is shown by the 'down arrow')
   - test:
       if: ".[contains(@notation,'leftarrow')]"
-      then: [t: "left arrow", pause: short]      # phrase(the 'left arrow' indicates going back)
+      then: [T: "ör til vinstri", pause: short]      # phrase(the 'left arrow' indicates going back)
   - test:
       if: ".[contains(concat(' ', normalize-space(@notation), ' '), ' rightarrow ')]"
-      then: [t: "right arrow", pause: short]      # phrase(the 'right arrow' indicates moving forward)
+      then: [T: "ör til hægri", pause: short]      # phrase(the 'right arrow' indicates moving forward)
   - test:
       if: ".[contains(@notation,'northeastarrow')]"
-      then: [t: "northeast arrow", pause: short]      # phrase(direction is indicated by the 'northeast arrow')
+      then: [T: "ör í norðaustur", pause: short]      # phrase(direction is indicated by the 'northeast arrow')
   - test:
       if: ".[contains(concat(' ', normalize-space(@notation), ' '), ' southeastarrow ')]"
-      then: [t: "southeast arrow", pause: short]      # phrase(direction is shown by the 'southeast arrow')
+      then: [T: "ör í suðaustur", pause: short]      # phrase(direction is shown by the 'southeast arrow')
   - test:
       if: ".[contains(concat(' ', normalize-space(@notation), ' '), ' southwestarrow ')]"
-      then: [t: "southwest arrow", pause: short]      # phrase(direction is shown by the 'southwest arrow')
+      then: [T: "ör í suðvestur", pause: short]      # phrase(direction is shown by the 'southwest arrow')
   - test:
       if: ".[contains(@notation,'northwestarrow')]"
-      then: [t: "northwest arrow", pause: short]      # phrase(direction is shown by the 'northwest arrow')
+      then: [T: "ör í norðvestur", pause: short]      # phrase(direction is shown by the 'northwest arrow')
   - test:
       if: ".[contains(@notation,'updownarrow')]"
-      then: [t: "double ended vertical arrow", pause: short]      # phrase(upward movement is indicated by the 'double ended vertical arrow')
+      then: [T: "tvíátta lóðrétt ör", pause: short]      # phrase(upward movement is indicated by the 'double ended vertical arrow')
   - test:
       if: ".[contains(@notation,'leftrightarrow')]"
-      then: [t: "double ended horizontal arrow", pause: short]      # phrase(progress is indicated by the 'double ended horizontal arrow')
+      then: [T: "tvíátta lárétt ör", pause: short]      # phrase(progress is indicated by the 'double ended horizontal arrow')
   - test:
       if: ".[contains(@notation,'northeastsouthwestarrow')]"
-      then: [t: "double ended up diagonal arrow", pause: short]      # phrase(trend is indicated by the 'double ended up diagonal arrow')
+      then: [T: "tvíátta ör upp á ská", pause: short]      # phrase(trend is indicated by the 'double ended up diagonal arrow')
   - test:
       if: ".[contains(@notation,'northwestsoutheastarrow')]"
-      then: [t: "double ended down diagonal arrow", pause: short]      # phrase(trend is indicated by the 'double ended down diagonal arrow')
+      then: [T: "tvíátta ör niður á ská", pause: short]      # phrase(trend is indicated by the 'double ended down diagonal arrow')
   - test:
       if: ".[contains(@notation,'actuarial')]"
-      then: [t: "actuarial symbol", pause: short]      # phrase(the 'actuarial symbol' represents a specific quantity)
+      then: [T: "tryggingamerki", pause: short]      # phrase(the 'actuarial symbol' represents a specific quantity)
   - test:
       if: ".[contains(@notation,'madrub')]"
-      then: [t: "arabic factorial symbol", pause: short]      # phrase(the 'arabic factorial symbol' represents a factorial operation)
+      then: [T: "arabískt aðfeldismerki", pause: short]      # phrase(the 'arabic factorial symbol' represents a factorial operation)
   - test:
       if: ".[contains(@notation,'phasorangle')]"
-      then: [t: "phasor angle", pause: short]      # phrase(the 'phasor angle' is used to measure electrical current)
+      then: [T: "fasorhorn", pause: short]      # phrase(the 'phasor angle' is used to measure electrical current) TODO: Google translate
   - test:
       if: ".[contains(@notation,'longdiv') or not(@notation) or normalize-space(@notation) ='']" # default
-      then: [t: "long division symbol", pause: short]      # phrase(the 'long division symbol' indicates  a long division calculation)
+      then: [T: "löng deiling", pause: short]      # phrase(the 'long division symbol' indicates  a long division calculation)
   - test:
       if: ".[contains(@notation,'radical')]"
-      then: [t: "square root", pause: short]      # phrase(5 is the 'square root' of 25)
-  - t: "enclosing"      # phrase(parentheses are 'enclosing' part of the equation)
+      then: [T: "ferningsrótin", pause: short]      # phrase(5 is the 'square root' of 25)
+  - T: "umlykja"      # phrase(parentheses are 'enclosing' part of the equation)
   - test:
       if: "*[self::m:mtext and text()=' ']"
-      then: [t: "space"]     # otherwise there is complete silence      # phrase(there is a 'space' between the words)
+      then: [T: "bil"]     # otherwise there is complete silence      # phrase(there is a 'space' between the words)
       else: [x: "*"]
   - test:
       if: "$Impairment = 'Blindness' and ( $SpeechStyle != 'SimpleSpeak' or not(IsNode(*[1], 'leaf')) )"
-      then: [t: "end enclosure"]      # phrase(reached the 'end enclosure' point)
+      then: [T: "end enclosure"]      # phrase(reached the 'end enclosure' point) TODO: how to say this in Icelandic?
   - pause: short
 
 - name: semantics
@@ -602,7 +596,7 @@
   match: .
   replace:
   - x: "*[1]"
-  - t: "applied to"      # phrase(the function sine 'applied to' x plus y)
+  - T: "notuð á"      # phrase(the function sine 'applied to' x plus y) TODO: correct?
   - x: "*[2]"
 
 
