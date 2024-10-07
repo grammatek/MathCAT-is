@@ -11,58 +11,52 @@
   tag: mn
   match: "starts-with(text(), '-')"
   replace:
-  - t: "minus"        # phrase(x 'minus' y)
+  - T: "mínus"        # phrase(x 'minus' y)
   - x: "translate(text(), '-_', '')"
 
 - name: default
   tag: square-root
   match: "."
   replace:
+  - T: "ferningsrótin"      # phrase(the 'square root' of x)
   - test:
       if: "$Verbosity!='Terse'"
-      then: [t: "the"]    # phrase('the' square root of x)
-  - t: "square root"      # phrase(the 'square root' of x)
-  - test:
-      if: "$Verbosity!='Terse'"
-      then: [t: "of"]   # phrase(the square root 'of' x)
+      then: [T: "af"]   # phrase(the square root 'of' x)
       else: [pause: short]
   - x: "*[1]"
   - test:
       if: "IsNode(*[1], 'leaf') or $Impairment != 'Blindness'"
       then: [pause: short]
-      else: [t: "end root", pause: short]  # phrase(start the square root of x 'end of root')
+      else: [T: "lok ferningsrótar", pause: short]  # phrase(start the square root of x 'end of root')
 
 - name: default
   tag: root
   match: "."
   replace:
   - test:
-      if: "$Verbosity!='Terse'"
-      then: [t: "the"]
-  - test:
       if: "*[2][self::m:mn and not(contains(., '.'))]"
       then_test:
       - if: "*[2][text()='2']"
-        then: [t: "square root"]        # phrase(the 'square root' of x)
+        then: [T: "ferningsrótin"]        # phrase(the 'square root' of x)
       - else_if: "*[2][text()='3']"
-        then: [t: "cube root"]        # phrase(the 'cube root' of x)
-      - else: [x: "ToOrdinal(*[2])", t: "root"]      # phrase(the square 'root' of 25)
+        then: [T: "þriðja rótin"]        # phrase(the 'cube root' of x) Also: teningsrótin, verpilrótin
+      - else: [x: "ToOrdinal(*[2])", T: "rótin"]      # phrase(the square 'root' of 25)
       else:
       - test:
           if: "*[2][self::m:mi][string-length(.)=1]"
           then:
           - x: "*[2]"
-          - pronounce: [{text: "-th"}, {ipa: "θ"}, {sapi5: "th"}, {eloquence: "T"}]
+          - pronounce: [{text: "-th"}, {ipa: "θ"}, {sapi5: "th"}, {eloquence: "T"}] # TODO: how to translate?
           else: [x: "*[2]"]
-      - t: "root"        # phrase(the square 'root' of)
+      - T: "rótin"        # phrase(the square 'root' of)
   - test:
       if: "$Verbosity!='Terse'"
-      then: [t: "of"]        # phrase(the square root 'of' x)
+      then: [T: "af"]        # phrase(the square root 'of' x)
   - x: "*[1]"
   - test:
       if: "IsNode(*[1], 'leaf') or $Impairment != 'Blindness'"
       then: [pause: short]
-      else: [t: "end root", pause: short]      # phrase(start the fifth root of x 'end of root')
+      else: [T: "lok rótar", pause: short]      # phrase(start the fifth root of x 'end of root')
 
 # Fraction rules
 # Mixed numbers mostly "just work" because the invisible char reads as "and" and other parts read properly on their own
@@ -98,7 +92,7 @@
   - "not(ancestor::*[name() != 'mrow'][1]/self::m:fraction)" # FIX: can't test for mrow -- what should be used???
   replace:
   - x: "*[1]"
-  - t: "over"      # phrase(the fraction 3 'over' 4)
+  - T: "deilt með"      # phrase(the fraction 3 'over' 4)
   - x: "*[2]"
   - pause: short
 
@@ -108,13 +102,13 @@
   replace:
   - test:
       if: "$Impairment = 'Blindness'"
-      then: [t: "fraction"]      # phrase(the 'fraction' 3 over 4)
+      then: [T: "brotið"]      # phrase(the 'fraction' 3 over 4)
   - pause: short
   - x: "*[1]"
   - test:
       if: "not(IsNode(*[1],'leaf'))"
       then: [pause: short]
-  - t: "over"      # phrase(the fraction 3 'over' 4)
+  - T: "deilt með"      # phrase(the fraction 3 'over' 4)
   - test:
       if: "not(IsNode(*[2],'leaf'))"
       then: [pause: short]
@@ -122,7 +116,7 @@
   - pause: short
   - test:
       if: "$Impairment = 'Blindness'"
-      then: [t: "end fraction"]      # phrase(start 7 over 8 'end of fraction')
+      then: [T: "brot endar"]      # phrase(start 7 over 8 'end of fraction')
   - pause: medium
 
 # rules for functions raised to a power
@@ -132,7 +126,7 @@
   tag: inverse-function
   match: "."
   replace:
-  - t: "inverse"      # phrase(the 'inverse' of f)
+  - T: "andhverfan"      # phrase(the 'inverse' of f)
   - x: "*[1]"
 
 - name: function-squared-or-cubed
@@ -145,22 +139,19 @@
   - bookmark: "*[2]/@id"
   - test:
       if: "*[2][text()=2]"
-      then: [t: "squared"]      # phrase(5 'squared' equals 25)
-      else: [t: "cubed"]      # phrase(5 'cubed' equals 125)
+      then: [T: "í öðru"]      # phrase(5 'squared' equals 25)
+      else: [T: "í þriðja"]      # phrase(5 'cubed' equals 125)
 - name: function-power
   tag: power
   match:
   - "following-sibling::*[1][self::m:mo][text()='⁡']" #invisible function apply
   replace:
-  - test:
-      if: "$Verbosity!='Terse'"
-      then: [t: "the"]      # # phrase('the' fourth power of 10)
   - bookmark: "*[2]/@id"
   - test:
       if: "*[2][self::m:mn][not(contains(., '.'))]"
       then: [x: "ToOrdinal(*[2])"]
       else: [x: "*[2]"]
-  - t: "power of"      # phrase(the fourth 'power of' 2)
+  - T: "veldið af"      # phrase(the fourth 'power of' 2) TODO: correct? 'veldi af' ?
   - pause: short
   - x: "*[1]"
 
@@ -173,15 +164,15 @@
   - bookmark: "*[2]/@id"
   - test:
       if: "*[2][text()=2]"
-      then: [t: "squared"]      # phrase(5 'squared' equals 25)
-      else: [t: "cubed"]      # phrase(5 'cubed' equals 125)
+      then: [T: "í öðru"]      # phrase(5 'squared' equals 25)
+      else: [T: "í þriðja"]      # phrase(5 'cubed' equals 125)
 
 - name: simple-integer
   tag: power
   match: "*[2][self::m:mn][not(contains(., '.'))]"
   replace:
   - x: "*[1]"
-  - t: "to the"      # phrase(15 raised 'to the' second power equals 225)
+  - T: "í"      # phrase(15 raised 'to the' second power equals 225)
   - test:
       if: "*[2][.>0]"
       then: {x: "ToOrdinal(*[2])"}
@@ -193,14 +184,14 @@
   - "     *[1][self::m:mn][not(contains(., '.'))]]"
   replace:
   - x: "*[1]"
-  - t: "to the"      # phrase(15 raised 'to the' second power equals 225)
+  - T: "í"      # phrase(15 raised 'to the' second power equals 225)
   - x: "*[2]"
 - name: simple-var
   tag: power
   match: "*[2][self::m:mi][string-length(.)=1]"
   replace:
   - x: "*[1]"
-  - t: "to the"      # phrase(15 raised 'to the' second power equals 225)
+  - T: "í"      # phrase(15 raised 'to the' second power equals 225)
   - x: "*[2]"
   - pronounce: [{text: "-th"}, {ipa: "θ"}, {sapi5: "th"}, {eloquence: "T"}]
 
@@ -209,7 +200,7 @@
   match: "IsNode(*[2], 'leaf')"
   replace:
   - x: "*[1]"
-  - t: "to the"      # phrase(15 raised 'to the' second power equals 225)
+  - T: "í"      # phrase(15 raised 'to the' second power equals 225)
   - x: "*[2]"
 
 - name: nested
@@ -224,13 +215,13 @@
   - "    ]"
   replace:
   - x: "*[1]"
-  - t: "raised to the"      # phrase(15 'raised to the' second power equals 225)
+  - T: "í"      # phrase(15 'raised to the' second power equals 225)
   - x: "*[2]"
   - pause: short
   - test:
       if: "$Impairment = 'Blindness'"
       then:
-      - t: "end exponent"      # phrase(start 2 raised to the exponent 4 'end of exponent')
+      - T: "veldisvísir endar"      # phrase(start 2 raised to the exponent 4 'end of exponent')
       - pause: short
       else:
       - pause: medium
@@ -240,9 +231,9 @@
   match: "."
   replace:
   - x: "*[1]"
-  - t: "raised to the"      # phrase(15 'raised to the' second power equals 225)
+  - T: "í"      # phrase(15 'raised to the' second power equals 225)
   - x: "*[2]"
-  - t: "power"      # phrase(15 raised to the second 'power' equals 225)
+  - T: "veldi"      # phrase(15 raised to the second 'power' equals 225)
   - pause: short
 
 #
@@ -255,24 +246,15 @@
   - test:
     - if: "count(*)=0"
       then:
-      - test:
-          if: "$Verbosity!='Terse'"
-          then: [t: "the"]      # phrase('the' empty set)
-      - t: "empty set"      # phrase(when a set contains no value it is called an 'empty set' and this is valid)
+      - T: "tóma mengi"      # phrase(when a set contains no value it is called an 'empty set' and this is valid)
     - else_if: "count(*[1]/*)=3 and *[1]/*[2][self::m:mo][text()=':' or text()='|' or text()='∣']"
       then:
-      - test:
-          if: "$Verbosity!='Terse'"
-          then: [t: "the"]      # phrase('the' set of all integers)
-      - t: "set of all"      # phrase(the 'set of all' positive integers less than 10)
+      - T: "mengi allra"      # phrase(the 'set of all' positive integers less than 10)
       - x: "*[1]/*[1]"
-      - t: "such that"      # phrase(x 'such that' x is less than y)
+      - T: "þannig að"      # phrase(x 'such that' x is less than y)
       - x: "*[1]/*[3]"
       else:
-      - test:
-          if: "$Verbosity!='Terse'"
-          then: [t: "the"]      # phrase('the' set of integers)
-      - t: "set"      # phrase(here is a 'set' of numbers)
+      - T: "mengi"      # phrase(here is a 'set' of numbers)
       - x: "*[1]"
 
 - name: times
@@ -295,7 +277,7 @@
   - "    IsBracketed(., '(', ')') or IsBracketed(., '[', ']') or IsBracketed(., '|', '|')]" # followed by parens
   - " )"
   replace:
-  - t: "times"      # phrase(7 'times' 5 equals 35)
+  - T: "sinnum"      # phrase(7 'times' 5 equals 35)
 
 - name: no-say-parens
   tag: mrow
