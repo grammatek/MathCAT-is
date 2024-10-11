@@ -110,6 +110,6 @@
     ]
       
 - NumbersOrdinalPluralLarge: [
-  "", "þúsundustu", "milljónustu", "milljörðustu", "billjónustu", "billjörðustu",
-  "trilljónustu", "trilljörðustu", "kvaðrilljónustu", "kvaðrilljörðustu", "kvintilljónustu"
+        "", "þúsundustu", "milljónustu", "milljörðustu", "billjónustu", "billjörðustu",
+        "trilljónustu", "trilljörðustu", "kvaðrilljónustu", "kvaðrilljörðustu", "kvintilljónustu"
     ]

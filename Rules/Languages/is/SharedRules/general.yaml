@@ -18,7 +18,7 @@
   - test:
     - if: "*[2][text()='+']"
       then: [T: "jákvæðar"]      # phrase(set of all 'positive' integers less than 10) TODO: do we need other cases/gender?
-      else: [N: "neikvæðar"]      # phrase(set of all 'negative' integers less than minus 10)
+      else: [T: "neikvæðar"]      # phrase(set of all 'negative' integers less than minus 10)
   - bookmark: "*[1]/@id"
   - test:
     - if: "*[1][text()='ℂ']"
