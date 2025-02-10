@@ -390,9 +390,9 @@
               - else_if: $ClearSpeak_SetMemberSymbol = 'In'
                 then: [T: "er í"]
               - else: [T: "tilheyrir"]              # $ClearSpeak_SetMemberSymbol = 'Belongs'
- - "∏": [T: "margfeldi"]                             # 0x220f
- - "∐": [T: "hjámargfeldi"]                          # 0x2210   Also: summa, https://www.stæ.is/os
- - "∑": [T: "summa"]                                 # 0x2211
+ - "∏": [T: "margfeldið"]                             # 0x220f
+ - "∐": [T: "hjámargfeldið"]                          # 0x2210   Also: summa, https://www.stæ.is/os
+ - "∑": [T: "summan"]                                 # 0x2211
  - "−": [T: "mínus"]                               # 0x2212
  - "∓": [T: "mínus plús"]                       # 0x2213
  - "∗": [T: "sinnum"]                               # 0x2217
@@ -421,9 +421,9 @@
      - T: "ekki samsíða"                    # Also: ekki samhliða
  - "∧": [T: "og"]                                 # 0x2227
  - "∨": [T: "eða"]                                  # 0x2228
- - "∩": [T: "sniðmengi"]                        # 0x2229    Also: snið, skurðmengi, skarmengi (https://www.stæ.is/os)
- - "∪": [T: "sammengi"]                               # 0x222a
- - "∫": [T: "heildi"]                            # 0x222b   Also: tegur (https://www.stæ.is/os)
+ - "∩": [T: "sniðmengið"]                        # 0x2229    Also: snið, skurðmengi, skarmengi (https://www.stæ.is/os)
+ - "∪": [T: "sammengið"]                               # 0x222a
+ - "∫": [T: "heildið"]                            # 0x222b   Also: tegur (https://www.stæ.is/os)
  - "∬": [T: "tvöfalt heildi"]                     # 0x222c  Also: tvöfalt tegur
  - "∭": [T: "þrefalt heildi"]                     # 0x222d  Also: þrefalt tegur
  - "∮": [T: "lykkjuheildi"]                    # 0x222e   Also: lykkjutegur, heildi yfir lokaðan feril, tegur yfir lokaðan feril

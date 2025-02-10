@@ -234,7 +234,7 @@
   - x: "*[1]"
   - T: "frá"      # phrase(subtracting 5 'from' 10 gives 5)
   - x: "*[2]"
-  - T: "við"      # phrase(adding 6 'to' 6 equals  12)
+  - T: "til"      # phrase(adding 6 'to' 6 equals  12)
   - x: "*[3]"
   - test:
       if: "following-sibling::*"

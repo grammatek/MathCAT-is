@@ -796,10 +796,10 @@
  - "∢": [t: "spherical angle"]                     # 0x2222
  - "∣": [t: "divides"]                              # 0x2223
  - "∤": [t: "does not divide"]                      # 0x2224
- - "∧": [t: "and"]                                 # 0x2227
- - "∨": [t: "or"]                                  # 0x2228
- - "∩": [t: "intersection"]                        # 0x2229
- - "∪": [t: "union"]                               # 0x222a
+ - "∧": [T: "og"]                                 # 0x2227
+ - "∨": [T: "eða"]                                  # 0x2228
+ - "∩": [T: "sniðmengið"]                        # 0x2229
+ - "∪": [T: "sammengið"]                               # 0x222a
  - "∫": [t: "integral"]                            # 0x222b
  - "∬": [t: "double integral"]                     # 0x222c
  - "∭": [t: "triple integral"]                     # 0x222d
@@ -1181,8 +1181,8 @@
  - "⊿": [t: "right triangle"]                      # 0x22bf
  - "⋀": [t: "logical and"]                         # 0x22c0
  - "⋁": [t: "logical or"]                          # 0x22c1
- - "⋂": [t: "intersection"]                        # 0x22c2
- - "⋃": [t: "union"]                               # 0x22c3
+ - "⋂": [T: "sniðmengið"]                        # 0x22c2
+ - "⋃": [T: "sammengið"]                               # 0x22c3
  - "⋄": [t: "diamond operator"]                    # 0x22c4
  - "⋅":                                             # 0x22c5
     - test: 
