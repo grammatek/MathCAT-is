@@ -18,7 +18,7 @@
   - test:
     - if: "*[2][text()='+']"
       then: [T: "jákvæðar"]      # phrase(set of all 'positive' integers less than 10) TODO: do we need other cases/gender?
-      else: [T: "neikvæðar"]      # phrase(set of all 'negative' integers less than minus 10)
+      else: [T: "mínus"]      # phrase(set of all 'negative' integers less than minus 10)
   - bookmark: "*[1]/@id"
   - test:
     - if: "*[1][text()='ℂ']"
@@ -130,18 +130,31 @@
   tag: [open-interval, open-closed-interval, closed-interval, closed-open-interval]
   match: "count(*)=2 and not(@data-intent-property)"
   replace:
-  - x: "translate(name(.),'-', ' ')"
-  - test:
-      if: "$Verbosity!='Terse'"
-      then:
+      # SWEDISH: The translate function doesn't work for non-English. Used the solution below instead.
+      # ICELANDIC: same solution as for Swedish
+      - test:
+          - if: "self::m:open-interval"
+            then: [ T: "opna bilið" ]
+          - else_if: "self::m:open-closed-interval"
+            then: [ T: "hálfopna bilið" ]
+          - else_if: "self::m:closed-interval"
+            then: [ T: "lokaða bilið" ]
+            else: [ T: "hálfopna bilið" ]
       - T: "frá"      # phrase(subtracting 5 'from' 10 gives 5)
+      - test:
+          - if: "self::m:closed-open-interval"
+            then: [ T: "og með" ]
       - x: "*[1]"
-      - T: "við"      # phrase(adding 6 'to' 6 equals  12)
+      - T: "til"      # phrase(adding 6 'to' 6 equals  12)
+      - test:
+          - if: "self::m:open-closed-interval"
+            then: [ T: "og með" ]
       - x: "*[2]"
-      else:
-      - x: "*[1]"
-      - T: "komma"      # phrase(use a 'comma' to divide large numbers or as a decimal point)
-      - x: "*[2]"
+  # removed this option because it doesn't clarify in which end half-open intervals are open
+  #      else:
+  #      - x: "*[1]"
+  #      - T: "komma"      # phrase(use a 'comma' to divide large numbers or as a decimal point)
+  #      - x: "*[2]"
 
 - name: default-point
   tag: point
@@ -171,7 +184,7 @@
   match: "count(*)=1 and not(@data-intent-property)"
   replace:
   - bookmark: "./@id"
-  - T: "neikvæðar"      # phrase('negative' numbers are those less than 0)
+  - T: "mínus"      # phrase('negative' numbers are those less than 0)
   - x: "*[1]"
 
 - name: positive
@@ -187,7 +200,7 @@
   match: "count(*)=1 and not(@data-intent-property)"
   replace:
   - bookmark: "./@id"
-  - T: "neikvæðar"      # phrase('negative' numbers are those less than 0) TODO: should this be 'mínus', as English is 'minus'?
+  - T: "mínus"      # phrase('negative' numbers are those less than 0) TODO: should this be 'mínus', as English is 'minus'?
   - x: "*[1]"
 
 - name: plus

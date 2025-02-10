@@ -10,7 +10,8 @@ fn sum_both() {
         </munderover>
         <mi>n</mi>
     </math>";
-    test("en", "SimpleSpeak", expr, "the sum from n is equal to 1 to 10 of n");
+    test("is", "SimpleSpeak", expr, "summan frá n jafnt og 1 til 10 af n");
+    // test("en", "SimpleSpeak", expr, "the sum from n is equal to 1 to 10 of n");  // is this correct English?
 }
 
 #[test]
@@ -22,7 +23,7 @@ fn sum_under() {
         </munder>
         <mi>i</mi>
     </math>";
-    test("en", "SimpleSpeak", expr, "the sum over cap s of i");
+    test("is", "SimpleSpeak", expr, "summan yfir stórt s af i");
 }
 #[test]
 fn sum_both_msubsup() {

@@ -12,6 +12,7 @@ fn arc() {
 fn ray() {
   let expr = "<math> <mover><mrow><mi>X</mi><mi>Y</mi></mrow><mo>&#xAF;</mo></mover> </math>";
   test("is", "SimpleSpeak", expr, "strik stórt x stórt y"); // en. 'line segment' = 'línustrik', 'strik'
+}
 
 #[test]
 fn arc_mtext() {
@@ -22,5 +23,5 @@ fn arc_mtext() {
 #[test]
 fn ray_mtext() {
   let expr = "<math> <mover><mtext>XY</mtext><mo>→</mo></mover> </math>";
-  test("is", "SimpleSpeak", expr, "háflína stórt x stórt y"); // en. 'ray'
+  test("is", "SimpleSpeak", expr, "hálflína stórt x stórt y"); // en. 'ray'
 }

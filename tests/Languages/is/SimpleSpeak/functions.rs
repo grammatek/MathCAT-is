@@ -32,15 +32,15 @@ fn hyperbolic_trig_names() {
                                 breiðbogakósínus af y, plús \
                                 breiðbogatangens af z, plús \
                                 breiðbogasekans af alfa, plús \
-                                breiðbogakósekans af fí, plús \
-                                breiðbogatangens af fí");
+                                breiðbogakósekans af fí, plús, \
+                                breiðbogakótangens af fí");
 }
 
 
 #[test]
 fn inverse_trig() {
     let expr = "<math><msup><mi>sin</mi><mrow><mo>-</mo><mn>1</mn></mrow></msup><mi>x</mi></math>";
-    test("is", "SimpleSpeak", expr, "andhverfur sínus af x"); // TODO: declination of 'andhverfur', atm: 'andhverfan'
+    test("is", "SimpleSpeak", expr, "andhver()fur sínus af x"); // TODO: declination of 'andhverfur', atm: 'andhverfan'
 }
 
 #[test]
@@ -127,9 +127,9 @@ fn other_names() {
                 expr, "samfylgni x");
     let expr = "<math> <mrow><mi>exp</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow> </math>";
     test_prefs("is", "SimpleSpeak", vec![("Verbosity", "Terse")],
-                expr, "exp x"); // TODO: how to translate?
+                expr, "vísis x"); // TODO: how to translate? English: 'exp x'
     test_prefs("is", "SimpleSpeak", vec![("Verbosity", "Medium")],
-                expr, "exponential of x"); // TODO: how to translate?
+                expr, "veldisvísis af x"); // TODO: how to translate? English: 'exponential of x'
 }
 
 #[test]
@@ -194,7 +194,7 @@ fn no_times_sqrt() {
         <msqrt> <mrow>  <mi>a</mi><mi>b</mi></mrow> </msqrt>
         </mrow></math>";
     test("is", "SimpleSpeak", expr,
-            "ferningsrótin af a; ferningsrótin af b; er jafnt og, ferningsrótin af a b rót endar,"); // TODO: fix in code 'lok ferningsrótar'
+            "ferningsrótin af a; ferningsrótin af b; er jafnt og, ferningsrótin af a b lok ferningsrótar,");
     test_prefs("is", "SimpleSpeak", vec![("Impairment", "LearningDisability")], expr,
             "ferningsrótin af a; ferningsrótin af b; er jafnt og, ferningsrótin af a b,");
 }
@@ -244,7 +244,7 @@ fn no_times_sqrt() {
         <mo>)</mo></mrow>
         <mo>+</mo><mn>1</mn>
         </mrow></math>";
-        test("is", "SimpleSpeak", expr, "mínus 2 x, plús 1");
+        test("is", "SimpleSpeak", expr, "mínus 2 x plús 1");
     }
 
     #[test]
@@ -273,7 +273,7 @@ fn no_times_sqrt() {
             <mfrac> <mn>1</mn><mn>2</mn></mfrac>
             <mo>)</mo></mrow></mrow>
     </mrow></math>";
-        test("is", "SimpleSpeak", expr, "2 plús hálfur"); // TODO: en: 2 plus 1 half
+        test("is", "SimpleSpeak", expr, "2 plús 1 hálfur");
     }
 
 
@@ -295,7 +295,7 @@ fn no_times_sqrt() {
             <mrow> <mo arg='open'>[(]</mo><mi arg='start'>c</mi><mo>,</mo><mi arg='end'>d</mi></mrow><mo arg='close'>)</mo>
             <mo>)</mo></mrow>
         </math>";
-    test("is", "SimpleSpeak",expr, "lokaða opna bilið frá c til d");
+    test("is", "SimpleSpeak",expr, "hálfopna bilið frá og með c til d");
 }
 
 
@@ -306,7 +306,7 @@ fn parens_interval_open_closed() {
         <mrow> <mo arg='open'>(</mo><mi arg='start'>c</mi><mo>,</mo><mi arg='end'>d</mi></mrow><mo arg='close'>]</mo>
         <mo>]</mo></mrow>
     </math>";
-    test("is", "SimpleSpeak",expr,"opna lokaða bilið frá c til d");
+    test("is", "SimpleSpeak",expr,"hálfopna bilið frá c til og með d");
 }
 
 
@@ -328,7 +328,7 @@ fn parens_interval_closed_closed() {
         <mo>)</mo></mrow>
     </math>";
     test("is", "SimpleSpeak",expr,
-    "opna bilið frá neikvæðu óendanleika til d");
+    "opna bilið frá mínus óendanlegt til d");
 }
 
     #[test]
@@ -339,6 +339,6 @@ fn parens_interval_closed_closed() {
         <mo>]</mo></mrow>
     </math>";
     test("is", "SimpleSpeak",expr,
-    "opna lokaða bilið frá neikvæðum óendanleika til d");
+    "hálfopna bilið frá mínus óendanlegt til og með d");
 }
 

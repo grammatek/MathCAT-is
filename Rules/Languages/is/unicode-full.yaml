@@ -1354,7 +1354,7 @@
  - "⌏": [t: "top left crop"]                       # 0x230f
  - "⌐": [t: "reversed not sign"]                   # 0x2310
  - "⌑": [t: "square lozenge"]                      # 0x2311
- - "⌒": [t: "arc"]                                 # 0x2312
+ - "⌒": [t: "bogi"]                                 # 0x2312
  - "⌓": [t: "segment"]                             # 0x2313
  - "⌔": [t: "sector"]                              # 0x2314
  - "⌕": [t: "telephone recorder"]                  # 0x2315
