@@ -3,31 +3,31 @@ use crate::common::*;
 #[test]
 fn transpose() {
   let expr = "<math> <msup><mi>M</mi><mi>T</mi></msup> </math>";
-  test("en", "SimpleSpeak", expr, "cap m transpose");
+  test("is", "SimpleSpeak", expr, "stórt m bylta");
 }
 
 #[test]
 fn trace() {
   let expr = "<math> <mi>Tr</mi><mi>M</mi> </math>";
-  test("en", "SimpleSpeak", expr, "trace of cap m");
+  test("is", "SimpleSpeak", expr, "spor stórt m");
 }
 
 #[test]
 fn dimension() {
   let expr = "<math> <mi>Dim</mi><mi>M</mi> </math>";
-  test("en", "SimpleSpeak", expr, "dimension of cap m");
+  test("is", "SimpleSpeak", expr, "vídd stórt m");
 }
 
 #[test]
 fn homomorphism() {
   let expr = "<math> <mi>Hom</mi><mo>(</mo><mi>M</mi><mo>)</mo> </math>";
-  test("en", "SimpleSpeak", expr, "homomorphism of cap m");
+  test("is", "SimpleSpeak", expr, "mótun af stóru m");
 }
 
 #[test]
 fn kernel() {
   let expr = "<math> <mi>ker</mi><mrow><mo>(</mo><mi>L</mi><mo>)</mo></mrow> </math>";
-  test("en", "SimpleSpeak", expr, "kernel of cap l");
+  test("is", "SimpleSpeak", expr, "kjarninn af stóru l");
 }
 
 #[test]
@@ -40,7 +40,7 @@ fn norm() {
     </mrow>
 </math>
 ";
-  test("en", "SimpleSpeak", expr, "norm of f");
+  test("is", "SimpleSpeak", expr, "lengd f"); // stæ.is - einnig: staðall
 }
 
 #[test]
@@ -56,5 +56,5 @@ fn norm_subscripted() {
     </msub>
 </math>
 ";
-  test("en", "SimpleSpeak", expr, "p norm of f");
+  test("is", "SimpleSpeak", expr, "p lengd f");
 }
