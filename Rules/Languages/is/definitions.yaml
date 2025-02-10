@@ -75,9 +75,8 @@
         "", "tíundi", "tuttugasti", "þrítugasti", "fertugasti", "fimmtugasti", "sextugasti", "sjötugasti", "áttugasti", "nítugasti"
     ]
 
-#TODO: is this relevant for Icelandic?
 - NumbersOrdinalPluralTens: [
-        "", "tenths", "twentieths", "thirtieths", "fortieths", "fiftieths", "sixtieths", "seventieths", "eightieths", "ninetieths"
+        "", "tíundu", "tuttugustu", "þrítugustu", "fertugustu", "fimmtugustu", "sextugustu", "sjötugustu", "áttugustu", "nítugustu"
     ]
 
 
