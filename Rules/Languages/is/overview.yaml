@@ -57,7 +57,8 @@
           if: "*[2][self::m:mi][string-length(.)=1]"
           then:
           - x: "*[2]"
-          - pronounce: [{text: "-th"}, {ipa: "θ"}, {sapi5: "th"}, {eloquence: "T"}] #TODO: we need to be able to insert the correct ordinals before "rótin": fjórða rótin, fimmta rótin, etc.
+          - T: "-ta"
+          #- pronounce: [{text: "-th"}, {ipa: "θ"}, {sapi5: "th"}, {eloquence: "T"}] #TODO: we need to be able to insert the correct ordinals before "rótin": fjórða rótin, fimmta rótin, etc.
           else: {x: "*[2]"}
       - T: "rótin"
   - test:

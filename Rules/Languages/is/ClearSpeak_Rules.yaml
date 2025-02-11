@@ -68,7 +68,8 @@
           if: "*[2][self::m:mi][string-length(.)=1]"
           then:
           - x: "*[2]"
-          - pronounce: [{text: "-th"}, {ipa: "θ"}, {sapi5: "th"}, {eloquence: "T"}]
+          - T: "-ta"
+          #- pronounce: [{text: "-th"}, {ipa: "θ"}, {sapi5: "th"}, {eloquence: "T"}]
           else: {x: "*[2]"}
       - T: "rótin"      # phrase(the square 'root' of 36)
   - test:
@@ -325,7 +326,8 @@
   - x: "*[1]"
   - T: "í"      # phrase(3 raised 'to the' power 7)
   - x: "*[2]"
-  - pronounce: [{text: "-th"}, {ipa: "θ"}, {sapi5: "th"}, {eloquence: "T"}]
+  - T: "-ta"
+  #- pronounce: [{text: "-th"}, {ipa: "θ"}, {sapi5: "th"}, {eloquence: "T"}]
   - test:
       if: "$ClearSpeak_Exponents != 'Ordinal'"
       then: [T: "veldi"]      # phrase(2 raised to the 'power' 7)

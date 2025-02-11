@@ -8,7 +8,7 @@ fn squared() {
     let expr = "<math>
                     <msup> <mi>x</mi> <mn>2</mn> </msup>
                 </math>";
-    test("en", "SimpleSpeak", expr, "x squared");
+    test("is", "SimpleSpeak", expr, "x í öðru");
 }
 
 #[test]
@@ -16,7 +16,7 @@ fn cubed() {
     let expr = "<math>
                     <msup> <mi>x</mi> <mn>3</mn> </msup>
                 </math>";
-    test("en", "SimpleSpeak", expr, "x cubed");
+    test("is", "SimpleSpeak", expr, "x í þriðja");
 }
 
 #[test]
@@ -24,7 +24,7 @@ fn cubed() {
         let expr = "<math>
                         <msup> <mi>x</mi> <mn>4</mn> </msup>
                     </math>";
-        test("en", "SimpleSpeak", expr, "x to the fourth");
+        test("is", "SimpleSpeak", expr, "x í fjórða");
     }
 
 #[test]
@@ -32,7 +32,7 @@ fn simple_mi_power() {
     let expr = "<math>
                     <msup> <mi>x</mi> <mi>n</mi> </msup>
                 </math>";
-  test("en", "SimpleSpeak", expr, "x to the n-th");
+  test("is", "SimpleSpeak", expr, "x í n -ta");
 }
 
 #[test]
@@ -40,7 +40,7 @@ fn zero_power() {
     let expr = "<math>
                     <msup> <mi>x</mi> <mn>0</mn> </msup>
                 </math>";
-    test("en", "SimpleSpeak", expr, "x to the 0");
+    test("is", "SimpleSpeak", expr, "x í 0-ta");
 }
 
 
@@ -49,7 +49,7 @@ fn decimal_power() {
     let expr = "<math>
                     <msup> <mi>x</mi> <mn>2.0</mn> </msup>
                 </math>";
-    test("en", "SimpleSpeak", expr, "x to the 2.0");
+    test("is", "SimpleSpeak", expr, "x í 2,0 veldi");
 }
 
 #[test]
@@ -63,7 +63,7 @@ fn non_simple_power() {
       </msup>
       </mrow>
                 </math>";
-    test("en", "SimpleSpeak", expr, "3 raised to the y plus 2 power,");
+    test("is", "SimpleSpeak", expr, "3 í y plús 2 veldi,");
 }
 
 #[test]
@@ -74,7 +74,7 @@ fn negative_power() {
                         <mrow> <mo>-</mo> <mn>2</mn> </mrow>
                     </msup>
                 </math>";
-    test("en", "SimpleSpeak", expr, "x to the negative 2");
+    test("is", "SimpleSpeak", expr, "x í mínus 2");
 }
 
 #[test]
@@ -85,7 +85,7 @@ fn simple_fraction_power() {
                       <mfrac><mn>1</mn><mn>3</mn></mfrac>
                   </msup>
               </math>";
-  test("en", "SimpleSpeak", expr, "x raised to the 1 third power,");
+  test("is", "SimpleSpeak", expr, "x í 1 þriðja veldi,");
 }
 
 #[test]
@@ -104,7 +104,7 @@ fn nested_squared_power_with_coef() {
       </msup>
       </mrow>
       </math>";
-  test("en", "SimpleSpeak", expr, "3 raised to the 2 x squared power,");
+  test("is", "SimpleSpeak", expr, "3 í 2 x í öðru veldi,");
 }
 
 #[test]
@@ -124,7 +124,7 @@ fn nested_squared_power_with_neg_coef() {
     </msup>
     </mrow>
   </math>";
-  test("en", "SimpleSpeak", expr, "3 raised to the negative 2 x squared power,");
+  test("is", "SimpleSpeak", expr, "3 í mínus 2 x í öðru veldi,");
 }
 
 
@@ -139,7 +139,7 @@ fn nested_cubed_power() {
       </msup>
     </msup>
   </math>";
-  test("en", "SimpleSpeak", expr, "y raised to the 4 fifths cubed power,");
+  test("is", "SimpleSpeak", expr, "y í 4 fimmtu í þriðja veldi,");
 }
 
 #[test]
@@ -156,7 +156,7 @@ fn nested_cubed_power_with_neg_base() {
         </mrow>
     </msup>
     </math>";
-  test("en", "SimpleSpeak", expr, "y raised to the negative 4 fifths cubed power,");
+  test("is", "SimpleSpeak", expr, "y í mínus 4 fimmtu í þriðja veldi,");
 }
 
 #[test]
@@ -178,7 +178,7 @@ fn nested_number_times_squared() {
         </msup>
         </mrow>
         </math>";
-  test("en", "SimpleSpeak", expr, "e raised to the 1 half x squared power,");
+  test("is", "SimpleSpeak", expr, "e í 1 hálfur x í öðru veldi,");
 }
 
 #[test]
@@ -200,7 +200,7 @@ fn nested_negative_number_times_squared() {
     </msup>
     </mrow>
     </math>";
-  test("en", "SimpleSpeak", expr, "e raised to the negative 1 half x squared power,");
+  test("is", "SimpleSpeak", expr, "e í mínus 1 hálfur x í öðru veldi,");
 }
 
 #[test]
@@ -219,7 +219,7 @@ fn nested_expr_to_tenth() {
       </msup>
       </mrow>
       </math>";
-  test("en", "SimpleSpeak", expr, "3 raised to the 3 to the tenth power,");
+  test("is", "SimpleSpeak", expr, "3 í 3 í tíunda veldi,");
 }
 
 #[test]
@@ -241,7 +241,7 @@ fn nested_non_simple_squared_exp() {
       </msup>
       </mrow>
       </math>";
-  test("en", "SimpleSpeak", expr, "3 raised to the open paren x plus 1, close paren squared power,");
+  test("is", "SimpleSpeak", expr, "3 í svigi opnast x plús 1, svigi lokast í öðru veldi,");
 }
 
 #[test]
@@ -255,7 +255,7 @@ fn nested_simple_power() {
       </msup>
     </msup>
   </math>";
-  test("en", "SimpleSpeak", expr, "t raised to the 4 fifths to the n-th power,");
+  test("is", "SimpleSpeak", expr, "t í 4 fimmtu í n -ta veldi,");
 }
 
 #[test]
@@ -269,9 +269,9 @@ fn nested_end_exponent_power() {
       </msup>
     </msup>
   </math>";
-  test("en", "SimpleSpeak", expr, "t raised to the 4 fifths raised to the n plus 1 power; end exponent,");
-  test_prefs("en", "SimpleSpeak", vec![("Impairment", "LearningDisability")], expr,
-  "t raised to the 4 fifths raised to the n plus 1 power;");
+  test("is", "SimpleSpeak", expr, "t í 4 fimmtu í n plús 1 veldi; veldisvísir endar,");
+  test_prefs("is", "SimpleSpeak", vec![("Impairment", "LearningDisability")], expr,
+  "t í 4 fimmtu í n plús 1 veldi;");
 }
 
 #[test]
@@ -285,7 +285,7 @@ fn nested_end_exponent_neg_power() {
       </msup>
     </msup>
   </math>";
-  test("en", "SimpleSpeak", expr, "t raised to the 4 fifths to the negative 3, end exponent,");
+  test("is", "SimpleSpeak", expr, "t í 4 fimmtu í mínus 3, veldisvísir endar,");
 }
 
 #[test]
@@ -316,7 +316,7 @@ fn nested_complex_power() {
       </msup>
       </mrow>
       </math>";
-  test("en", "SimpleSpeak", expr, "e raised to the negative 1 half times; open paren, fraction, x minus mu, over sigma, end fraction; close paren squared power,");
+  test("is", "SimpleSpeak", expr, "e í mínus 1 hálfur sinnum; svigi opnast; brotið, x mínus mý, deilt með sigma, brot endar; svigi lokast í öðru veldi,");
 }
 
 #[test]
@@ -330,5 +330,5 @@ fn default_power() {
       </mfrac>
     </msup>
   </math>";
-  test("en", "SimpleSpeak", expr, "t raised to the fraction, b plus 1, over 3, end fraction; power,");
+  test("is", "SimpleSpeak", expr, "t í brotið, b plús 1, deilt með 3, brot endar; veldi,");
 }
