@@ -500,7 +500,7 @@
   # note that *[2] is an mrow with X, ",", Y, so getting X or Y is a double index
   # SWEDISH: rewrote the intervals function to better deal with Swedish convention of speaking intervals
   # ICELANDIC: adapted the Swedish way
-- name: ClearSpeak-intervals # avoid overriding with default "intervals" name
+  name: ClearSpeak-intervals # avoid overriding with default "intervals" name
   variables:
   - is_intervals_start_infinity: "*[1][self::m:negative and *[1][text()='∞']]"
   - is_intervals_end_infinity: "*[2][text()='∞'or (self::m:positive and *[1][text()='∞'])]"
@@ -509,20 +509,20 @@
   replace:
   - test:
     - if: "name(.)='open-interval'"
-      then: [ T: "opna" ]
+      then: [T: "opna"]
     - else_if: "name(.)='open-closed-interval' or name(.)='closed-open-interval'"
-      then: [ T: "hálfopna" ]
+      then: [T: "hálfopna"]
     - else_if: "name(.)='closed-interval'"
-      then: [ T: "lokaða" ]
-  - T: "bilið frá"      # phrase('the interval from' a to b)
+      then: [T: "lokaða"]
+  - T: "bilið frá"
   - test:
     - if: "name(.)='closed-open-interval'"
-      then: [ T: "og með" ]
+      then: [T: "og með"]
   - x: "*[1]"
-  - T: "til"      # phrase(the interval from a 'to' b)
+  - T: "til"
   - test:
     - if: "name(.)='open-closed-interval'"
-      then: [ T: "og með" ]
+      then: [T: "og með"]
   - x: "*[2]"
 
     # onto the [not] [including]... part
