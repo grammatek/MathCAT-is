@@ -7,7 +7,7 @@
  - "¥": [t: "yen"]                                 # 0xa5
  - "¦": [t: "broken bar"]                          # 0xa6
  - "§": [t: "section"]                             # 0xa7
- - "¨": [t: "double dot"]                          # 0xa8
+ - "¨": [T: "tvöfaldur punktur"]                          # 0xa8
  - "©": [t: "copyright"]                           # 0xa9
  - "ª": [t: "feminine ordinal indicator"]          # 0xaa
  - "¬": [t: "not"]                                 # 0xac
@@ -85,7 +85,7 @@
  - "˖": [t: "modifier plus sign"]                  # 0x2d6
  - "˗": [t: "modifier minus sign"]                 # 0x2d7
  - "˘": [t: "breve"]                               # 0x2d8
- - "˙": [t: "dot"]                                 # 0x2d9
+ - "˙": [T: "punktur"]                                 # 0x2d9
  - "˚": [t: "ring above"]                          # 0x2da
  - "˛": [t: "ogonek"]                              # 0x2db
  - "˜": [t: "small tilde"]                         # 0x2dc
@@ -416,8 +416,8 @@
  - "⃘": [t: "ring overlay embellishment"]          # 0x20d8
  - "⃙": [t: "clockwise ring overlay embellishment"] # 0x20d9
  - "⃚": [t: "anticlockwise ring overlay embellishment"] # 0x20da
- - "⃛": [t: "triple dot"]      # 0x20db
- - "⃜": [t: "quadruple dot"]       # 0x20dc
+ - "⃛": [T: "þrefaldur punktur"]      # 0x20db
+ - "⃜": [T: "fjórfaldur punktur"]       # 0x20dc
  - "⃝": [t: "enclosing circle embellishment"]      # 0x20dd
  - "⃞": [t: "enclosing square embellishment"]      # 0x20de
  - "⃟": [t: "enclosing diamond embellishment"]     # 0x20df
@@ -562,14 +562,14 @@
  - "↗":                                          # 0x2197
     - test:
         if: "ancestor::*[2][self::m:limit]"
-        then: [t: "approaches from below"]
-        else: [t: "north east arrow"]
+        then: [T: "nálgast neðan frá"]
+        else: [T: "ör í norð austur"]
 
  - "↘":                                          # 0x2198
     - test:
         if: "ancestor::*[2][self::m:limit]"
-        then: [t: "approaches from above"]
-        else: [t: "south east arrow"]
+        then: [T: "nálgast ofan frá"]
+        else: [T: "ör í suð austur"]
 
  - "↙": [t: "south west arrow"]                    # 0x2199
  - "↚": [t: "leftwards arrow with stroke"]         # 0x219a
@@ -766,8 +766,8 @@
  - "∙":                                            # 0x2219
     - test: 
         if: "@data-chem-formula-op"
-        then: [t: "dot"]
-        else: [t: "times"]
+        then: [T: "punktur"]
+        else: [T: "sinnum"]
 
  - "√":                                          # 0x221a
      - test: 

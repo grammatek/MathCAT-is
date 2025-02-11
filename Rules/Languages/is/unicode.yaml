@@ -262,9 +262,9 @@
  - "⁢": [T: ""]                                   # 0x2062
  - "⁣": [T: ""]                                   # 0x2063
  - "⁤": [T: "og"]                                # 0x2064
- - "′": [t: "prime"]                               # 0x2032   # TODO: translation missing. frumtala? tvöföld, þreföld?
- - "″": [t: "double prime"]                        # 0x2033
- - "‴": [t: "triple prime"]                        # 0x2034
+ - "′": [T: "strik"]                               # 0x2032   # stæ.is : strik, merki
+ - "″": [T: "tvöfalt strik"]                        # 0x2033
+ - "‴": [T: "þrefalt strik"]                        # 0x2034
 
  - "ℂℕℚℝℤ":     # here we rely on this running through the table again to speak "cap xxx"
     - T: "tvísláttur"                          # en: "double-struck", sv: "med dubbelstreck" TODO: correct?

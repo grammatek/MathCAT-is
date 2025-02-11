@@ -18,9 +18,9 @@ fn modified_vars() {
         <mover> <mi>x</mi> <mo>^</mo> </mover> <mo>+</mo>
         <mover> <mi>t</mi> <mo>→</mo> </mover>
         </mrow> </math>";
-    test("en", "SimpleSpeak", expr, 
-        "eigh grave, b tilde, c breve, b check, c grave; plus; \
-            x dot, y dot, z double dot, u triple dot, v quadruple dot; plus x hat, plus vector t");
+    test("is", "SimpleSpeak", expr,
+        "a öfugur broddur, b bylgja, c breve_missing_transl, b check_missing_transl, c öfugur broddur; plús; \
+            x punktur, y punktur, z tvöfaldur puntkur, u þrefaldur punktur, v fjórfaldur punktur; plús x hattur, plús vigur t");
 }
 
 #[test]
@@ -37,9 +37,9 @@ fn limit() {
             </mfrac>
             </mrow>
         </math>";
-    test("en", "SimpleSpeak", expr, "the limit as x approaches 0, of, fraction, sine of x, over x, end fraction;");
-    test_prefs("en", "SimpleSpeak", vec![("Impairment", "LearningDisability")], expr,
-            "the limit as x approaches 0, of; sine of x, over x;");
+    test("is", "SimpleSpeak", expr, "markgildi þegar x nálgast 0, af, brotið, sínus af x, deilt með x, brot endar;");
+    test_prefs("is", "SimpleSpeak", vec![("Impairment", "LearningDisability")], expr,
+            "markgildi þegar x nálgast 0, af; sínus af x, deilt með x;");
 }
 
 #[test]
@@ -53,45 +53,45 @@ fn limit_from_below() {
                 <mrow>  <mi>sin</mi>  <mo>&#x2061;</mo> <mi>x</mi> </mrow>
             </mrow>
         </math>";
-    test("en", "SimpleSpeak", expr, "the limit as x approaches from below 0, of sine of x");
+    test("is", "SimpleSpeak", expr, "markgildi þegar x nálgast neðan frá 0, af sínus af x");
 }
 
 
 #[test]
 fn binomial_mmultiscripts() {
     let expr = "<math><mmultiscripts><mi>C</mi><mi>m</mi><none/><mprescripts/><mi>n</mi><none/></mmultiscripts></math>";
-    test("en", "SimpleSpeak", expr, "n choose m");
+    test("is", "SimpleSpeak", expr, "n valið m");
 }
 
 #[test]
 fn binomial_mmultiscripts_other() {
     let expr = "<math><mmultiscripts><mi>C</mi><mi>m</mi><none/><mprescripts/><none/><mi>n</mi></mmultiscripts></math>";
-    test("en", "SimpleSpeak", expr, "n choose m");
+    test("is", "SimpleSpeak", expr, "n valið m");
 }
 
 #[test]
 fn binomial_subscript() {  // C_{n,k}
     let expr = "<math><msub><mi>C</mi><mrow><mi>n</mi><mo>,</mo><mi>m</mi></mrow></msub></math>";
-    test("en", "SimpleSpeak", expr, "n choose m");
+    test("is", "SimpleSpeak", expr, "n valið m");
 }
 
 
 #[test]
 fn permutation_mmultiscripts() {
     let expr = "<math><mmultiscripts><mi>P</mi><mi>k</mi><none/><mprescripts/><mi>n</mi><none/></mmultiscripts></math>";
-    test("en", "SimpleSpeak", expr, "k permutations of n");
+    test("is", "SimpleSpeak", expr, "k uppstokkanir af n");
 }
 
 #[test]
 fn permutation_mmultiscripts_sup() {
     let expr = "<math><mmultiscripts><mi>P</mi><mi>k</mi><none/><mprescripts/><none/><mi>n</mi></mmultiscripts></math>";
-    test("en", "SimpleSpeak", expr, "k permutations of n");
+    test("is", "SimpleSpeak", expr, "k uppstokkanir af n");
 }
 
 #[test]
 fn permutation_msubsup() {
     let expr = "<math><msubsup><mi>P</mi><mi>k</mi><mi>n</mi></msubsup></math>";
-    test("en", "SimpleSpeak", expr, "k permutations of n");
+    test("is", "SimpleSpeak", expr, "k uppstokkanir af n");
 }
 
 #[test]
@@ -99,10 +99,10 @@ fn tensor_mmultiscripts() {
     let expr = "<math><mmultiscripts>
             <mi>R</mi> <mi>i</mi><none/> <none/><mi>j</mi> <mi>k</mi><none/> <mi>l</mi><none/> 
         </mmultiscripts></math>";
-    test_prefs("en", "SimpleSpeak", vec![("Verbosity", "Verbose")], expr,
-            "cap r with 4 postscripts, subscript i superscript j subscript k subscript l");
+    test_prefs("is", "SimpleSpeak", vec![("Verbosity", "Verbose")], expr,
+            "stórt r með 4 eftirvísa, lágvísir i hávísir j lágvísir k lágvísir l");
     test_prefs("en", "SimpleSpeak", vec![("Verbosity", "Medium")], expr,
-            "cap r with 4 postscripts, sub i super j sub k sub l");
+            "stórt r með 4 eftirvísa, lágvísir i hávísir j lágvísir k lágvísir l");
 }
 
 #[test]
@@ -118,14 +118,14 @@ fn huge_num_mmultiscripts() {
 #[test]
 fn prime() {
     let expr = "<math> <msup><mi>x</mi><mo >&#x2032;</mo></msup> </math>";
-    test("en", "SimpleSpeak", expr, "x prime,");
+    test("is", "SimpleSpeak", expr, "x strik,");
 }
 
 #[test]
 fn given() {
     let expr = "<math><mi>P</mi><mo>(</mo><mi>A</mi><mo>|</mo><mi>B</mi><mo>)</mo></math>";
-    test("en", "SimpleSpeak", expr, "cap p, open paren, cap eigh vertical line cap b; close paren");
-    test("en", "ClearSpeak", expr,  "cap p, open paren, cap eigh divides cap b, close paren");  // not good, but follows the spec
+    test("is", "SimpleSpeak", expr, "stórt p; svigi opnast, stórt a lóðstrik stórt b; svigi lokast");
+    test("is", "ClearSpeak", expr,  "stórt p, svigi opnast, stórt a skiptir stórt b, svigi lokast");  // not good, but follows the spec
 }
 
 #[test]
@@ -143,16 +143,16 @@ fn simple_msubsup() {
             </msubsup>
             </mstyle>
         </math>";
-    test("en", "ClearSpeak", expr, "x sub k, to the i-th power");
+    test("is", "ClearSpeak", expr, "x lágvísir k, í i -ta veldi");
 }
 
 #[test]
 fn non_simple_msubsup() {
   let expr = "<math><msubsup><mi>i</mi><mrow><mi>j</mi><mo>&#x2212;</mo><mn>2</mn></mrow><mi>k</mi></msubsup></math>";
-  test("en", "SimpleSpeak", expr, "i sub j minus 2 end sub, to the k-th");
-  test("en", "ClearSpeak", expr, "i sub j minus 2 end sub, to the k-th power");
-  test_prefs("en", "SimpleSpeak", vec![("Impairment", "LearningDisability")], expr,
-          "i sub j minus 2, to the k-th");
+  test("is", "SimpleSpeak", expr, "i lágvísir j mínus 2 lágvísir endar, í k -ta");
+  test("is", "ClearSpeak", expr, "i lágvísir j mínus 2 lágvísir endar, í k -ta veldi");
+  test_prefs("is", "SimpleSpeak", vec![("Impairment", "LearningDisability")], expr,
+          "i lágvísir j mínus 2, í k -ta");
 }
 
 #[test]
@@ -173,7 +173,7 @@ fn presentation_mathml_in_semantics() {
             </annotation-xml>
         </semantics>
     </math>";
-    test("en", "ClearSpeak", expr, "x sub k, to the i-th power");
+    test("is", "ClearSpeak", expr, "x lágvísir k, í i -ta veldi");
 }
 
 #[test]
@@ -217,13 +217,13 @@ fn ignore_period() {
       </annotation-xml>
     </semantics>  
   </math>";
-    test("en", "SimpleSpeak", expr, "cap p; open paren, cap eigh and cap b; close paren; is equal to; cap p, open paren, cap eigh intersection cap b; close paren; is equal to, cap p of cap eigh, cap p of cap b");
+    test("is", "SimpleSpeak", expr, "stórt p; svigi opnast, stórt a og stórt b; svigi lokast; er jafnt og; stórt p; svigi opnast, stórt a sniðmengið stórt b; svigi lokast; er jafnt og, stórt p af stórt a, stórt p af stórt b");
 }
 
 #[test]
 fn ignore_mtext_period() {
     let expr = "<math><mrow><mrow><mo>{</mo><mn>2</mn><mo>}</mo></mrow><mtext>.</mtext></mrow></math>";
-    test("en", "SimpleSpeak", expr, "the set 2");
+    test("is", "SimpleSpeak", expr, "mengið 2");
 }
 
 #[test]
@@ -260,7 +260,7 @@ fn ignore_comma() {
       </mstyle>
     </mrow>
 </math>";
-    test("en", "SimpleSpeak", expr, "phi of x is equal to; c, e raised to the negative h squared x squared power,");
+    test("is", "SimpleSpeak", expr, "fí af x er jafnt og; c, e í mínus h í öðru x í öðru veldi,");
 }
 
 #[test]
@@ -300,7 +300,7 @@ fn ignore_period_and_space() {
         </mstyle>
       </mrow>
 </math>";
-    test("en", "ClearSpeak", expr, "phi of x is equal to; c, e raised to the negative h squared x squared power");
+    test("is", "ClearSpeak", expr, "fí af x er jafnt og; c, e í mínus h í öðru x í öðru veldi");
 }
 
 
@@ -320,23 +320,23 @@ fn bug_199_2pi() {
         <mo stretchy=\"false\" form=\"postfix\">)</mo>
       </mrow>
     </math>";
-  test("en", "SimpleSpeak",expr, "the closed open interval from 0 to 2 pi");
+  test("is", "SimpleSpeak",expr, "hálfopna bilið frá og með 0 til 2 pí");
 }
 
 #[test]
 fn caret_and_hat() {
   let expr = "<math><mi>x</mi><mo>^</mo><mn>2</mn><mo>+</mo><mover><mi>y</mi><mo>^</mo></mover></math>";
-  test("en", "SimpleSpeak",expr, "x caret 2 plus y hat,");
+  test("is", "SimpleSpeak",expr, "x innskotsmerki 2, plús y hattur,");
 }
 
 #[test]
 fn mn_with_space() {
   let expr = "<math><mn>1 234 567</mn></math>";
-  test_prefs("en", "SimpleSpeak", vec![("DecimalSeparators", "."), ("BlockSeparators", " ,")], expr, "1234567");
+  test_prefs("is", "SimpleSpeak", vec![("DecimalSeparators", "."), ("BlockSeparators", " ,")], expr, "1234567");
 }
 
 #[test]
 fn mn_with_block_and_decimal_separators() {
   let expr = "<math><mn>1,234.56</mn></math>";                                       // may want to change this for another language
-  test_prefs("en", "SimpleSpeak", vec![("DecimalSeparators", "."), ("BlockSeparators", " ,")], expr, "1234.56");
+  test_prefs("is", "SimpleSpeak", vec![("DecimalSeparators", "."), ("BlockSeparators", " ,")], expr, "1234.56");
 }
