@@ -305,7 +305,7 @@
          else: [T: "hlutafleiða"]
  - "∃": [T: "eru til"]                        # 0x2203
  - "∄": [T: "eru ekki til"]                # 0x2204
- - "∅": [T: "tómamengi"]                           # 0x2205
+ - "∅": [T: "tómamengið"]                           # 0x2205
  - "∆": [T: "laplace"]                                          # 0x2206    # TODO: ath: laplace-virki
  - "∇": [T: "stigull"]                                         # 0x2207
  - "∈":                                          # 0x2208
@@ -315,7 +315,7 @@
         - test:
             if: "$Verbosity!='Terse' and not(ancestor::*[self::m:set])"    # "the set x is an element of ..." sounds bad"
             then: [T: "er"]
-        - T: "eining í"       # TODO: correct? "element of" - rather "stak" or "hluti"? See this and next translation batches
+        - T: "stak í"       # TODO: correct? "element of" - See this and next translation batches
         # Several options for speaking elements in ClearSpeak -- they split between being inside a set or not and then the option
         else_test:
             if: "../../self::m:set or ../../../self::m:set" # inside a set
@@ -325,13 +325,13 @@
               - else_if: $ClearSpeak_SetMemberSymbol = 'Member'
                 then: [T: "meðlimur í"]
               - else_if: $ClearSpeak_SetMemberSymbol = 'Element'
-                then: [T: "eining í"]
+                then: [T: "stak í"]
               - else: [T: "tilheyrandi"]             # $ClearSpeak_SetMemberSymbol = 'Belongs' , en: "belonging to"
             else_test:
               - if: $ClearSpeak_SetMemberSymbol = 'Auto' or $ClearSpeak_SetMemberSymbol = 'Member'
                 then: [T: "er meðlimur í"]
               - else_if: $ClearSpeak_SetMemberSymbol = 'Element'
-                then: [T: "er eining í"]
+                then: [T: "er stak í"]
               - else_if: $ClearSpeak_SetMemberSymbol = 'In'
                 then: [T: "er í"]
               - else: [T: "tilheyrir"]              # $ClearSpeak_SetMemberSymbol = 'Belongs'
@@ -343,7 +343,7 @@
         - test: 
             if: "$Verbosity!='Terse'"
             then: [T: "er"]
-        - T: "ekki eining í"
+        - T: "ekki stak í"
         # Several options for speaking elements in ClearSpeak -- they split between being inside a set or not and then the option
         else_test:
             if: "../../self::m:set or ../../../self::m:set" # inside a set
@@ -353,13 +353,13 @@
               - else_if: $ClearSpeak_SetMemberSymbol = 'Member'
                 then: [T: "ekki meðlimur í"]
               - else_if: $ClearSpeak_SetMemberSymbol = 'Element'
-                then: [T: "ekki eining í"]
+                then: [T: "ekki stak í"]
               - else: [T: "ekki tilheyrandi"]             # $ClearSpeak_SetMemberSymbol = 'Belongs'
             else_test:
               - if: $ClearSpeak_SetMemberSymbol = 'Auto' or $ClearSpeak_SetMemberSymbol = 'Member'
                 then: [T: "er ekki meðlimur í"]
               - else_if: $ClearSpeak_SetMemberSymbol = 'Element'
-                then: [T: "er ekki eining í"]
+                then: [T: "er ekki stak í"]
               - else_if: $ClearSpeak_SetMemberSymbol = 'In'
                 then: [T: "er ekki í"]
               - else: [T: "tilheyrir ekki"]              # $ClearSpeak_SetMemberSymbol = 'Belongs'

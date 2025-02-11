@@ -687,7 +687,7 @@
          else: [T: "hlutafleiða"]
  - "∃": [t: "there exists"]                        # 0x2203
  - "∄": [t: "there does not exist"]                # 0x2204
- - "∅": [T: "tóma mengi"]                           # 0x2205
+ - "∅": [T: "tómamengið"]                           # 0x2205
  - "∆":                                          # 0x2206
      - test: 
          if: "$Verbosity!='Terse'"
