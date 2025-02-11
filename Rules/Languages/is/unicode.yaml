@@ -121,7 +121,7 @@
  - "]":                                          # 0x5d
     - test:
         if: $SpeechStyle = 'ClearSpeak' or $SpeechStyle = 'SimpleSpeak'
-        then: [T: "hornklokfi lokast"]
+        then: [T: "hornklofi lokast"]
         else: [T: "hægri hornklofi"]
  - "^":                                           # 0x5e
     - test:
