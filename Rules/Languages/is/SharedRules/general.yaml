@@ -177,7 +177,7 @@
   - test:
       if: "IsNode(*[1], 'leaf') or $Impairment != 'Blindness'"
       then: [pause: short]
-      else: [pause: short, T: "lok algildis", pause: short]      # phrase(show 'end absolute value' position) TODO: check!
+      else: [pause: short, T: "algildi endar", pause: short]      # phrase(show 'end absolute value' position) TODO: check!
 
 - name: negative
   tag: negative
@@ -539,7 +539,7 @@
       then: [T: "tilfelli"]      # phrase(this is the first 'case' of three cases) Also: tilvik
     - else_if: "self::m:system-of-equations"
       then: [T: "jafna"]      # phrase(this is the first 'equation' of three equations)
-      else: [T: "röð"]      # phrase(this is the first 'line' of three lines)
+      else: [T: "lína"]      # phrase(this is the first 'line' of three lines)
   - test:
     - if: "$LineCount != 1"
       then: [ct: "s"] # plural
@@ -561,7 +561,7 @@
           then: [T: "tilfelli"]     # phrase('case' 1 of 10 cases)
         - else_if: "parent::m:system-of-equations"
           then: [T: "jafna"] # phrase('equation' 1 of 10 equations)
-          else: [T: "röð"]     # phrase('line 1 of 10 lines)
+          else: [T: "lína"]     # phrase('line 1 of 10 lines)
       - x: "count(preceding-sibling::*[not(contains(@data-intent-property, ':continued-row:'))]) + 1"
 
   - test:
@@ -641,11 +641,11 @@
   - test:
       if: "$ClearSpeak_Matrix = 'EndMatrix' or $ClearSpeak_Matrix = 'EndVector'"
       then:
-      - T: "lok"      # phrase('end' of matrix)
       - test:
           if: $ClearSpeak_Matrix = 'EndVector'
           then: [T: "vigur"]      # phrase(the 2 column 'vector')
           else: [T: "fylki"]      # phrase(the 2 by 2 'matrix')
+      - T: "endar"      # phrase('end' of matrix)
 
 - name: default-column-matrix
   tag: matrix
@@ -662,7 +662,7 @@
   - x: "*" # select the rows (mtr)
   - test:
       if: "$ClearSpeak_Matrix = 'EndMatrix' or $ClearSpeak_Matrix = 'EndVector'"
-      then: [T: "lok fylkis"]      # phrase(the 'end of matrix' has been reached)
+      then: [T: "fylki endar"]      # phrase(the 'end of matrix' has been reached)
 
 - name: 1x2-or-3-matrix
   tag: matrix
@@ -675,7 +675,7 @@
   replace:
   - T: "einu sinni"      # phrase('the 1 by' 2 matrix)
   - x: count(*/*)
-  - T: "röð"      # phrase(the 1 by 4 'row' matrix) TODO: check case
+  - T: "lína"      # phrase(the 1 by 4 'row' matrix) TODO: check case
   - test:
       if: "$ClearSpeak_Matrix = 'Vector' or $ClearSpeak_Matrix = 'EndVector'"
       then: [T: "vigur"]      # phrase('the 1 by' 2 row 'vector')
@@ -685,11 +685,11 @@
   - test:
       if: "$ClearSpeak_Matrix = 'EndMatrix' or $ClearSpeak_Matrix = 'EndVector'"
       then:
-      - T: "lok"      # phrase(the 'end' of matrix has been reached)
       - test:
           if: $ClearSpeak_Matrix = 'EndMatrix'
           then: [T: "fylki"]      # phrase(the 2 by 2 'matrix')
           else: [T: "vigur"]      # phrase(the 2 by 1 'vector')
+      - T: "endar"      # phrase(the 'end' of matrix has been reached)
 
 - name: default-row-matrix
   tag: matrix
@@ -698,7 +698,7 @@
   replace:
   - T: "einu sinni"      # phrase('the 1 by' 2 matrix)
   - x: "count(*/*)"
-  - T: "röð"      # phrase(the 1 by 2 'row' matrix)
+  - T: "lína"      # phrase(the 1 by 2 'row' matrix)
   - test:
       if: "$ClearSpeak_Matrix = 'Vector' or $ClearSpeak_Matrix = 'EndVector'"
       then: [T: "vigur"]      # phrase(the 2 by 1 'vector')
@@ -709,11 +709,11 @@
   - test:
       if: "$ClearSpeak_Matrix = 'EndMatrix' or $ClearSpeak_Matrix = 'EndVector'"
       then:
-      - T: "lok"      # phrase(the 'end' of matrix has been reached)
       - test:
           if: $ClearSpeak_Matrix = 'EndMatrix'
           then: [T: "fylki"]      # phrase(the 2 by 2 'matrix')
           else: [T: "vigur"]      # phrase(the 2 by 1 'vector')
+      - T: "endar"      # phrase(the 'end' of matrix has been reached)
 
 - name: simple-small-matrix
   tag: [matrix, determinant]
@@ -735,11 +735,11 @@
   - test:
       if: "$ClearSpeak_Matrix = 'EndMatrix' or $ClearSpeak_Matrix = 'EndVector'"
       then:
-      - T: "lok"      # phrase(the 'end' of matrix has been reached)
       - test:
           if: "self::m:determinant"
           then: [T: "ákveða"]      # phrase(the 2 by 2 'determinant')
           else: [T: "fylki"]      # phrase(the 2 by 2 'matrix')
+      - T: "endar"      # phrase(the 'end' of matrix has been reached)
 
 - name: default-matrix
   tag: [matrix, determinant]
@@ -758,11 +758,11 @@
   - test:
       if: "$ClearSpeak_Matrix = 'EndMatrix' or $ClearSpeak_Matrix = 'EndVector'"
       then:
-      - T: "lok"      # phrase(the 'end' of matrix has been reached)
       - test:
           if: "self::m:determinant"
           then: [T: "ákveða"]      # phrase(the 2 by 2 'determinant')
           else: [T: "fylki"]      # phrase(the 2 by 2 'matrix's)
+      - T: "endar"      # phrase(the 'end' of matrix has been reached)
 
 - name: chemistry-msub
   tag: [chemical-formula]

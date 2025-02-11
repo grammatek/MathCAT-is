@@ -456,17 +456,17 @@
   name: ClearSpeak-absolute-value
   tag: absolute-value
   match: "."
-  variables: [WordToSay: "IfThenElse($ClearSpeak_AbsoluteValue = 'Cardinality', 'cardinality', 'absolute value')"]
+  variables: [WordToSay: "IfThenElse($ClearSpeak_AbsoluteValue = 'Cardinality', 'fjöldatala', 'algildi')"]
   replace:
   - x: "$WordToSay"
-  - T: "af"      # phrase(the absolute value 'of' 25)
+  #- T: "af"      # phrase(the absolute value 'of' 25)
   - x: "*[1]"
   - test:
       if: "$ClearSpeak_AbsoluteValue = 'AbsEnd'"
       then:
-      - pause: short
-      - T: "enda"      # phrase('end' absolute value) TODO: check how this phrase is as a whole
+      - pause: short      # phrase('end' absolute value) TODO: check how this phrase is as a whole
       - x: "$WordToSay"
+      - T: "endar"
   - pause: short
 
 - name: set
@@ -533,7 +533,7 @@
   - "count(*[1]/*)=1 and count(*)=2"
   replace:
   - x: "*[1]/*[1]/*" # mtable/mtr/mtd
-  - T: "choose"      # phrase(the binomial coefficient n 'choose' m) TODO: how to translate?
+  - T: "velja"      # phrase(the binomial coefficient n 'choose' m) TODO: how to translate?
   - x: "*[2]/*[1]/*"
 
 - name: ClearSpeak-default
@@ -541,7 +541,7 @@
   match: "parent::m:matrix or parent::m:determinant"
   variables: [NextLineIsContinuedRow: "following-sibling::*[1][contains(@data-intent-property, ':continued-row:')]"]
   replace:
-  - T: "röð"      # phrase(the first 'row' of a matrix)
+  - T: "lína"      # phrase(the first 'row' of a matrix)
   - x: "count(preceding-sibling::*)+1"
   - test:
       if: .[self::m:mlabeledtr]
@@ -601,7 +601,7 @@
         - else_if: "$ClearSpeak_MultiLineLabel = 'Equation'"
           then: [T: "jafna"]      # phrase(this is the first 'equation' of three equations)
         - else_if: "$ClearSpeak_MultiLineLabel = 'Row'"
-          then: [T: "röð"]      # phrase(this is the first 'row' of three rows)
+          then: [T: "lína"]      # phrase(this is the first 'row' of three rows)
         - else_if: "$ClearSpeak_MultiLineLabel = 'Step'"
           then: [T: "skref"]      # phrase(this is the first 'step' of three steps)
           # else 'None -- don't say anything'
@@ -627,7 +627,7 @@
     - else_if: "$ClearSpeak_MultiLineLabel = 'Equation'"
       then: [T: "jafna"]      # phrase(the 'equation' pi r squared gives the area of a circle)
     - else_if: "$ClearSpeak_MultiLineLabel = 'Row'"
-      then: [T: "röð"]      # phrase(the values on the top 'row' are relevant)
+      then: [T: "lína"]      # phrase(the values on the top 'row' are relevant)
     - else_if: "$ClearSpeak_MultiLineLabel = 'Step'"
       then: [T: "skref"]      # phrase(this is a 'step' by step process)
       # else 'None -- don't say anything'

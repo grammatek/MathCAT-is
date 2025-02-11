@@ -12,8 +12,8 @@ fn matrix_1x1() {
         <mo>)</mo></mrow></mrow>
     </math>
                                 ";
-    test("en", "ClearSpeak",  expr, "the 1 by 1 matrix with entry 3;");
-    test("en", "SimpleSpeak", expr, "the 1 by 1 matrix with entry 3;");
+    test("is", "ClearSpeak",  expr, "einu sinni einn fylki með stak 3;");
+    test("is", "SimpleSpeak", expr, "einu sinni einn fylki með stak 3;");
 }
 
 #[test]
@@ -28,8 +28,8 @@ fn determinant_1x1() {
         <mo>|</mo></mrow></mrow>
     </math>
                                 ";
-    test("en", "ClearSpeak",  expr, "the 1 by 1 determinant with entry 3;");
-    test("en", "SimpleSpeak", expr, "the 1 by 1 determinant with entry 3;");
+    test("is", "ClearSpeak",  expr, "einu sinni einn ákveða með stak 3;");
+    test("is", "SimpleSpeak", expr, "einu sinni einn ákveða með stak 3;");
 }
 
 
@@ -52,8 +52,8 @@ fn matrix_1x2() {
       <mo>)</mo></mrow></mrow>
     </math>
                                 ";
-    test("en", "ClearSpeak",  expr, "the 1 by 2 row matrix; 3, 5;");
-    test("en", "SimpleSpeak", expr, "the 1 by 2 row matrix; 3, 5;");
+    test("is", "ClearSpeak",  expr, "einu sinni 2 línu fylki; 3, 5;");
+    test("is", "SimpleSpeak", expr, "einu sinni 2 línu fylki; 3, 5;");
 }
 
 
@@ -79,8 +79,8 @@ fn matrix_1x3() {
       <mo>)</mo></mrow></mrow>
     </math>
                                 ";
-    test("en", "ClearSpeak", expr, "the 1 by 3 row matrix; negative x, 5, 12;");
-    test("en", "SimpleSpeak", expr, "the 1 by 3 row matrix; negative x, 5, 12;");
+    test("is", "ClearSpeak", expr, "einu sinni 3 línu fylki; mínus x, 5, 12;");
+    test("is", "SimpleSpeak", expr, "einu sinni 3 línu fylki; mínus x, 5, 12;");
 }
 
 #[test]
@@ -107,8 +107,8 @@ fn matrix_2x1_not_simple() {
       <mo>)</mo></mrow></mrow>
     </math>
                                 ";
-    test("en", "ClearSpeak", expr, "the 2 by 1 column matrix; row 1; x plus 1; row 2; x minus 1;");
-    test("en", "SimpleSpeak", expr, "the 2 by 1 column matrix; row 1; x plus 1; row 2; x minus 1;");
+    test("is", "ClearSpeak", expr, "2 sinnum einn dálkur fylki; lína 1; x plús 1; lína 2; x mínus 1;");
+    test("is", "SimpleSpeak", expr, "2 sinnum einn dálkur fylki; lína 1; x plús 1; lína 2; x mínus 1;");
 }
 #[test]
 fn matrix_3x1_not_simple() {
@@ -144,14 +144,14 @@ fn matrix_3x1_not_simple() {
         </mtable>
       <mo>)</mo></mrow></mrow>
     </math>";
-    test("en", "SimpleSpeak", expr, "the 3 by 1 column matrix; \
-            row 1; x; \
-            row 2; eigh; \
-            row 3; fraction, x over, x plus 1, end fraction;");
-    test("en", "ClearSpeak",  expr, "the 3 by 1 column matrix; \
-            row 1; x; \
-            row 2; eigh; \
-            row 3; the fraction with numerator x; and denominator x plus 1;");
+    test("is", "SimpleSpeak", expr, "3 sinnum einn dálkur fylki; \
+            lína 1; x; \
+            lína 2; a; \
+            lína 3; brot með teljarann x; og nefnarann x plús 1;");
+    test("is", "ClearSpeak",  expr, "3 sinnum einn dálkur fylki; \
+            lína 1; x; \
+            lína 2; a; \
+            lína 3; brot með teljarann x; og nefnarann x plús 1;");
 }
 
 #[test]
@@ -180,8 +180,8 @@ fn determinant_2x2() {
         </mtable>
       <mo>|</mo></mrow></mrow>
                         </math>";
-    test("en", "ClearSpeak",  expr, "the 2 by 2 determinant; row 1; 2, 1; row 2; 7, 5;");
-    test("en", "SimpleSpeak", expr, "the 2 by 2 determinant; row 1; 2, 1; row 2; 7, 5;");
+    test("is", "ClearSpeak",  expr, "2 sinnum 2 ákveða; lína 1; 2, 1; lína 2; 7, 5;");
+    test("is", "SimpleSpeak", expr, "2 sinnum 2 ákveða; lína 1; 2, 1; lína 2; 7, 5;");
 }
 
 #[test]
@@ -217,8 +217,8 @@ fn matrix_2x3() {
       <mo>]</mo></mrow></mrow>
     </math>
                                 ";
-    test("en", "ClearSpeak",  expr, "the 2 by 3 matrix; row 1; 3, 1, 4; row 2; 0, 2, 6;");
-    test("en", "SimpleSpeak", expr, "the 2 by 3 matrix; row 1; 3, 1, 4; row 2; 0, 2, 6;");
+    test("is", "ClearSpeak",  expr, "2 sinnum 3 fylki; lína 1; 3, 1, 4; lína 2; 0, 2, 6;");
+    test("is", "SimpleSpeak", expr, "2 sinnum 3 fylki; lína 1; 3, 1, 4; lína 2; 0, 2, 6;");
 }
 
 #[test]
@@ -257,12 +257,12 @@ fn matrix_2x3_labeled() {
       <mo>]</mo></mrow></mrow>
     </math>
                                 ";
-    test("en", "ClearSpeak",  expr,
-        "the 2 by 3 matrix; row 1 with label (3.1); column 2; 3, column 3; 1, column 4; 4; \
-                                   row 2; column 1; 0, column 2; 2, column 3; 6;");
-    test("en", "SimpleSpeak", expr,
-        "the 2 by 3 matrix; row 1 with label (3.1); column 2; 3, column 3; 1, column 4; 4; \
-                                   row 2; column 1; 0, column 2; 2, column 3; 6;");
+    test("is", "ClearSpeak",  expr,
+        "2 sinnum 3 fylki; lína 1 merkt (3 punktur 1); dálkur 2; 3, dálkur 3; 1, dálkur 4; 4; \
+                                   lína 2; dálkur 1; 0, dálkur 2; 2, dálkur 3; 6;");
+    test("is", "SimpleSpeak", expr,
+       "2 sinnum 3 fylki; lína 1 merkt (3 punktur 1); dálkur 2; 3, dálkur 3; 1, dálkur 4; 4; \
+                                   lína 2; dálkur 1; 0, dálkur 2; 2, dálkur 3; 6;");
 }
 
 #[test]
@@ -290,8 +290,8 @@ fn matrix_3x1() {
         </mtable> <mo>]</mo></mrow></mrow>
     </math>
                                 ";
-    test("en", "ClearSpeak",  expr, "the 3 by 1 column matrix; 1; 2; 3;");
-    test("en", "SimpleSpeak", expr, "the 3 by 1 column matrix; 1; 2; 3;");
+    test("is", "ClearSpeak",  expr, "3 sinnum einn dálkur fylki; 1; 2; 3;");
+    test("is", "SimpleSpeak", expr, "3 sinnum einn dálkur fylki; 1; 2; 3;");
 }
 
 #[test]
@@ -325,8 +325,8 @@ fn matrix_4x1() {
       <mo>)</mo></mrow></mrow>
     </math>
                                 ";
-    test("en", "ClearSpeak",  expr, "the 4 by 1 column matrix; row 1; 3; row 2; 6; row 3; 1; row 4; 2;");
-    test("en", "SimpleSpeak", expr, "the 4 by 1 column matrix; row 1; 3; row 2; 6; row 3; 1; row 4; 2;");
+    test("is", "ClearSpeak",  expr, "4 sinnum einn dálkur fylki; lína 1; 3; lína 2; 6; lína 3; 1; lína 4; 2;");
+    test("is", "SimpleSpeak", expr, "4 sinnum einn dálkur fylki; lína 1; 3; lína 2; 6; lína 3; 1; lína 4; 2;");
 }
 
 #[test]
@@ -363,10 +363,10 @@ fn matrix_4x1_labeled() {
       <mo>)</mo></mrow></mrow>
     </math>
                                 ";
-    test("en", "ClearSpeak",  expr,
-        "the 4 by 1 column matrix; row 1; 3; row 2; 6; row 3; 1; row 4 with label (3.1); 2;");
-    test("en", "SimpleSpeak", expr,
-        "the 4 by 1 column matrix; row 1; 3; row 2; 6; row 3; 1; row 4 with label (3.1); 2;");
+    test("is", "ClearSpeak",  expr,
+        "4 sinnum einn dálkur fylki; lína 1; 3; lína 2; 6; lína 3; 1; lína 4 merkt (3 punktur 1); 2;");
+    test("is", "SimpleSpeak", expr,
+        "4 sinnum einn dálkur fylki; lína 1; 3; lína 2; 6; lína 3; 1; lína 4 merkt (3 punktur 1); 2;");
 }
 
 #[test]
@@ -394,8 +394,8 @@ fn matrix_1x4() {
       <mo>)</mo></mrow></mrow>
     </math>
                                 ";
-    test("en", "ClearSpeak",  expr, "the 1 by 4 row matrix; column 1; 3, column 2; 6, column 3; 1, column 4; 2;");
-    test("en", "SimpleSpeak", expr, "the 1 by 4 row matrix; column 1; 3, column 2; 6, column 3; 1, column 4; 2;");
+    test("is", "ClearSpeak",  expr, "einu sinni 4 línu fylki; dálkur 1; 3, dálkur 2; 6, dálkur 3; 1, dálkur 4; 2;");
+    test("is", "SimpleSpeak", expr, "einu sinni 4 línu fylki; dálkur 1; 3, dálkur 2; 6, dálkur 3; 1, dálkur 4; 2;");
 }
 
 #[test]
@@ -465,16 +465,16 @@ fn matrix_4x4() {
       <mo>)</mo></mrow></mrow>
     </math>
                                 ";
-    test("en", "ClearSpeak",  expr, "the 4 by 4 matrix; \
-          row 1; column 1; 0, column 2; 3, column 3; 4, column 4; 3; \
-          row 2; column 1; 2, column 2; 1, column 3; 0, column 4; 9; \
-          row 3; column 1; 3, column 2; 0, column 3; 2, column 4; 1; \
-          row 4; column 1; 6, column 2; 2, column 3; 9, column 4; 0;");
-    test("en", "SimpleSpeak", expr, "the 4 by 4 matrix; \
-          row 1; column 1; 0, column 2; 3, column 3; 4, column 4; 3; \
-          row 2; column 1; 2, column 2; 1, column 3; 0, column 4; 9; \
-          row 3; column 1; 3, column 2; 0, column 3; 2, column 4; 1; \
-          row 4; column 1; 6, column 2; 2, column 3; 9, column 4; 0;");}
+    test("is", "ClearSpeak",  expr, "4 sinnum 4 fylki; \
+          lína 1; dálkur 1; 0, dálkur 2; 3, dálkur 3; 4, dálkur 4; 3; \
+          lína 2; dálkur 1; 2, dálkur 2; 1, dálkur 3; 0, dálkur 4; 9; \
+          lína 3; dálkur 1; 3, dálkur 2; 0, dálkur 3; 2, dálkur 4; 1; \
+          lína 4; dálkur 1; 6, dálkur 2; 2, dálkur 3; 9, dálkur 4; 0;");
+    test("is", "SimpleSpeak", expr, "4 sinnum 4 fylki; \
+          lína 1; dálkur 1; 0, dálkur 2; 3, dálkur 3; 4, dálkur 4; 3; \
+          lína 2; dálkur 1; 2, dálkur 2; 1, dálkur 3; 0, dálkur 4; 9; \
+          lína 3; dálkur 1; 3, dálkur 2; 0, dálkur 3; 2, dálkur 4; 1; \
+          lína 4; dálkur 1; 6, dálkur 2; 2, dálkur 3; 9, dálkur 4; 0;");}
 
 #[test]
 fn matrix_4x2() {
@@ -520,17 +520,17 @@ fn matrix_4x2() {
       <mo>)</mo></mrow></mrow>
     </math>
       ";
-    test("en", "ClearSpeak",  expr, "the 4 by 2 matrix; \
-              row 1; column 1; 1, column 2; 3; \
-              row 2; column 1; 4, column 2; 2; \
-              row 3; column 1; 2, column 2; 1; \
-              row 4; column 1; 0, column 2; 5;\
+    test("is", "ClearSpeak",  expr, "4 sinnum 2 fylki; \
+              lína 1; dálkur 1; 1, dálkur 2; 3; \
+              lína 2; dálkur 1; 4, dálkur 2; 2; \
+              lína 3; dálkur 1; 2, dálkur 2; 1; \
+              lína 4; dálkur 1; 0, dálkur 2; 5;\
     ");
-    test("en", "SimpleSpeak", expr, "the 4 by 2 matrix; \
-              row 1; column 1; 1, column 2; 3; \
-              row 2; column 1; 4, column 2; 2; \
-              row 3; column 1; 2, column 2; 1; \
-              row 4; column 1; 0, column 2; 5;\
+    test("is", "SimpleSpeak", expr, "4 sinnum 2 fylki; \
+              lína 1; dálkur 1; 1, dálkur 2; 3; \
+              lína 2; dálkur 1; 4, dálkur 2; 2; \
+              lína 3; dálkur 1; 2, dálkur 2; 1; \
+              lína 4; dálkur 1; 0, dálkur 2; 5;\
     ");}
 
 // put absolute value test here since it is related to determinate and is small for its own file
@@ -539,11 +539,11 @@ fn simple_absolute_value() {
   let expr = "<math>
     <mrow><mrow><mo>|</mo> <mi>x</mi> <mo>|</mo></mrow></mrow>
   </math>";
-  test("en", "SimpleSpeak", expr, "the absolute value of x,");
-  test("en", "ClearSpeak",  expr, "the absolute value of x,");
-  test_prefs("en", "ClearSpeak", vec![("Verbosity", "Terse"), ("ClearSpeak_AbsoluteValue", "Auto")], expr, "absolute value of x,");
-  test_prefs("en", "ClearSpeak", vec![("Verbosity", "Verbose"), ("ClearSpeak_AbsoluteValue", "AbsEnd")],
-             expr, "the absolute value of x, end absolute value,");
+  test("is", "SimpleSpeak", expr, "algildi x,");
+  test("is", "ClearSpeak",  expr, "algildi x,");
+  test_prefs("is", "ClearSpeak", vec![("Verbosity", "Terse"), ("ClearSpeak_AbsoluteValue", "Auto")], expr, "algildi x,");
+  test_prefs("is", "ClearSpeak", vec![("Verbosity", "Verbose"), ("ClearSpeak_AbsoluteValue", "AbsEnd")],
+             expr, "algildi x, algildi endar,");
 }
   
 #[test]
@@ -553,9 +553,9 @@ let expr = "<math>
       <mrow><mi>x</mi><mo>+</mo><mn>1</mn> </mrow>
     <mo>|</mo></mrow></mrow>
   </math>";
-  test("en", "ClearSpeak", expr, "the absolute value of x plus 1,");
-  test_prefs("en", "ClearSpeak", vec![("Verbosity", "Terse"), ("ClearSpeak_AbsoluteValue", "AbsEnd")],
-             expr, "absolute value of x plus 1, end absolute value,");
+  test("is", "ClearSpeak", expr, "algildi x plús 1,");
+  test_prefs("is", "ClearSpeak", vec![("Verbosity", "Terse"), ("ClearSpeak_AbsoluteValue", "AbsEnd")],
+             expr, "algildi x plús 1, algildi endar,");
 }
 
 #[test]
@@ -563,8 +563,8 @@ fn simple_cardinality_value() {
   let expr = "<math>
     <mrow><mrow><mo>|</mo> <mi>S</mi> <mo>|</mo></mrow></mrow>
   </math>";
-  test_prefs("en", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_AbsoluteValue", "Cardinality")], expr,
-             "the cardinality of cap s,");
+  test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_AbsoluteValue", "Cardinality")], expr,
+             "fjöldatala stórt s,");
 }
   
 // Test preferences
@@ -586,8 +586,8 @@ let expr = "<math display='block' xmlns='http://www.w3.org/1998/Math/MathML'>
       </mtable></mrow>
     <mo>)</mo></mrow></mrow>
   </math>";
-  test_ClearSpeak("en", "ClearSpeak_Matrix", "SpeakColNum",
-        expr, "the 2 by 2 matrix; row 1; column 1; 2, column 2; 1; row 2; column 1; 7, column 2; 5;");
+  test_ClearSpeak("is", "ClearSpeak_Matrix", "SpeakColNum",
+        expr, "2 sinnum 2 fylki; lína 1; dálkur 1; 2, dálkur 2; 1; lína 2; dálkur 1; 7, dálkur 2; 5;");
 }
 
 #[test]
@@ -609,8 +609,8 @@ let expr = "<math display='block' xmlns='http://www.w3.org/1998/Math/MathML'>
       </mtable></mrow>
     <mo>)</mo></mrow></mrow>
   </math>";
-test_ClearSpeak("en", "ClearSpeak_Matrix", "SpeakColNum",
-        expr, "the 3 by 1 column matrix; row 1; 1; row 2; 2; row 3; 3;");
+test_ClearSpeak("is", "ClearSpeak_Matrix", "SpeakColNum",
+        expr, "3 sinnum einn dálkur fylki; lína 1; 1; lína 2; 2; lína 3; 3;");
 }
 
 #[test]
@@ -626,8 +626,8 @@ let expr = "<math display='block' xmlns='http://www.w3.org/1998/Math/MathML'>
       </mtable></mrow>
     <mo>]</mo></mrow></mrow>
   </math>";
-test_ClearSpeak("en", "ClearSpeak_Matrix", "SpeakColNum",
-        expr, "the 1 by 2 row matrix; column 1; 1, column 2; 2;");
+test_ClearSpeak("is", "ClearSpeak_Matrix", "SpeakColNum",
+        expr, "einu sinni 2 línu fylki; dálkur 1; 1, dálkur 2; 2;");
 }
 
 #[test]
@@ -644,9 +644,9 @@ let expr = "<math><mrow><mrow><mo>(</mo><mrow>
     </mtr>
     </mtable>
     </mrow><mo>)</mo></mrow></mrow></math>";
-test_ClearSpeak("en", "ClearSpeak_Matrix", "SpeakColNum",
-        expr, "the 2 by 2 matrix; row 1; column 1; b sub 1 1, column 2; b sub 1 2; \
-                                                row 2; column 1; b sub 2 1, column 2; b sub 2 2;");
+test_ClearSpeak("is", "ClearSpeak_Matrix", "SpeakColNum",
+        expr, "2 sinnum 2 fylki; lína 1; dálkur 1; b lágvísir 1 1, dálkur 2; b lágvísir 1 2; \
+                                                lína 2; dálkur 1; b lágvísir 2 1, dálkur 2; b lágvísir 2 2;");
 }
 
 
@@ -668,8 +668,8 @@ let expr = "<math display='block' xmlns='http://www.w3.org/1998/Math/MathML'>
       </mtable></mrow>
     <mo>)</mo></mrow></mrow>
   </math>";
-  test_ClearSpeak("en", "ClearSpeak_Matrix", "SilentColNum",
-        expr, "the 2 by 2 matrix; row 1; 2, 1; row 2; 7, 5;");
+  test_ClearSpeak("is", "ClearSpeak_Matrix", "SilentColNum",
+        expr, "2 sinnum 2 fylki; lína 1; 2, 1; lína 2; 7, 5;");
 }
 
 #[test]
@@ -691,8 +691,8 @@ let expr = "<math display='block' xmlns='http://www.w3.org/1998/Math/MathML'>
       </mtable></mrow>
     <mo>)</mo></mrow></mrow>
   </math>";
-test_ClearSpeak("en", "ClearSpeak_Matrix", "SilentColNum",
-        expr, "the 3 by 1 column matrix; 1; 2; 3;");
+test_ClearSpeak("is", "ClearSpeak_Matrix", "SilentColNum",
+        expr, "3 sinnum einn dálkur fylki; 1; 2; 3;");
 }
 
 #[test]
@@ -708,8 +708,8 @@ let expr = "<math display='block' xmlns='http://www.w3.org/1998/Math/MathML'>
       </mtable></mrow>
     <mo>]</mo></mrow></mrow>
   </math>";
-test_ClearSpeak("en", "ClearSpeak_Matrix", "SilentColNum",
-        expr, "the 1 by 2 row matrix; 1, 2;");
+test_ClearSpeak("is", "ClearSpeak_Matrix", "SilentColNum",
+        expr, "einu sinni 2 línu fylki; 1, 2;");
 }
 
 #[test]
@@ -726,9 +726,9 @@ let expr = "<math><mrow><mrow><mo>(</mo><mrow>
     </mtr>
     </mtable>
     </mrow><mo>)</mo></mrow></mrow></math>";
-test_ClearSpeak("en", "ClearSpeak_Matrix", "SilentColNum",
-        expr, "the 2 by 2 matrix; row 1; b sub 1 1, b sub 1 2; \
-                                                row 2; b sub 2 1, b sub 2 2;");
+test_ClearSpeak("is", "ClearSpeak_Matrix", "SilentColNum",
+        expr, "2 sinnum 2 fylki; lína 1; b lágvísir 1 1, b lágvísir 1 2; \
+                                                lína 2; b lágvísir 2 1, b lágvísir 2 2;");
 }
 
 
@@ -750,8 +750,8 @@ let expr = "<math display='block' xmlns='http://www.w3.org/1998/Math/MathML'>
       </mtable></mrow>
     <mo>)</mo></mrow></mrow>
   </math>";
-  test_ClearSpeak("en", "ClearSpeak_Matrix", "EndMatrix",
-        expr, "the 2 by 2 matrix; row 1; 2, 1; row 2; 7, 5; end matrix");
+  test_ClearSpeak("is", "ClearSpeak_Matrix", "EndMatrix",
+        expr, "2 sinnum 2 fylki; lína 1; 2, 1; lína 2; 7, 5; fylki endar");
 }
 
 #[test]
@@ -773,8 +773,8 @@ let expr = "<math display='block' xmlns='http://www.w3.org/1998/Math/MathML'>
       </mtable></mrow>
     <mo>)</mo></mrow></mrow>
   </math>";
-test_ClearSpeak("en", "ClearSpeak_Matrix", "EndMatrix",
-        expr, "the 3 by 1 column matrix; 1; 2; 3; end matrix");
+test_ClearSpeak("is", "ClearSpeak_Matrix", "EndMatrix",
+        expr, "3 sinnum einn dálkur fylki; 1; 2; 3; fylki endar");
 }
 
 #[test]
@@ -790,8 +790,8 @@ let expr = "<math display='block' xmlns='http://www.w3.org/1998/Math/MathML'>
       </mtable></mrow>
     <mo>]</mo></mrow></mrow>
   </math>";
-test_ClearSpeak("en", "ClearSpeak_Matrix", "EndMatrix",
-        expr, "the 1 by 2 row matrix; 1, 2; end matrix");
+test_ClearSpeak("is", "ClearSpeak_Matrix", "EndMatrix",
+        expr, "einu sinni 2 línu fylki; 1, 2; fylki endar");
 }
 
 #[test]
@@ -808,9 +808,9 @@ let expr = "<math><mrow><mrow><mo>(</mo><mrow>
     </mtr>
     </mtable>
     </mrow><mo>)</mo></mrow></mrow></math>";
-test_ClearSpeak("en", "ClearSpeak_Matrix", "EndMatrix",
-        expr, "the 2 by 2 matrix; row 1; column 1; b sub 1 1, column 2; b sub 1 2; \
-                                                row 2; column 1; b sub 2 1, column 2; b sub 2 2; end matrix");
+test_ClearSpeak("is", "ClearSpeak_Matrix", "EndMatrix",
+        expr, "2 sinnum 2 fylki; lína 1; dálkur 1; b lágvísir 1 1, dálkur 2; b lágvísir 1 2; \
+                                                lína 2; dálkur 1; b lágvísir 2 1, dálkur 2; b lágvísir 2 2; fylki endar");
 }
 
 
@@ -832,8 +832,8 @@ let expr = "<math display='block' xmlns='http://www.w3.org/1998/Math/MathML'>
       </mtable></mrow>
     <mo>)</mo></mrow></mrow>
   </math>";
-  test_ClearSpeak("en", "ClearSpeak_Matrix", "Vector",
-        expr, "the 2 by 2 matrix; row 1; 2, 1; row 2; 7, 5;");
+  test_ClearSpeak("is", "ClearSpeak_Matrix", "Vector",
+        expr, "2 sinnum 2 fylki; lína 1; 2, 1; lína 2; 7, 5;");
 }
 
 #[test]
@@ -855,8 +855,8 @@ let expr = "<math display='block' xmlns='http://www.w3.org/1998/Math/MathML'>
       </mtable></mrow>
     <mo>)</mo></mrow></mrow>
   </math>";
-test_ClearSpeak("en", "ClearSpeak_Matrix", "Vector",
-        expr, "the 3 by 1 column vector; 1; 2; 3;");
+test_ClearSpeak("is", "ClearSpeak_Matrix", "Vector",
+        expr, "3 sinnum einn dálkur vigur; 1; 2; 3;");
 }
 
 #[test]
@@ -872,8 +872,8 @@ let expr = "<math display='block' xmlns='http://www.w3.org/1998/Math/MathML'>
       </mtable></mrow>
     <mo>]</mo></mrow></mrow>
   </math>";
-test_ClearSpeak("en", "ClearSpeak_Matrix", "Vector",
-        expr, "the 1 by 2 row vector; 1, 2;");
+test_ClearSpeak("is", "ClearSpeak_Matrix", "Vector",
+        expr, "einu sinni 2 línu vigur; 1, 2;");
 }
 
 #[test]
@@ -890,9 +890,9 @@ let expr = "<math><mrow><mrow><mo>(</mo><mrow>
     </mtr>
     </mtable>
     </mrow><mo>)</mo></mrow></mrow></math>";
-test_ClearSpeak("en", "ClearSpeak_Matrix", "Vector",
-        expr, "the 2 by 2 matrix; row 1; column 1; b sub 1 1, column 2; b sub 1 2; \
-                                                row 2; column 1; b sub 2 1, column 2; b sub 2 2;");
+test_ClearSpeak("is", "ClearSpeak_Matrix", "Vector",
+        expr, "2 sinnum 2 fylki; lína 1; dálkur 1; b lágvísir 1 1, dálkur 2; b lágvísir 1 2; \
+                                                lína 2; dálkur 1; b lágvísir 2 1, dálkur 2; b lágvísir 2 2;");
 }
 
 
@@ -914,8 +914,8 @@ let expr = "<math display='block' xmlns='http://www.w3.org/1998/Math/MathML'>
       </mtable></mrow>
     <mo>)</mo></mrow></mrow>
   </math>";
-  test_ClearSpeak("en", "ClearSpeak_Matrix", "EndVector",
-        expr, "the 2 by 2 matrix; row 1; 2, 1; row 2; 7, 5; end matrix");
+  test_ClearSpeak("is", "ClearSpeak_Matrix", "EndVector",
+        expr, "2 sinnum 2 fylki; lína 1; 2, 1; lína 2; 7, 5; fylki endar");
 }
 
 #[test]
@@ -937,8 +937,8 @@ let expr = "<math display='block' xmlns='http://www.w3.org/1998/Math/MathML'>
       </mtable></mrow>
     <mo>)</mo></mrow></mrow>
   </math>";
-test_ClearSpeak("en", "ClearSpeak_Matrix", "EndVector",
-        expr, "the 3 by 1 column vector; 1; 2; 3; end vector");
+test_ClearSpeak("is", "ClearSpeak_Matrix", "EndVector",
+        expr, "3 sinnum einn dálkur vigur; 1; 2; 3; vigur endar");
 }
 
 #[test]
@@ -954,8 +954,8 @@ let expr = "<math display='block' xmlns='http://www.w3.org/1998/Math/MathML'>
       </mtable></mrow>
     <mo>]</mo></mrow></mrow>
   </math>";
-test_ClearSpeak("en", "ClearSpeak_Matrix", "EndVector",
-        expr, "the 1 by 2 row vector; 1, 2; end vector");
+test_ClearSpeak("is", "ClearSpeak_Matrix", "EndVector",
+        expr, "einu sinni 2 línu vigur; 1, 2; vigur endar");
 }
 
 #[test]
@@ -972,9 +972,9 @@ let expr = "<math><mrow><mrow><mo>(</mo><mrow>
     </mtr>
     </mtable>
     </mrow><mo>)</mo></mrow></mrow></math>";
-test_ClearSpeak("en", "ClearSpeak_Matrix", "EndVector",
-        expr, "the 2 by 2 matrix; row 1; column 1; b sub 1 1, column 2; b sub 1 2; \
-                                                row 2; column 1; b sub 2 1, column 2; b sub 2 2; end matrix");
+test_ClearSpeak("is", "ClearSpeak_Matrix", "EndVector",
+        expr, "2 sinnum 2 fylki; lína 1; dálkur 1; b lágvísir 1 1, dálkur 2; b lágvísir 1 2; \
+                                                lína 2; dálkur 1; b lágvísir 2 1, dálkur 2; b lágvísir 2 2; fylki endar");
 }
 
 
@@ -986,5 +986,5 @@ fn matrix_binomial() {
         <mtable><mtr><mtd><mn>3</mn></mtd></mtr><mtr><mtd><mn>2</mn></mtd></mtr></mtable>
       </mrow><mo>)</mo>
     </math>";
-  test_ClearSpeak("en", "ClearSpeak_Matrix", "Combinatorics", expr, "3 choose 2");
+  test_ClearSpeak("is", "ClearSpeak_Matrix", "Combinatorics", expr, "3 velja 2");
 }
