@@ -230,9 +230,9 @@ fn complicated_set_with_mtext() {
         <mo>{</mo>
         <mrow> <mi>x</mi><mo>∈</mo><mi>ℕ</mi></mrow>
         <mo>|</mo>
-        <mrow><mi>x</mi> <mtext>&#x00A0;is&#x00A0;an&#x00A0;even&#x00A0;number</mtext> </mrow>
+        <mrow><mi>x</mi> <mtext>er slétt tala</mtext> </mrow>
         <mo>}</mo>
         </math>";
     test("is", "SimpleSpeak", expr,
-            "mengi allra x stak í náttúrulegu tölunum þannig að x is an even number"); // text in formula
+            "mengi allra x stak í náttúrulegu tölunum þannig að x er slétt tala"); 
 }

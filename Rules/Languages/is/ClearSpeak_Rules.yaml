@@ -481,7 +481,7 @@
       - T: "tómamengið"      # phrase(the 'empty set')
     - else_if: "count(*[1]/*)=3 and *[1]/*[2][self::m:mo][text()=':' or text()='|' or text()='∣']"
       then:
-      - T: "mengi af"      # phrase(this is a 'set of' numbers)
+      - T: "mengi"      # phrase(this is a 'set of' numbers) - ICELANDIC: does not fit, we get "mengi af allra x ..." if we translate with "mengi af"
       - test:
         - if: $ClearSpeak_Sets != 'woAll'
           then: [T: "allra"]      # phrase(the set of 'all' integers)
