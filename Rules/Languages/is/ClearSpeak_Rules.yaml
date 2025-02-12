@@ -62,7 +62,7 @@
         then: [T: "ferningsrótin"]      # phrase(5 is the 'square root' of 25)
       - else_if: "*[2][text()='3']"
         then: [T: "teningsrótin"]      # phrase(5 is the 'cube root' of 625)
-      - else: [x: "ToOrdinal(*[2])", t: "root"]      # phrase(the square 'root' of 25)
+      - else: [x: "ToOrdinal(*[2])", T: "rótin"]      # phrase(the square 'root' of 25)
       else:
       - test:
           if: "*[2][self::m:mi][string-length(.)=1]"
@@ -74,7 +74,7 @@
       - T: "rótin"      # phrase(the square 'root' of 36)
   - test:
       if: "$Verbosity!='Terse'"
-      then: [t: "of"]      # phrase(the square root 'of' 36)
+      then: [T: "af"]      # phrase(the square root 'of' 36)
   - x: "*[1]"
   - test:
       if: $ClearSpeak_Roots = 'RootEnd' or $ClearSpeak_Roots = 'PosNegSqRootEnd'

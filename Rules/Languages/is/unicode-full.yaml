@@ -770,20 +770,11 @@
         else: [T: "sinnum"]
 
  - "√":                                          # 0x221a
-     - test: 
-         if: "$Verbosity!='Terse'"
-         then: [t: "the"]
-     - t: "square root of"
+     - T: "ferningsrótin af"
  - "∛":                                          # 0x221b
-     - test: 
-         if: "$Verbosity!='Terse'"
-         then: [t: "the"]
-     - t: "cube root of"
+     - T: "teningsrótin af"
  - "∜":                                          # 0x221c
-     - test: 
-         if: "$Verbosity!='Terse'"
-         then: [t: "the"]
-     - t: "fourth root of"
+     - T: "fjórða rótin af"
  - "∝":                                          # 0x221d
      - test: 
          if: "$Verbosity!='Terse'"
