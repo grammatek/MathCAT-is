@@ -8,7 +8,7 @@ fn common_fraction_half() {
     let expr = "<math>
                     <mfrac> <mn>1</mn> <mn>2</mn> </mfrac>
                 </math>";
-    test("en", "ClearSpeak", expr, "1 half");
+    test("is", "ClearSpeak", expr, "1 hálfur");
 }
 
 #[test]
@@ -16,7 +16,7 @@ fn common_fraction_thirds() {
     let expr = "<math>
                     <mfrac> <mn>2</mn> <mn>3</mn> </mfrac>
                 </math>";
-    test("en", "ClearSpeak", expr, "2 thirds");
+    test("is", "ClearSpeak", expr, "2 þriðju");
 }
 
 #[test]
@@ -24,8 +24,8 @@ fn common_fraction_tenths() {
     let expr = "<math>
                     <mfrac> <mn>17</mn> <mn>10</mn> </mfrac>
                 </math>";
-    test_prefs("en", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Auto")], expr, "17 tenths");
-    test_prefs("en", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Ordinal")], expr, "17 tenths");
+    test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Auto")], expr, "17 tíundu");
+    test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Ordinal")], expr, "17 tíundu");
 }
 
 #[test]
@@ -34,8 +34,8 @@ fn not_ClearSpeak_common_fraction_tenths() {
     let expr = "<math>
                     <mfrac> <mn>89</mn> <mn>10</mn> </mfrac>
                 </math>";
-    test_prefs("en", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Auto")], expr, "89 over 10");
-    test_prefs("en", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Ordinal")], expr, "89 tenths");
+    test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Auto")], expr, "89 deilt með 10");
+    test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Ordinal")], expr, "89 tíundu");
 }
 
 #[test]
@@ -51,16 +51,16 @@ fn non_simple_fraction() {
         </mfrac>
         </mrow>
     </math>";
-    test_prefs("en", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Auto")], expr, "the fraction with numerator; x plus y; and denominator x minus y;");
-    test_prefs("en", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Ordinal")], expr, "the fraction with numerator; x plus y; and denominator x minus y;");
-    test_prefs("en", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Over")], expr, "x plus y over x minus y");
-    test_prefs("en", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "FracOver")], expr, "the fraction x plus y over x minus y");
-    test_prefs("en", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "General")], expr, "the fraction with numerator; x plus y; and denominator x minus y;");
-    test_prefs("en", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "EndFrac")], expr, "the fraction with numerator; x plus y; and denominator x minus y; end fraction,");
-    test_prefs("en", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "GeneralEndFrac")], expr, "the fraction with numerator; x plus y; and denominator x minus y; end fraction,");
-    test_prefs("en", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "OverEndFrac")], expr, "x plus y over x minus y, end fraction,");
-    test_prefs("en", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Per")], expr, "x plus y per x minus y");
-    test_prefs("en", "ClearSpeak", vec![("Verbosity", "Verbose"),("ClearSpeak_Fractions", "Auto")], expr, "the fraction with numerator; x plus y; and denominator x minus y; end fraction,");
+    test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Auto")], expr, "brot með teljarann; x plús y; og nefnarann x mínus y;");
+    test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Ordinal")], expr, "brot með teljarann; x plús y; og nefnarann x mínus y;");
+    test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Over")], expr, "x plús y deilt með x mínus y");
+    test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "FracOver")], expr, "brotið x plús y deilt með x mínus y");
+    test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "General")], expr, "brot með teljarann; x plús y; og nefnarann x mínus y;");
+    test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "EndFrac")], expr, "brot með teljarann; x plús y; og nefnarann x mínus y; brot endar,");
+    test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "GeneralEndFrac")], expr, "brot með teljarann; x plús y; og nefnarann x mínus y; brot endar,");
+    test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "OverEndFrac")], expr, "x plús y deilt með x mínus y, brot endar,");
+    test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Per")], expr, "x plús y á x mínus y"); // why is this 'á' instead of 'deilt með' all of a sudden?
+    test_prefs("is", "ClearSpeak", vec![("Verbosity", "Verbose"),("ClearSpeak_Fractions", "Auto")], expr, "brot með teljarann; x plús y; og nefnarann x mínus y; brot endar,");
 }
 
 
@@ -70,7 +70,7 @@ fn mixed_number() {
                     <mn>3</mn>
                     <mfrac> <mn>1</mn> <mn>2</mn> </mfrac>
                 </math>";
-    test("en", "ClearSpeak", expr, "3 and 1 half");
+    test("is", "ClearSpeak", expr, "3 og 1 hálfur");
 }
 
 #[test]
@@ -80,7 +80,7 @@ fn explicit_mixed_number() {
                     <mo>&#x2064;</mo>
                     <mfrac> <mn>1</mn> <mn>8</mn> </mfrac>
                 </math>";
-    test("en", "ClearSpeak", expr, "3 and 1 eighth");
+    test("is", "ClearSpeak", expr, "3 og 1 áttundi");
 }
 
 #[test]
@@ -89,7 +89,7 @@ fn mixed_number_big() {
                     <mn>3</mn>
                     <mfrac> <mn>7</mn> <mn>83</mn> </mfrac>
                 </math>";
-    test("en", "ClearSpeak", expr, "3 and 7 over 83");
+    test("is", "ClearSpeak", expr, "3 og 7 deilt með 83");
 }
 
 #[test]
@@ -97,7 +97,7 @@ fn simple_text() {
     let expr = "<math>
     <mfrac> <mi>rise</mi> <mi>run</mi> </mfrac>
                 </math>";
-    test("en", "ClearSpeak", expr, "rise over run");
+    test("is", "ClearSpeak", expr, "rise deilt með run");
 }
 
 #[test]
@@ -110,7 +110,7 @@ fn number_and_text() {
                 <mn>3</mn><mtext>gallons</mtext></mrow>
             </mfrac>
         </math>";
-    test("en", "ClearSpeak", expr, "2 miles over 3 gallons");
+    test("is", "ClearSpeak", expr, "2 miles deilt með 3 gallons");
 }
 
 
@@ -134,18 +134,18 @@ fn nested_simple_fractions() {
                 </mfrac>
                 </mrow>
             </math>";
-    test_prefs("en", "ClearSpeak", vec![("ClearSpeak_Fractions", "Auto")], expr, "1 half over 2 thirds");
-    test_prefs("en", "ClearSpeak", vec![("ClearSpeak_Fractions", "Ordinal")], expr, "1 half over 2 thirds");
-    test_prefs("en", "ClearSpeak", vec![("ClearSpeak_Fractions", "Over")], expr, "1 over 2 over 2 over 3");
-    test_prefs("en", "ClearSpeak", vec![("ClearSpeak_Fractions", "FracOver")], expr,
-            "the fraction the fraction 1 over 2 over the fraction 2 over 3");
-    test_prefs("en", "ClearSpeak", vec![("ClearSpeak_Fractions", "General")], expr,
-            "the fraction with numerator the fraction with numerator 1; and denominator 2; and denominator the fraction with numerator 2; and denominator 3;");
-    test_prefs("en", "ClearSpeak", vec![("ClearSpeak_Fractions", "EndFrac")], expr, "1 half over 2 thirds");
-    test_prefs("en", "ClearSpeak", vec![("ClearSpeak_Fractions", "GeneralEndFrac")], expr,
-            "the fraction with numerator the fraction with numerator 1; and denominator 2; end fraction; and denominator the fraction with numerator 2; and denominator 3; end fraction; end fraction,");
-    test_prefs("en", "ClearSpeak", vec![("ClearSpeak_Fractions", "OverEndFrac")], expr,
-            "1 over 2, end fraction, over 2 over 3, end fraction; end fraction,");
+    test_prefs("is", "ClearSpeak", vec![("ClearSpeak_Fractions", "Auto")], expr, "1 hálfur deilt með 2 þriðju");
+    test_prefs("is", "ClearSpeak", vec![("ClearSpeak_Fractions", "Ordinal")], expr, "1 hálfur deilt með 2 þriðju");
+    test_prefs("is", "ClearSpeak", vec![("ClearSpeak_Fractions", "Over")], expr, "1 deilt með 2 deilt með 2 deilt með 3");
+    test_prefs("is", "ClearSpeak", vec![("ClearSpeak_Fractions", "FracOver")], expr,
+            "brotið brotið 1 deilt með 2 deilt með brotið 2 deilt með 3");
+    test_prefs("is", "ClearSpeak", vec![("ClearSpeak_Fractions", "General")], expr,
+            "brot með teljarann brot með teljarann 1; og nefnarann 2; og nefnarann brot með teljarann 2; og nefnarann 3;");
+    test_prefs("is", "ClearSpeak", vec![("ClearSpeak_Fractions", "EndFrac")], expr, "1 hálfur deilt með 2 þriðju");
+    test_prefs("is", "ClearSpeak", vec![("ClearSpeak_Fractions", "GeneralEndFrac")], expr,
+            "brot með teljarann brot með teljarann 1; og nefnarann 2; brot endar; og nefnarann brot með teljarann 2; og nefnarann 3; brot endar; brot endar,");
+    test_prefs("is", "ClearSpeak", vec![("ClearSpeak_Fractions", "OverEndFrac")], expr,
+            "1 deilt með 2, brot endar, deilt með 2 deilt með 3, brot endar; brot endar,");
 }
 
 
@@ -165,7 +165,7 @@ fn semi_nested_fraction() {
                     </mfrac>
                 </mrow>
                 </math>";
-    test("en", "ClearSpeak", expr, "2 thirds x over 6");
+    test("is", "ClearSpeak", expr, "2 þriðju x deilt með 6");
 }
 
 #[test]
@@ -190,7 +190,7 @@ fn general_nested_fraction() {
         </mrow>
     </math>
                     ";
-    test("en", "ClearSpeak", expr, "the fraction with numerator; 10 over n; and denominator 2 over n;");
+    test("is", "ClearSpeak", expr, "brot með teljarann; 10 deilt með n; og nefnarann 2 deilt með n;");
 }
 
 #[test]
@@ -215,14 +215,14 @@ fn complex_nested_fraction() {
         </mrow>
     </math>
                     ";
-    test("en", "ClearSpeak", expr, "the fraction with numerator; the fraction with numerator; n plus 10; and denominator n; and denominator 2 over n;");
+    test("is", "ClearSpeak", expr, "brot með teljarann; brot með teljarann; n plús 10; og nefnarann n; og nefnarann 2 deilt með n;");
 }
 
 #[test]
 fn simple_function() {
     let expr = "<math><mfrac><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mn>2</mn></mfrac></math>";
-    test_prefs("en", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Auto")], expr, "f of x over 2");
-    test_prefs("en", "ClearSpeak", vec![("Verbosity", "Verbose"), ("ClearSpeak_Fractions", "Auto")], expr, "f of x over 2, end fraction,");
+    test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Auto")], expr, "f af x deilt með 2");
+    test_prefs("is", "ClearSpeak", vec![("Verbosity", "Verbose"), ("ClearSpeak_Fractions", "Auto")], expr, "f af x deilt með 2, brot endar,");
 }
 
 #[test]
@@ -231,8 +231,8 @@ fn function_over_function() {
             <mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow>
             <mrow><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow>
         </mfrac></math>";
-    test_prefs("en", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Auto")], expr, "f of x over g of x");
-    test_prefs("en", "ClearSpeak", vec![("Verbosity", "Verbose"), ("ClearSpeak_Fractions", "Auto")], expr, "f of x over g of x, end fraction,");
+    test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Auto")], expr, "f af x deilt með g af x");
+    test_prefs("is", "ClearSpeak", vec![("Verbosity", "Verbose"), ("ClearSpeak_Fractions", "Auto")], expr, "f af x deilt með g af x, brot endar,");
 }
 
 #[test]
@@ -241,10 +241,10 @@ fn non_simple_function_over_function() {
             <mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>+</mo><mn>1</mn><mo>)</mo></mrow>
             <mrow><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow>
         </mfrac></math>";
-    test_prefs("en", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Auto")], expr,
-             "the fraction with numerator; f of, open paren x plus 1, close paren; and denominator g of x;");
-    test_prefs("en", "ClearSpeak", vec![("Verbosity", "Verbose"), ("ClearSpeak_Fractions", "Auto")], expr,
-             "the fraction with numerator; f of, open paren x plus 1, close paren; and denominator g of x; end fraction,");
+    test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Fractions", "Auto")], expr,
+             "brot með teljarann; f af, svigi opnast x plús 1, svigi lokast; og nefnarann g af x;");
+    test_prefs("is", "ClearSpeak", vec![("Verbosity", "Verbose"), ("ClearSpeak_Fractions", "Auto")], expr,
+             "brot með teljarann; f af, svigi opnast x plús 1, svigi lokast; og nefnarann g af x; brot endar,");
 }
 
 #[test]
@@ -255,5 +255,5 @@ fn binomial() {
                     <mfrac linethickness='0'> <mn>7</mn> <mn>3</mn> </mfrac>
                     <mo>)</mo>
                 </math>";
-    test("en", "ClearSpeak", expr, "2 times 7 choose 3");
+    test("is", "ClearSpeak", expr, "2 sinnum 7 valið 3");
 }
