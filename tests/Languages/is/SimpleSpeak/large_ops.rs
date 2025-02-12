@@ -103,7 +103,7 @@ fn intersection_both() {
         </munderover>
         <msub><mi>S</mi><mi>i</mi></msub>
     </math>";
-    test("is", "SimpleSpeak", expr, "sniðmengið frá i er jafnt og 1 til 10 af; stóru s lágvísir i");
+    test("is", "SimpleSpeak", expr, "sniðmengið frá i er jafnt og 1 til 10 af; stórt s lágvísir i");
 }
 
 #[test]
@@ -115,7 +115,7 @@ fn intersection_under() {
         </munder>
         <msub><mi>S</mi><mi>i</mi></msub>
     </math>";
-    test("is", "SimpleSpeak", expr, "sniðmengið yfir stórt c af, stóru s lágvísir i");
+    test("is", "SimpleSpeak", expr, "sniðmengið yfir stórt c af, stórt s lágvísir i");
 }
 
 #[test]
@@ -124,7 +124,7 @@ fn intersection() {
             <mo>⋂</mo>
             <msub><mi>S</mi><mi>i</mi></msub>
             </math>";
-    test("is", "SimpleSpeak", expr, "sniðmengið af stóru s lágvísir i");
+    test("is", "SimpleSpeak", expr, "sniðmengið af stórt s lágvísir i");
 }
 
 #[test]
@@ -137,7 +137,7 @@ fn union_both() {
         </munderover>
         <msub><mi>S</mi><mi>i</mi></msub>
     </math>";
-    test("is", "SimpleSpeak", expr, "sammengið frá i er jafnt og 1 til 10 af; stóru s lágvísir i");
+    test("is", "SimpleSpeak", expr, "sammengið frá i er jafnt og 1 til 10 af; stórt s lágvísir i");
 }
 
 #[test]
@@ -149,7 +149,7 @@ fn union_under() {
         </munder>
         <msub><mi>S</mi><mi>i</mi></msub>
     </math>";
-    test("is", "SimpleSpeak", expr, "sammengið yfir stórt c af, stóru s lágvísir i");
+    test("is", "SimpleSpeak", expr, "sammengið yfir stórt c af, stórt s lágvísir i");
 }
 
 #[test]
@@ -158,7 +158,7 @@ fn union() {
             <mo>⋃</mo>
             <msub><mi>S</mi><mi>i</mi></msub>
             </math>";
-    test("is", "SimpleSpeak", expr, "sammengið af stóru s lágvísir i");
+    test("is", "SimpleSpeak", expr, "sammengið af stórt s lágvísir i");
 }
 
 #[test]
