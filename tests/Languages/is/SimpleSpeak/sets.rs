@@ -234,5 +234,5 @@ fn complicated_set_with_mtext() {
         <mo>}</mo>
         </math>";
     test("is", "SimpleSpeak", expr,
-            "mengi allra x stak í náttúrulegu tölunum þannig að x er slétt tala"); 
+            "mengi allra x stak í náttúrulegu tölunum þannig að x er slétt tala");
 }
