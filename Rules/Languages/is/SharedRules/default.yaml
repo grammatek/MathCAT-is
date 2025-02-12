@@ -484,13 +484,13 @@
   - test:
       if: ".[ contains(concat(' ', normalize-space(@notation), ' '), ' left ') or contains(concat(' ', normalize-space(@notation), ' '), ' right ') or contains(@notation,'top') or contains(@notation,'bottom') ]"
       then:
-      - T: "línu á"      # phrase(draw a straight 'line' on the page)
+      - T: "lína"      # phrase(draw a straight 'line' on the page) ICELANDIC: this does not generalize - "teikna beina línu" is not the same form as "(hér er) bein lína". see e.g. menclose test cases.
       - test:
           if: ".[contains(concat(' ', normalize-space(@notation), ' '), ' left ')]"
-          then: [T: "vinstra", pause: short]      # phrase(line on 'left' of the expression)
+          then: [T: "vinstra megin", pause: short]      # phrase(line on 'left' of the expression)
       - test:
           if: ".[contains(concat(' ', normalize-space(@notation), ' '), ' right ')]"
-          then: [T: "hægra", pause: short]      # phrase(line on 'right' of the expression)
+          then: [T: "hægra megin", pause: short]      # phrase(line on 'right' of the expression)
       - test:
           if: ".[contains(@notation,'top')]"
           then: [T: "fyrir ofan", pause: short]      # phrase(line on 'top' of the expression)
@@ -516,7 +516,8 @@
       - test:
           if: ".[contains(@notation,'horizontalstrike')]"
           then: [T: "lárétt", pause: short]      # phrase(the line is 'horizontal')
-      - T: "strikaðu út"      # phrase(please 'cross out' the incorrect answer)
+      # TODO: this is not a correct comment, is used as a noun in test 'menclose' for example. See also the Swedish translation which uses a noun
+      - T: "útstrikun"      # phrase(please 'cross out' the incorrect answer)
       - pause: short
   - test:
       if: ".[contains(@notation,'uparrow')]"
@@ -576,7 +577,7 @@
       else: [x: "*"]
   - test:
       if: "$Impairment = 'Blindness' and ( $SpeechStyle != 'SimpleSpeak' or not(IsNode(*[1], 'leaf')) )"
-      then: [T: "end enclosure"]      # phrase(reached the 'end enclosure' point) TODO: how to say this in Icelandic?
+      then: [T: "umlykja endar"]      # phrase(reached the 'end enclosure' point)
   - pause: short
 
 - name: semantics

@@ -54,14 +54,14 @@
     ]
 
     # stop when regularity begins
-  #TODO: Icelandic: what is this exactly?
+  #TODO: Icelandic: 1/2 becomes 1 hálfur - is that ok?
 - NumbersOrdinalFractionalOnes: [
         "núll", "heill", "hálfur"
     ]
 
-    # stop when regularity begins
+    # stop when regularity begins - ICELANDIC: use "aðrir" instead of "hálfir", used e.g. in 3/2 fraction
 - NumbersOrdinalFractionalPluralOnes: [
-        "núll", "heilir", "hálfir"
+        "núll", "heilir", "aðrir"
     ]
 
 
