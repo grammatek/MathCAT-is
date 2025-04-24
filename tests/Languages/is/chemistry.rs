@@ -140,7 +140,7 @@ fn beta_decay() {
       </mmultiscripts>
     </math>";
     test_prefs("is", "ClearSpeak", vec![("Verbosity", "Terse")], expr,
-      "14, 6, stórt c; forms, 14, 7, stórt n; plús 0, mínus 1, e,");
+      "14, 6, stórt c; mynda, 14, 7, stórt n; plús 0, mínus 1, e,");
     test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium")], expr,
       "hávísir 14, lágvísir 6, stórt c; hvarfast og mynda; hávísir 14, lágvísir 7, stórt n; plús hávísir 0, lágvísir mínus 1, e,");
     test_prefs("is", "ClearSpeak", vec![("Verbosity", "Verbose")], expr,
@@ -404,11 +404,11 @@ fn mhchem_beta_decay() {
       </mrow>
     </math>";
     test_prefs("is", "ClearSpeak", vec![("Verbosity", "Terse")], expr,
-      "14, 6, stórt c; forms, 14, 7, stórt n; plús 0, mínus 1, e,");
+      "14, 6, stórt c; mynda, 14, 7, stórt n; plús 0, mínus 1, e,");
     test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium")], expr,
-      "hávísir 14, lágvísir 6, stórt c; bregst við form; hávísir 14, lágvísir 7, stórt n; plús hávísir 0, lágvísir mínus 1, e,");
+      "hávísir 14, lágvísir 6, stórt c; hvarfast og mynda; hávísir 14, lágvísir 7, stórt n; plús hávísir 0, lágvísir mínus 1, e,");
     test_prefs("is", "ClearSpeak", vec![("Verbosity", "Verbose")], expr,
-      "hávísir 14, lágvísir 6, stórt c; bregst við form; hávísir 14, lágvísir 7, stórt n; plús hávísir 0, lágvísir mínus 1, e,");
+      "hávísir 14, lágvísir 6, stórt c; hvarfast og mynda; hávísir 14, lágvísir 7, stórt n; plús hávísir 0, lágvísir mínus 1, e,");
 }
 
 #[test]

@@ -40,7 +40,7 @@ fn hyperbolic_trig_names() {
 #[test]
 fn inverse_trig() {
     let expr = "<math><msup><mi>sin</mi><mrow><mo>-</mo><mn>1</mn></mrow></msup><mi>x</mi></math>";
-    test("is", "SimpleSpeak", expr, "andhver()fur sínus af x"); // TODO: declination of 'andhverfur', atm: 'andhverfan'
+    test("is", "SimpleSpeak", expr, "andhverfan sínus af x"); // TODO: declination of 'andhverfur', atm: 'andhverfan'
 }
 
 #[test]
@@ -127,9 +127,9 @@ fn other_names() {
                 expr, "samfylgni x");
     let expr = "<math> <mrow><mi>exp</mi><mo>(</mo><mi>x</mi><mo>)</mo></mrow> </math>";
     test_prefs("is", "SimpleSpeak", vec![("Verbosity", "Terse")],
-                expr, "vísis x"); // TODO: how to translate? English: 'exp x'
+                expr, "vísisfall af x");
     test_prefs("is", "SimpleSpeak", vec![("Verbosity", "Medium")],
-                expr, "veldisvísis af x"); // TODO: how to translate? English: 'exponential of x'
+                expr, "veldisvísisfall af x");
 }
 
 #[test]
