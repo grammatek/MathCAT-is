@@ -26,12 +26,12 @@
  - "·":
     - test:
         if: "$SpeechStyle != 'ClearSpeak' or $ClearSpeak_MultSymbolDot = 'Auto'"
-        then: [t: "times"]
+        then: [T: "sinnum"]
         else: [t: "dot"]
  - "×":                                          # 0xd7
     - test:
         if: "$SpeechStyle != 'ClearSpeak' or $ClearSpeak_MultSymbolX = 'Auto'"
-        then: [t: "times"]
+        then: [T: "sinnum"]
         else_test:
             if: $ClearSpeak_MultSymbolX = 'By'
             then: [t: "by"]
@@ -761,7 +761,7 @@
  - "∔": [t: "dot plus"]                            # 0x2214
  - "∕": [t: "divided by"]                          # 0x2215
  - "∖": [t: "set minus"]                           # 0x2216
- - "∗": [t: "times"]                               # 0x2217
+ - "∗": [T: "sinnum"]                               # 0x2217
  - "∘": [t: "composed with"]                       # 0x2218
  - "∙":                                            # 0x2219
     - test: 
@@ -1179,9 +1179,9 @@
     - test: 
         if: "@data-chem-formula-op"
         then: [t: "dot"]
-        else: [t: "times"]
+        else: [T: "sinnum"]
 
- - "⋆": [t: "times"]                               # 0x22c6
+ - "⋆": [T: "sinnum"]                               # 0x22c6
  - "⋇": [t: "division times"]                      # 0x22c7
  - "⋈": [t: "bowtie"]                              # 0x22c8
  - "⋉":                                          # 0x22c9
