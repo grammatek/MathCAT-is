@@ -562,13 +562,13 @@
  - "↗":                                          # 0x2197
     - test:
         if: "ancestor::*[2][self::m:limit]"
-        then: [T: "nálgast neðan frá"]
+        then: [T: "stefnir á að neðan"]         # stæ.is : nálgast, MBH: stefnir á
         else: [T: "ör í norð austur"]
 
  - "↘":                                          # 0x2198
     - test:
         if: "ancestor::*[2][self::m:limit]"
-        then: [T: "nálgast ofan frá"]
+        then: [T: "stefnir á að ofan"]
         else: [T: "ör í suð austur"]
 
  - "↙": [t: "south west arrow"]                    # 0x2199
@@ -770,7 +770,7 @@
         else: [T: "sinnum"]
 
  - "√":                                          # 0x221a
-     - T: "ferningsrótin af"
+     - T: "rótin af"
  - "∛":                                          # 0x221b
      - T: "teningsrótin af"
  - "∜":                                          # 0x221c

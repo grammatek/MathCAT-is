@@ -320,7 +320,7 @@ fn explicit_times_none_superscript() {
         </mrow>
         <mo>+</mo><mn>1</mn>
         </mrow></math>";
-        test("is", "ClearSpeak", expr, "mínus 2 x, plús 1");
+        test("is", "ClearSpeak", expr, "mínus 2 x plús 1");
     }
 
     #[test]
@@ -454,7 +454,7 @@ fn parens_interval_neg_infinity_to_infinity() {
         <mo>)</mo></mrow>
     </math>";
     test_ClearSpeak("is", "ClearSpeak_Paren", "Interval ",expr,
-    "opna bilið frá mínus óendanlegt til óendanlegt,");
+    "opna bilið frá mínus óendanlegt til óendanlegt");
 }
 
 #[test]
@@ -465,5 +465,5 @@ fn parens_interval_neg_infinity_to_pos_infinity() {
     <mo>)</mo></mrow>
     </math>";
     test_ClearSpeak("is", "ClearSpeak_Paren", "Interval ",expr,
-    "opna bilið frá mínus óendanlegt til óendanlegt,");
+    "opna bilið frá mínus óendanlegt til plús óendanlegt");
 }

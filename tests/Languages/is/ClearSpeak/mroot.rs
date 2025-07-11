@@ -5,7 +5,7 @@ fn msqrt_simple() {
     let expr = "<math>
                     <msqrt> <mi>x</mi> </msqrt>
                 </math>";
-    test("is", "ClearSpeak", expr, "ferningsrótin af x,");
+    test("is", "ClearSpeak", expr, "rótin af x,");
 }
 
 #[test]
@@ -13,7 +13,7 @@ fn msqrt_simple_end_root() {
     let expr = "<math>
                     <msqrt> <mi>x</mi> </msqrt>
                 </math>";
-    test_ClearSpeak("is", "ClearSpeak_Roots", "RootEnd", expr, "ferningsrótin af x, rót endar;");
+    test_ClearSpeak("is", "ClearSpeak_Roots", "RootEnd", expr, "rótin af x, rót endar;");
 }
 
 #[test]
@@ -21,7 +21,7 @@ fn msqrt_simple_positive() {
     let expr = "<math>
                     <msqrt> <mi>x</mi> </msqrt>
                 </math>";
-    test_ClearSpeak("is", "ClearSpeak_Roots", "PosNegSqRoot", expr, "jákvæð ferningsrótin af x,");
+    test_ClearSpeak("is", "ClearSpeak_Roots", "PosNegSqRoot", expr, "plús rótin af x,");
 }
 
 #[test]
@@ -29,7 +29,7 @@ fn msqrt_simple_pos_end_root() {
     let expr = "<math>
                     <msqrt> <mi>x</mi> </msqrt>
                 </math>";
-    test_ClearSpeak("is", "ClearSpeak_Roots", "PosNegSqRootEnd", expr, "jákvæð ferningsrótin af x, rót endar;");
+    test_ClearSpeak("is", "ClearSpeak_Roots", "PosNegSqRootEnd", expr, "plús rótin af x, rót endar;");
 }
 
 #[test]
@@ -39,7 +39,7 @@ fn msqrt_simple_pos_end_with_neg_root() {
                     <mo>-</mo> <mroot> <mi>x</mi> <mn>3</mn></mroot>
                 </math>";
     test_ClearSpeak("is", "ClearSpeak_Roots", "PosNegSqRootEnd", expr, 
-    "neikvæð ferningsrótin af x, rót endar; mínus, jákvæð teningsrótin af x, rót endar;");
+    "mínus rótin af x, rót endar; mínus, plús teningsrótin af x, rót endar;");
 }
 
 #[test]
@@ -50,7 +50,7 @@ fn mroot_simple_pos_end_with_neg_root() {
 
                 </math>";
     test_ClearSpeak("is", "ClearSpeak_Roots", "PosNegSqRoot", expr, 
-    "neikvæð teningsrótin af x; mínus jákvæð ferningsrótin af x,");
+    "mínus teningsrótin af x; mínus plús rótin af x,");
 }
 
 #[test]
@@ -58,7 +58,7 @@ fn neg_without_root() {
     let expr = "<math>
                     <mo>-</mo> <mi>x</mi> <mo>-</mo> <mi>y</mi>
                 </math>";
-    test("is", "ClearSpeak", expr, "neikvætt x mínus y");
+    test("is", "ClearSpeak", expr, "mínus x mínus y");
 }
 
 #[test]
@@ -68,7 +68,7 @@ fn msqrt() {
                         <mrow> <mi>x</mi> <mo>+</mo> <mi>y</mi> </mrow>
                     </msqrt>
                 </math>";
-    test("is", "ClearSpeak", expr, "ferningsrótin af x plús y;");
+    test("is", "ClearSpeak", expr, "rótin af x plús y;");
 }
 
 #[test]
@@ -76,7 +76,7 @@ fn mroot_as_square_root() {
     let expr = "<math>
                     <mroot> <mi>x</mi> <mn>2</mn> </mroot>
                 </math>";
-    test("is", "ClearSpeak", expr, "ferningsrótin af x,");
+    test("is", "ClearSpeak", expr, "rótin af x,");
 }
 
 #[test]
@@ -108,7 +108,7 @@ fn mroot_simple_pos_end_root() {
     let expr = "<math>
                 <mroot> <mi>x</mi> <mi>t</mi> </mroot>
                 </math>";
-    test_ClearSpeak("is", "ClearSpeak_Roots", "PosNegSqRootEnd", expr, "jákvæð t -ta rótin af x, rót endar;");
+    test_ClearSpeak("is", "ClearSpeak_Roots", "PosNegSqRootEnd", expr, "plús t -ta rótin af x, rót endar;");
 }
 
 #[test]

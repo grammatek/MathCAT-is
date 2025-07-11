@@ -19,7 +19,7 @@ fn modified_vars() {
         <mover> <mi>t</mi> <mo>→</mo> </mover>
         </mrow> </math>";
     test("is", "SimpleSpeak", expr,
-        "a öfugur broddur, b bylgja, c breve_missing_transl, b check_missing_transl, c öfugur broddur; plús; \
+        "a öfugur broddur, b slanga, c breve_missing_transl, b check_missing_transl, c öfugur broddur; plús; \
             x punktur, y punktur, z tvöfaldur puntkur, u þrefaldur punktur, v fjórfaldur punktur; plús x hattur, plús vigur t");
 }
 
@@ -37,9 +37,9 @@ fn limit() {
             </mfrac>
             </mrow>
         </math>";
-    test("is", "SimpleSpeak", expr, "markgildi þegar x nálgast 0, af, brotið, sínus af x, deilt með x, brot endar;");
+    test("is", "SimpleSpeak", expr, "markgildið þegar x stefnir á 0, af, brotið, sínus af x, deilt með x, brot endar;");
     test_prefs("is", "SimpleSpeak", vec![("Impairment", "LearningDisability")], expr,
-            "markgildi þegar x nálgast 0, af; sínus af x, deilt með x;");
+            "markgildið þegar x stefnir á 0, af; sínus af x, deilt með x;");
 }
 
 #[test]
@@ -53,45 +53,45 @@ fn limit_from_below() {
                 <mrow>  <mi>sin</mi>  <mo>&#x2061;</mo> <mi>x</mi> </mrow>
             </mrow>
         </math>";
-    test("is", "SimpleSpeak", expr, "markgildi þegar x nálgast neðan frá 0, af sínus af x");
+    test("is", "SimpleSpeak", expr, "markgildið þegar x stefnir á að neðan 0, af sínus af x");
 }
 
 
 #[test]
 fn binomial_mmultiscripts() {
     let expr = "<math><mmultiscripts><mi>C</mi><mi>m</mi><none/><mprescripts/><mi>n</mi><none/></mmultiscripts></math>";
-    test("is", "SimpleSpeak", expr, "n valið m");
+    test("is", "SimpleSpeak", expr, "n velur m");
 }
 
 #[test]
 fn binomial_mmultiscripts_other() {
     let expr = "<math><mmultiscripts><mi>C</mi><mi>m</mi><none/><mprescripts/><none/><mi>n</mi></mmultiscripts></math>";
-    test("is", "SimpleSpeak", expr, "n valið m");
+    test("is", "SimpleSpeak", expr, "n velur m");
 }
 
 #[test]
 fn binomial_subscript() {  // C_{n,k}
     let expr = "<math><msub><mi>C</mi><mrow><mi>n</mi><mo>,</mo><mi>m</mi></mrow></msub></math>";
-    test("is", "SimpleSpeak", expr, "n valið m");
+    test("is", "SimpleSpeak", expr, "n velur m");
 }
 
 
 #[test]
 fn permutation_mmultiscripts() {
     let expr = "<math><mmultiscripts><mi>P</mi><mi>k</mi><none/><mprescripts/><mi>n</mi><none/></mmultiscripts></math>";
-    test("is", "SimpleSpeak", expr, "k uppstokkanir af n");
+    test("is", "SimpleSpeak", expr, "k umraðanir af n");
 }
 
 #[test]
 fn permutation_mmultiscripts_sup() {
     let expr = "<math><mmultiscripts><mi>P</mi><mi>k</mi><none/><mprescripts/><none/><mi>n</mi></mmultiscripts></math>";
-    test("is", "SimpleSpeak", expr, "k uppstokkanir af n");
+    test("is", "SimpleSpeak", expr, "k umraðanir af n");
 }
 
 #[test]
 fn permutation_msubsup() {
     let expr = "<math><msubsup><mi>P</mi><mi>k</mi><mi>n</mi></msubsup></math>";
-    test("is", "SimpleSpeak", expr, "k uppstokkanir af n");
+    test("is", "SimpleSpeak", expr, "k umraðanir af n");
 }
 
 #[test]
@@ -118,7 +118,7 @@ fn huge_num_mmultiscripts() {
 #[test]
 fn prime() {
     let expr = "<math> <msup><mi>x</mi><mo >&#x2032;</mo></msup> </math>";
-    test("is", "SimpleSpeak", expr, "x strik,");
+    test("is", "SimpleSpeak", expr, "x merkt,");
 }
 
 #[test]

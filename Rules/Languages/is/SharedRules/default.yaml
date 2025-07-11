@@ -395,25 +395,45 @@
                           - x: "$Postscripts[position() > 8]"
                           - T: "end scripts"      # phrase(At this point 'end scripts' occurs)
 
+#- name: default
+#  tag: mtable
+#  variables: [IsColumnSilent: false()]
+#  match: "."
+#  replace:
+#  - T: "tafla með"      # phrase(the 'table with' 3 rows)
+#  - x: count(*)
+#  - test:
+#      if: count(*)=1
+#      then: [T: "línu"]      # phrase(the table with 1 'row')
+#      else: [T: "línum"]      # phrase(the table with 3 'rows')
+#  - T: "og"      # phrase(the table with 3 rows 'and' 4 columns)
+#  - x: "count(*[1]/*)"
+#  - test:
+#      if: "count(*[1]/*)=1"
+#      then: [T: "dálki"]      # phrase(the table with 3 rows and 1 'column')
+#      else: [T: "dálkum"]      # phrase(the table with 3 rows and 4 'columns')
+#  - pause: long
+#  - x: "*"
+
 - name: default
   tag: mtable
   variables: [IsColumnSilent: false()]
   match: "."
   replace:
-  - T: "tafla með"      # phrase(the 'table with' 3 rows)
-  - x: count(*)
+  - T: ""      # phrase(the 'table with' 3 rows)
+  #- x: count(*)
   - test:
       if: count(*)=1
-      then: [T: "línu"]      # phrase(the table with 1 'row')
-      else: [T: "línum"]      # phrase(the table with 3 'rows')
-  - T: "og"      # phrase(the table with 3 rows 'and' 4 columns)
-  - x: "count(*[1]/*)"
+      then: [T: ""]      # phrase(the table with 1 'row')
+      else: [T: ""]      # phrase(the table with 3 'rows')
+ # - T: "og"      # phrase(the table with 3 rows 'and' 4 columns)
+ # - x: "count(*[1]/*)"
   - test:
       if: "count(*[1]/*)=1"
-      then: [T: "dálki"]      # phrase(the table with 3 rows and 1 'column')
-      else: [T: "dálkum"]      # phrase(the table with 3 rows and 4 'columns')
+      then: [T: ""]      # phrase(the table with 3 rows and 1 'column')
+      else: [T: ""]      # phrase(the table with 3 rows and 4 'columns')
   - pause: long
-  - x: "*"
+ # - x: "*"
 
 - name: default
   # callers/context should do that.
@@ -569,7 +589,7 @@
       then: [T: "löng deiling", pause: short]      # phrase(the 'long division symbol' indicates  a long division calculation)
   - test:
       if: ".[contains(@notation,'radical')]"
-      then: [T: "ferningsrótin", pause: short]      # phrase(5 is the 'square root' of 25)
+      then: [T: "rótin", pause: short]      # phrase(5 is the 'square root' of 25)
   - T: "umlykja"      # phrase(parentheses are 'enclosing' part of the equation)
   - test:
       if: "*[self::m:mtext and text()=' ']"

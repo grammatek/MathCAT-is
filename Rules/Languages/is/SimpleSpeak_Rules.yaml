@@ -18,7 +18,7 @@
   tag: square-root
   match: "."
   replace:
-  - T: "ferningsrótin"      # phrase(the 'square root' of x)
+  - T: "rótin"      # phrase(the 'square root' of x)
   - test:
       if: "$Verbosity!='Terse'"
       then: [T: "af"]   # phrase(the square root 'of' x)
@@ -27,7 +27,7 @@
   - test:
       if: "IsNode(*[1], 'leaf') or $Impairment != 'Blindness'"
       then: [pause: short]
-      else: [T: "lok ferningsrótar", pause: short]  # phrase(start the square root of x 'end of root')
+      else: [T: "lok rótar", pause: short]  # phrase(start the square root of x 'end of root')
 
 - name: default
   tag: root
@@ -37,7 +37,7 @@
       if: "*[2][self::m:mn and not(contains(., '.'))]"
       then_test:
       - if: "*[2][text()='2']"
-        then: [T: "ferningsrótin"]        # phrase(the 'square root' of x)
+        then: [T: "rótin"]        # phrase(the 'square root' of x)
       - else_if: "*[2][text()='3']"
         then: [T: "þriðja rótin"]        # phrase(the 'cube root' of x) Also: teningsrótin, verpilrótin
       - else: [x: "ToOrdinal(*[2])", T: "rótin"]      # phrase(the square 'root' of 25)

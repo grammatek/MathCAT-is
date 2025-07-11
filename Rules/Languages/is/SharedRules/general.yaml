@@ -115,7 +115,7 @@
   match: "count(*)=2 and not(@data-intent-property)"
   replace:
   - x: "*[1]"
-  - T: "valið"      # phrase(you can 'choose' a number at random) TODO: see SWEDISH: 'över' - what is this?
+  - T: "velur"      # phrase(you can 'choose' a number at random) TODO: see SWEDISH: 'över' - what is this? MBH: velur
   - x: "*[2]"
 
 - name: permutation
@@ -123,7 +123,7 @@
   match: "count(*)=2 and not(@data-intent-property)"
   replace:
   - x: "*[2]"
-  - T: "uppstokkanir af"      # phrase(the solution  involves several 'permutations of' values) TODO: also: 'umröðun'
+  - T: "umraðanir af"      # phrase(the solution  involves several 'permutations of' values)
   - x: "*[1]"
 
 - name: intervals
@@ -171,13 +171,13 @@
   replace:
   - test:
       if: "$Verbosity='Terse'"
-      then: [T: "algildi"]      # phrase(the 'absolute value' of a number represents its distance from 0)
-      else: [T: "algildi"]      # phrase('the absolute value of' a number represents its distance from 0)
+      then: [T: "tölugildi"]      # stæ.is : algildi, lengd, tölugildi; MBH: tölugildi. phrase(the 'absolute value' of a number represents its distance from 0)
+      else: [T: "tölugildi"]      # phrase('the absolute value of' a number represents its distance from 0)
   - x: "*[1]"
   - test:
       if: "IsNode(*[1], 'leaf') or $Impairment != 'Blindness'"
       then: [pause: short]
-      else: [pause: short, T: "algildi endar", pause: short]      # phrase(show 'end absolute value' position) TODO: check!
+      else: [pause: short, T: "tölugildi endar", pause: short]      # phrase(show 'end absolute value' position) TODO: check!
 
 - name: negative
   tag: negative
@@ -265,7 +265,7 @@
   replace:
   - test:
     - if: "*[1][.='lim']"
-      then: [T: "markgildi"]    # en: 'limit'
+      then: [T: "markgildið"]    # en: 'limit'
     - else_if: "*[1][.='limsup']"
       then_test:
           if: "$Verbosity='Terse'"
@@ -485,14 +485,14 @@
         then: [T: "logg"]      # phrase(the 'log' function is used in mathematics)
       - else_if: "$Verbosity='Terse'"
         then: [spell: "'ln'"]
-        else: [T: "náttúrulegur logri"]      # phrase(the 'natural log' function is used in mathematics) TODO: is this really used in stead of 'lógarithmi'?
+        else: [T: "l n"]      # phrase(the 'natural log' function is used in mathematics)
       else:
       - test:
         - if: "*[1][text()='log']"
           then: [T: "logg"]      # phrase(the 'log' function is used in mathematics)
         - else_if: "$Verbosity='Terse'"
           then: [spell: "'ln'"]
-          else: [T: "náttúrulegur logri"]      # phrase(the 'natural log' function is used in mathematics) TODO: check case
+          else: [T: "l n"]      # phrase(the 'natural log' function is used in mathematics) TODO: check case
       - T: "af"      # phrase(5 is the square root 'of' 25)
       - pause: short
   - x: "*[3]"

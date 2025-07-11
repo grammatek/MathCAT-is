@@ -3,7 +3,7 @@ use crate::common::*;
 #[test]
 fn transpose() {
   let expr = "<math> <msup><mi>M</mi><mi>T</mi></msup> </math>";
-  test("is", "SimpleSpeak", expr, "stórt m bylta");
+  test("is", "SimpleSpeak", expr, "stórt m bylt");
 }
 
 #[test]
@@ -40,7 +40,7 @@ fn norm() {
     </mrow>
 </math>
 ";
-  test("is", "SimpleSpeak", expr, "lengd f"); // stæ.is - einnig: staðall
+  test("is", "SimpleSpeak", expr, "staðall af f"); // stæ.is - einnig: staðall
 }
 
 #[test]
@@ -56,5 +56,5 @@ fn norm_subscripted() {
     </msub>
 </math>
 ";
-  test("is", "SimpleSpeak", expr, "p lengd f");
+  test("is", "SimpleSpeak", expr, "p staðall af f");
 }

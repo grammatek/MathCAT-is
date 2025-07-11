@@ -95,13 +95,13 @@ fn normal_log_with_base() {
 #[test]
 fn simple_ln() {
     let expr = "<math> <mrow>  <mi>ln</mi><mi>x</mi></mrow> </math>";
-    test("is", "SimpleSpeak", expr, "náttúrulegur logri x");
+    test("is", "SimpleSpeak", expr, "l n x");
 }
 
 #[test]
 fn normal_ln() {
     let expr = "<math><mrow><mi>ln</mi><mrow><mo>(</mo><mrow><mi>x</mi><mo>+</mo><mi>y</mi></mrow><mo>)</mo></mrow></mrow></math>";
-    test("is", "SimpleSpeak", expr, "náttúrulegur logri af, svigi opnast x plús y, svigi lokast");
+    test("is", "SimpleSpeak", expr, "l n af, svigi opnast x plús y, svigi lokast");
 }
 
 #[test]
@@ -194,9 +194,9 @@ fn no_times_sqrt() {
         <msqrt> <mrow>  <mi>a</mi><mi>b</mi></mrow> </msqrt>
         </mrow></math>";
     test("is", "SimpleSpeak", expr,
-            "ferningsrótin af a; ferningsrótin af b; er jafnt og, ferningsrótin af a b lok ferningsrótar,");
+            "rótin af a; rótin af b; er jafnt og, rótin af a b lok rótar,");
     test_prefs("is", "SimpleSpeak", vec![("Impairment", "LearningDisability")], expr,
-            "ferningsrótin af a; ferningsrótin af b; er jafnt og, ferningsrótin af a b,");
+            "rótin af a; rótin af b; er jafnt og, rótin af a b,");
 }
 
 /*

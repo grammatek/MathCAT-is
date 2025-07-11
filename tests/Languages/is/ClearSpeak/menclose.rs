@@ -181,7 +181,7 @@ fn menclose_radical() {
     let expr = "<math>
                     <menclose notation='radical'> <mfrac><mn>3</mn><mn>2</mn></mfrac> </menclose>
                 </math>";
-    test("is", "ClearSpeak", expr, "ferningsrótin, umlykja 3 aðrir umlykja endar,");
+    test("is", "ClearSpeak", expr, "rótin, umlykja 3 aðrir umlykja endar,");
 }
 
 #[test]

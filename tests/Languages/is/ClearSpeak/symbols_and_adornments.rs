@@ -30,7 +30,7 @@ fn ellipses_auto_start() {
             <mi>…</mi><mo>,</mo>
             <mo>-</mo><mn>2</mn><mo>,</mo><mo>-</mo><mn>1</mn><mo>,</mo><mn>0</mn>
         </math>";
-    test("is", "ClearSpeak", expr, "punktur punktur punktur komma mínus 2 komma mínus 1 komma 0");
+    test("is", "ClearSpeak", expr, "punktur punktur punktur, komma mínus 2 komma mínus 1 komma 0");
 }
 
 #[test]
@@ -74,7 +74,7 @@ fn ellipses_auto_both() {
             <mo>,</mo><mi>…</mi>
        </math>";
     test_ClearSpeak("is", "ClearSpeak_Ellipses", "Auto", expr,
-            "punktur punktur punktur komma mínus 2 komma mínus 1 komma 0 komma 1 komma 2 komma punktur punktur punktur");
+            "punktur punktur punktur, komma mínus 2 komma mínus 1 komma 0 komma 1 komma 2 komma punktur punktur punktur");
 }
 
 #[test]
@@ -83,7 +83,7 @@ fn ellipses_and_so_on_start() {
             <mi>…</mi><mo>,</mo>
             <mo>-</mo><mn>2</mn><mo>,</mo><mo>-</mo><mn>1</mn><mo>,</mo><mn>0</mn>
         </math>";
-        test_ClearSpeak("is", "ClearSpeak_Ellipses", "AndSoOn", expr, "punktur punktur punktur komma mínus 2 komma mínus 1 komma 0");
+        test_ClearSpeak("is", "ClearSpeak_Ellipses", "AndSoOn", expr, "punktur punktur punktur, komma mínus 2 komma mínus 1 komma 0");
 }
 
 #[test]
@@ -127,7 +127,7 @@ fn ellipses_and_so_on_both() {
             <mo>,</mo><mi>…</mi>
        </math>";
     test_ClearSpeak("is", "ClearSpeak_Ellipses", "AndSoOn", expr,
-            "punktur punktur punktur komma mínus 2 komma mínus 1 komma 0 komma 1 komma 2 komma punktur punktur punktur");
+            "punktur punktur punktur, komma mínus 2 komma mínus 1 komma 0 komma 1 komma 2 komma punktur punktur punktur");
 }
 
 #[test]
@@ -246,7 +246,7 @@ fn vertical_line_set_and_abs() {
             <mo>}</mo>
         </math>";
     test_ClearSpeak("is", "ClearSpeak_VerticalLine", "Auto", expr,
-        "mengi allra x þannig að algildi x, er stærra en 2");
+        "mengi allra x þannig að tölugildi x, er stærra en 2");
 }
 
 #[test]

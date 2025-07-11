@@ -22,12 +22,11 @@
   tag: norm
   match: "count(*)=1 and not(@data-intent-property)"
   replace:
-  - T: "lengd"      # phrase(the 'norm' can be a measure of distance) ICELANDIC: possibly also: 'staðall'
- # ICELANDIC: we only want 'lengd X' and not 'lengd af X'
- # - test:
- #     if: "$Verbosity!='Terse'"
- #     then:
- #     - t: "of"      # phrase(this is the mean 'of' the data)
+  - T: "staðall"      # phrase(the 'norm' can be a measure of distance)
+  - test:
+      if: "$Verbosity!='Terse'"
+      then:
+      - T: "af"      # phrase(this is the mean 'of' the data)
   - x: "*[1]"
   - test:
       if: "not(IsNode(*[1], 'simple')) and $Impairment = 'Blindness'"
@@ -39,12 +38,11 @@
   match: count(*)=2 and "not(@data-intent-property)"
   replace:
   - x: "*[2]"
-  - T: "lengd"      # phrase(the 'norm' can be a measure of distance) ICELANDIC: possibly also: 'staðall'
-  # ICELANDIC: we only want 'lengd X' and not 'lengd af X'
-  #- test:
-  #    if: "$Verbosity!='Terse'"
-  #    then:
-  #    - t: "of"      # phrase(systems 'of' linear equations)
+  - T: "staðall"      # phrase(the 'norm' can be a measure of distance)
+  - test:
+      if: "$Verbosity!='Terse'"
+      then:
+      - T: "af"      # phrase(systems 'of' linear equations)
   - x: "*[1]"
 
 - name: transpose
@@ -52,7 +50,7 @@
   match: "count(*)=1 and not(@data-intent-property)"
   replace:
   - x: "*[1]"
-  - T: "bylta"      # phrase(this will 'transpose' the values)
+  - T: "bylt"      # phrase(this will 'transpose' the values)
 - name: trace
   tag: trace
   match: "not(@data-intent-property)"

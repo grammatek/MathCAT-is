@@ -43,7 +43,7 @@ fn zero_power() {
   let expr = "<math>
                     <msup> <mn>3</mn> <mn>0</mn> </msup>
                 </math>";
-  test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Exponents", "Auto")], expr, "3 í 0 -ta");
+  test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Exponents", "Auto")], expr, "3 í 0 veldi");
   test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Exponents", "Ordinal")], expr, "3 í 0 -ta");
   test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Exponents", "OrdinalPower")], expr, "3 í 0 -ta veldi");
   test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Exponents", "AfterPower")], expr, "3 í 0 -ta veldi,");
@@ -57,7 +57,7 @@ fn simple_mi_power() {
   test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Exponents", "Auto")], expr, "4 í x -ta veldi");
   test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Exponents", "Ordinal")], expr, "4 í x -ta");
   test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Exponents", "OrdinalPower")], expr, "4 í x -ta veldi");
-  test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Exponents", "AfterPower")], expr, "4 í x -ta veldi,");
+  test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Exponents", "AfterPower")], expr, "4 í x veldi,");
 }
 
 #[test]
@@ -65,7 +65,7 @@ fn decimal_power() {
   let expr = "<math>
                   <msup> <mn>3</mn> <mn>5,0</mn> </msup>
               </math>";
-  test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Exponents", "Auto")], expr, "3 í 5,0 -ta veldi");
+  test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Exponents", "Auto")], expr, "3 í 5,0 veldi");
   test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Exponents", "Ordinal")], expr, "3 í 5,0 -ta veldi");
   test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Exponents", "OrdinalPower")], expr, "3 í 5,0 -ta veldi");
   test_prefs("is", "ClearSpeak", vec![("Verbosity", "Medium"), ("ClearSpeak_Exponents", "AfterPower")], expr, "3 í 5,0 -ta veldi,");

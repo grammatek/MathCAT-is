@@ -255,5 +255,5 @@ fn binomial() {
                     <mfrac linethickness='0'> <mn>7</mn> <mn>3</mn> </mfrac>
                     <mo>)</mo>
                 </math>";
-    test("is", "ClearSpeak", expr, "2 sinnum 7 valið 3");
+    test("is", "ClearSpeak", expr, "2 sinnum 7 velur 3");
 }

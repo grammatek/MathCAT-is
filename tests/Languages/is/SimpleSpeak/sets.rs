@@ -116,7 +116,7 @@ fn msup_negative_integers() {
                     <mo>-</mo>
                 </msup>
             </math>";
-    test("is", "SimpleSpeak", expr, "neikvæðar heilar tölur");
+    test("is", "SimpleSpeak", expr, "mínus heilar tölur");
 }
 
 #[test]
@@ -138,7 +138,7 @@ fn msup_negative_rationals() {
                     <mo>-</mo>
                 </msup>
             </math>";
-    test("is", "SimpleSpeak", expr, "neikvæðar ræðar tölur");
+    test("is", "SimpleSpeak", expr, "mínus ræðar tölur");
 }
 
 #[test]

@@ -82,7 +82,7 @@ fn deeply_nested_fraction_msqrt() {
         </mrow>
     </math>
                             ";
-    test("is", "SimpleSpeak", expr, "brotið, x plús, ferningsrótin af 1 deilt með y, lok ferningsrótar; deilt með, x mínus y, brot endar;");
+    test("is", "SimpleSpeak", expr, "brotið, x plús, rótin af 1 deilt með y, lok rótar; deilt með, x mínus y, brot endar;");
 }
 
 #[test]
@@ -98,7 +98,7 @@ fn deeply_nested_fraction_mrow_msqrt() {
         </mrow>
     </math>
                             ";
-    test("is", "SimpleSpeak", expr, "brotið, x plús, ferningsrótin af 2 plús 1 deilt með y, lok ferningsrótar; deilt með, x mínus y, brot endar;");
+    test("is", "SimpleSpeak", expr, "brotið, x plús, rótin af 2 plús 1 deilt með y, lok rótar; deilt með, x mínus y, brot endar;");
 }
 
 #[test]
@@ -212,5 +212,5 @@ fn binomial() {
                     <mfrac linethickness='0'> <mn>7</mn> <mn>3</mn> </mfrac>
                     <mo>)</mo>
                 </math>";
-    test("is", "SimpleSpeak", expr, "2 sinnum 7 valið 3"); // ICELANDIC: what does that mean, 'choose 3'?
+    test("is", "SimpleSpeak", expr, "2 sinnum 7 velur 3");
 }

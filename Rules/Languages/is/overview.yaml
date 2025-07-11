@@ -30,7 +30,7 @@
   tag: msqrt
   match: "."
   replace:
-  - T: "ferningsrótin"                #TODO: líka: önnur rót ATH: kvaðratrótin?
+  - T: "rótin"
   - test:
       if: "IsNode(*[1], 'simple')"
       then:
@@ -47,7 +47,7 @@
       if: "*[2][self::m:mn]"
       then_test:
       - if: "*[2][text()='2']"
-        then: [T: "ferningsrótin"]
+        then: [T: "rótin"]
       - else_if: "*[2][text()='3']"
         then: [T: "teningsrótin"]       # also: þriðja rót, verpilrót
       - else_if: "*[2][not(contains(., '.'))]"
